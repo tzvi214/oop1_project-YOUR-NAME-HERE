@@ -1,13 +1,9 @@
 #include "Windows.h"
 
-Windows::Windows(unsigned int height, unsigned int width)
-	: m_height(height), m_width(width), m_window(sf::VideoMode(m_width*pixelSize, m_height* pixelSize), "SFML")
-{
-	m_window.close();
+Windows::Windows(unsigned int width, unsigned int height)
+	: m_pixelSize{50}, m_height(height *m_pixelSize), m_width(width* m_pixelSize), 
+	  m_window(sf::VideoMode(m_width, m_height), "SFML")
+{ 
+	std::cout << " in main constructor\n";
 }
 //-------------------------------------------------------------------
-Windows::Windows()// default
-	:m_height{ 10 }, m_width{ 10 }, m_window(sf::VideoMode(m_width* pixelSize, m_height* pixelSize), "SFML")
-{
-	m_window.close();
-}

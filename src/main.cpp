@@ -3,5 +3,7 @@
 #include "firstWindow.h"
 int main()
 {
-	
+	firstWindow window;
+	window.tempFunction();
+	return EXIT_SUCCESS;
 }
