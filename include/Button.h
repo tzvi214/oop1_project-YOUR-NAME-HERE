@@ -1,17 +1,19 @@
 #pragma once 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
+#include "ObjName.h"
 class Button
 {
 public:
-	Button(sf::Vector2f , sf::Vector2f, sf::Sprite&);
+	Button(sf::Vector2f , sf::Sprite&, ObjName);
 	bool userPressOnTheButton(sf::Vector2f&) const;
 	void draw(sf::RenderWindow& window) const { window.draw(m_image); } //maybe it should nat be const
+	ObjName getObjType() const { return m_objType; }
 private:
-	//  I need to add sign to each button
+	
 	sf::Vector2f VertexUp;
-	sf::Vector2f VertexDown;
 	sf::Sprite m_image;
+	ObjName m_objType;
+	const int m_pixelSize = 50;
 };
 

@@ -16,7 +16,7 @@ TextureManager::TextureManager()
 
 sf::Texture& TextureManager::getTexture(ObjName objName)
 {
-	// return refernce of texture according the ObgName(Enum).
+	// return reference of texture according the ObgName(Enum).
 	switch (objName)
 	{
 	case Exit:

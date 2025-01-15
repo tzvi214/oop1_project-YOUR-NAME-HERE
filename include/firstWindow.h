@@ -5,23 +5,25 @@
 #include <vector>
 #include"TextureManager.h"
 
-class firstWindow : public Windows
+class FirstWindow : public Windows
 {
 public:
-	firstWindow(unsigned int = 15, unsigned int = 15);// =15 for default size of window
+	FirstWindow(unsigned int = 15, unsigned int = 15);// =15 for default size of window
 	void draw();
-	void tempFunction();
+	void customerChoice();
 	
+	bool need2exit() const { return m_need2exit; }
+	bool need2start() const { return m_need2start; }
 private:
 	//--- data members----
-	const int defaultSize = 15;//default size of window
 	TextureManager m_textureManager{};
 	ObjName m_objName{};
 	std::vector<Button> m_buttons;
-	//sf::Texture m_InstructionsTex;
+	bool m_need2exit = false;
+	bool m_need2start = false;
 	
 	   //--- functions----
-	sf::RenderWindow& getWindow() { return m_window; }
+	void readFromFile()const;
 	
 };
 

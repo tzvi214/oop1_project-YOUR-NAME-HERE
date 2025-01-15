@@ -1,9 +1,9 @@
 #include "Button.h"
 
-Button::Button(sf::Vector2f vertexUp, sf::Vector2f vertexDown, sf::Sprite& image)
-	: VertexUp{ vertexUp }, VertexDown{ vertexDown }, m_image{ image }
+Button::Button(sf::Vector2f vertexUp, sf::Sprite& image, ObjName type)
+	: VertexUp{ vertexUp }, m_image{ image }, m_objType{ type }
 {
-	m_image.setPosition(VertexUp.x*50, VertexUp.y*50);
+	m_image.setPosition(VertexUp.x* m_pixelSize, VertexUp.y* m_pixelSize);
 	m_image.setScale(0.2, 0.2);
 }
 //-------------------------------------------------------------------
