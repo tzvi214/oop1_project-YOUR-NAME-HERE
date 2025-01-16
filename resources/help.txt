@@ -1,0 +1,13 @@
+In the game "Bomberman," you play as a character who places bombs to blow up walls and eliminate enemies.
+The goal is to clear the path and reach the door that leads to the next level while avoiding the explosions from your own bombs and those of the enemies.
+At the start of each level, you begin in an area filled with walls, some of which can be destroyed and others that cannot.
+
+You need to place bombs using an action button and move away to avoid getting hit by the blast. 
+Blowing up walls can reveal special items like bomb upgrades, increased movement speed, or additional bombs.
+Each level also has enemies roaming the maze, and if they touch you, you lose a life. 
+You must eliminate them using your bombs before they reach you.
+
+Once you find the door, you can move on to the next level, but to open it, you must first eliminate all the enemies in the level.
+The game requires careful planning and precise timing in placing bombs to succeed without getting trapped or hurt.
+The game continues like this, with levels becoming increasingly challenging as you progress.
+

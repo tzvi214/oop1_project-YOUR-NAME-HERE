@@ -6,4 +6,4 @@ Windows::Windows(unsigned int width, unsigned int height)
 { 
 	std::cout << " in main constructor\n";
 }
-//-------------------------------------------------------------------
+
