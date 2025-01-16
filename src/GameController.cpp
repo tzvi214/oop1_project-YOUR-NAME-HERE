@@ -2,10 +2,9 @@
 //--------------------------------------------------------
 void GameController::run()
 {
-	FirstWindow window(m_textureManager);
-	handleFirstWindow(window);
+	FirstWindow firstWindow(m_SfmlManager);
+	handleFirstWindow(firstWindow);
 	
-
 }
 //--------------------------------------------------------
 void GameController::handleFirstWindow(FirstWindow& window) const

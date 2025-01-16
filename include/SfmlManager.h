@@ -16,4 +16,7 @@ private:
 	sf::Texture m_HelpTex;
 	sf::Texture m_StartTex;
 	sf::Font m_font;
+	sf::Texture m_RobotTex;
+	sf::Texture m_WallTex;
+	sf::Texture m_RockTex;
 };

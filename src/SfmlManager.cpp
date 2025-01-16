@@ -12,9 +12,18 @@ SfmlManager::SfmlManager()
 		std::cerr << "Failed to load Exit.png\n";
 	if (!m_HelpTex.loadFromFile("Help.png"))
 		std::cerr << "Failed to load Help.png\n";
+
 	if (!m_StartTex.loadFromFile("Start.png"))
 		std::cerr << "Failed to load Start.png\n";
 
+	if (!m_WallTex.loadFromFile("Wall.png"))
+
+		std::cerr << "Failed to load Wall.png\n";
+	if (!m_RobotTex.loadFromFile("Robot.png"))
+		std::cerr << "Failed to load Robot.png\n";
+
+	if (!m_RockTex.loadFromFile("Rock.png"))
+		std::cerr << "Failed to load Rock.png\n";
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
@@ -33,6 +42,16 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	case Help:
 		return m_HelpTex;
 		break;
+	case Robot:
+		return m_RobotTex;
+		break;
+	case Wall:
+		return m_WallTex;
+		break;
+	case Rock:
+		return m_RockTex;
+		break;
+
 
 	default:
 		std::cerr << "Error: ObjName not found\n";

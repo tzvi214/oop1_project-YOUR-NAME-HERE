@@ -15,6 +15,7 @@ FirstWindow::FirstWindow(SfmlManager& sfmlManager)
 	sf::Sprite HelpSprite(m_sfmlManager.getTexture(ObjName::Help));
 	m_buttons.push_back(Button(sf::Vector2f(5, 0), HelpSprite, ObjName::Help));
 
+	
 	sf::Sprite ExitSprite(m_sfmlManager.getTexture(ObjName::Exit));
 	m_buttons.push_back(Button(sf::Vector2f(10, 0), ExitSprite, ObjName::Exit));
 
@@ -106,7 +107,7 @@ sf::Text FirstWindow::readHelpFromFile() const
 	sf::Text text = m_sfmlManager.getText(ObjName::Font); // Returns a text object with a font defined inside it.
 	text.setString(fileContent);
 	text.setCharacterSize(24);
-	const sf::Color gold(255, 215, 0); // color golg
+	const sf::Color gold(255, 215, 0); // color gold
 	const sf::Color silver(192, 192, 192); // color silver
 	text.setFillColor(gold);
 	text.setOutlineColor(silver);

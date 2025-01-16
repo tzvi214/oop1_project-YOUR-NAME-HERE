@@ -14,7 +14,7 @@ public:
 
 	bool need2exit() const { return m_need2exit; }
 	bool need2start() const { return m_need2start; }
-
+	sf::RenderWindow& getWindow() { return m_window; }// tempFunction
 private:
 	//--- data members----
 	SfmlManager m_sfmlManager{};

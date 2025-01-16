@@ -4,7 +4,7 @@ Button::Button(sf::Vector2f vertexUp, sf::Sprite& image, ObjName type)
 	: VertexUp{ vertexUp }, m_image{ image }, m_objType{ type }
 {
 	m_image.setPosition(VertexUp.x* m_pixelSize, VertexUp.y* m_pixelSize);
-	m_image.setScale(0.2f, 0.2f);
+	m_image.setScale(0.244f, 0.244f);
 }
 //-------------------------------------------------------------------
 bool Button::userPressOnTheButton(sf::Vector2f& location) const

@@ -6,6 +6,7 @@ class GameBord
 {
 public:
 	
+	//sf::RenderWindow& getWindow() { return m_window; }// tempFunction
 
 private:
 	
