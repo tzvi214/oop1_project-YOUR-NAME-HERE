@@ -13,7 +13,7 @@ void StaticObject::draw(sf::RenderWindow& window)
 //------------------------ private function ---------------------
 void StaticObject::setSpritLoc()
 {
-	m_image.setScale(0.2441f, 0.2441f);
+	m_image.setScale(0.1f, 0.1f);
 	m_image.setPosition(m_location);
 }
 //---------------------------------------------------------------

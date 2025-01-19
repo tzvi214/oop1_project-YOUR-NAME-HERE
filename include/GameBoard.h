@@ -1,14 +1,16 @@
-#pragma once
+#pragma once 
 #include "Windows.h"
+#include "ObjName.h"
+#include"SfmlManager.h"
+#include "GameBoard.h"
 
-//class GameBord :public Windows
-class GameBord
+class GameBoard : public Windows
 {
 public:
-	
-	//sf::RenderWindow& getWindow() { return m_window; }// tempFunction
+	GameBoard(unsigned int, unsigned int);
+	void create(unsigned int, unsigned int, int);
 
-private:
-	
-	
+	sf::RenderWindow& getWindow();
+
+
 };

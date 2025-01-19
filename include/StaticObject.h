@@ -12,14 +12,17 @@ public:
 	 bool touch(sf::Vector2f& location) const { return m_image.getGlobalBounds().contains(location); }
 protected:
 	const int m_pixelSize;
+	sf::Sprite m_image;
+	sf::Vector2f getLoc() const { return m_location; }
+	sf::Vector2f m_location;
+	sf::Vector2f calculateLocation(sf::Vector2f);
 private:
 	//--- data_member ---
-	sf::Vector2f m_location;
-	sf::Sprite m_image;
+	
 	ObjName m_type;
 	
 	 //---- function --------
 	void setSpritLoc();
-	sf::Vector2f calculateLocation(sf::Vector2f);
+	
 
 };

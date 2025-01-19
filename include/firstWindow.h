@@ -3,7 +3,7 @@
 #include "Button.h"
 #include "ObjName.h"
 #include <vector>
-#include "SfmlManager.h"
+#include"SfmlManager.h"
 
 class FirstWindow : public Windows
 {
@@ -14,7 +14,7 @@ public:
 
 	bool need2exit() const { return m_need2exit; }
 	bool need2start() const { return m_need2start; }
-	sf::RenderWindow& getWindow() { return m_window; }// tempFunction
+
 private:
 	//--- data members----
 	SfmlManager m_sfmlManager{};
@@ -25,5 +25,8 @@ private:
 
 	//--- functions----
 	sf::Text readHelpFromFile()const;
+	void showHelp(sf::Text&);
+	void wrapText(sf::Text& text, float maxWidth);
+
 
 };
