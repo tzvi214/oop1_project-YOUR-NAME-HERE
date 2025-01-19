@@ -25,6 +25,4 @@ void Robot::ChooseDirection()
 	else
 		setDirection((sf::Vector2f{ 0, 0 })); // defulte nat moving
 
-
-	//setDirection();
 }
