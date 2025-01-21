@@ -10,7 +10,7 @@ public:
 	Robot(sf::Vector2f, SfmlManager&);
 	void goToFirstLoc() { m_location = m_firstLoc; }
 	sf::Vector2f getLocation() const { return m_location ; }
-	void ChooseDirection();
+	void updateDirection();
 	virtual void move(float) override;
 private:
 	sf::Vector2f m_firstLoc;

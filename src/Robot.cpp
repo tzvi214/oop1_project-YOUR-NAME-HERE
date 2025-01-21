@@ -4,7 +4,7 @@ Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan)
 	: MovingObject(location, sfmlMan, ObjName::E_Robot), m_firstLoc{location.x * m_pixelSize, location.y*m_pixelSize}//StaticObject(location, sf::Sprite{ sfmlManager.getTexture(type) }
 {}
 //-----------------------------------------------------------
-void Robot::ChooseDirection()
+void Robot::updateDirection()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
@@ -23,7 +23,7 @@ void Robot::ChooseDirection()
 		setDirection((sf::Vector2f{ 0, 1 }));
 	}
 	else
-		setDirection((sf::Vector2f{ 0, 0 })); // defulte nat moving
+		setDirection((sf::Vector2f{ 0, 0 })); // default nat moving
 
 	
 }

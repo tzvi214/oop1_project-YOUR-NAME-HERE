@@ -67,11 +67,12 @@ void Guard::updateDirection(sf::Vector2f robotLoc) {
     sf::Vector2f direction = { 0, 0 };
 
    
-        if (std::abs(robotLoc.x - m_location.x) == 0 ) 
+        if (std::abs(robotLoc.x - m_location.x) != 0 ) 
         { // בדיקה אם יש תנועה
             direction.x = (robotLoc.x > m_location.x) ? 1.f : -1.f;
         }
-        else {
+        else 
+        {
             direction.y = (robotLoc.y > m_location.y) ? 1.f : -1.f;
         }
     

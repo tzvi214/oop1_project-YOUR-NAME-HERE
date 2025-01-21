@@ -24,8 +24,12 @@ SfmlManager::SfmlManager()
 
 	if (!m_RockTex.loadFromFile("Rock.png"))
 		std::cerr << "Failed to load Rock.png\n";
+
 	if (!m_Guard.loadFromFile("Guard.png"))
 		std::cerr << "Failed to load Guard.png\n";
+
+	if (!m_Door.loadFromFile("Door.png"))
+		std::cerr << "Failed to load Door.png\n";
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
@@ -55,6 +59,9 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 		break;
 	case E_Guard:
 		return m_Guard;
+		break;
+	case E_Door:
+		return m_Door;
 		break;
 
 	default:

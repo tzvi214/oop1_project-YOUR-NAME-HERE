@@ -30,5 +30,5 @@ void MovingObject::setDirection(sf::Vector2f newDirection)
 //-----------------------------------------------------------------
 void MovingObject::move(float deltaTime)
 {
-   
+   // virtual function
 }
