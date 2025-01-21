@@ -24,6 +24,8 @@ SfmlManager::SfmlManager()
 
 	if (!m_RockTex.loadFromFile("Rock.png"))
 		std::cerr << "Failed to load Rock.png\n";
+	if (!m_Guard.loadFromFile("Guard.png"))
+		std::cerr << "Failed to load Guard.png\n";
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
@@ -51,7 +53,9 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	case Rock:
 		return m_RockTex;
 		break;
-
+	case E_Guard:
+		return m_Guard;
+		break;
 
 	default:
 		std::cerr << "Error: ObjName not found\n";

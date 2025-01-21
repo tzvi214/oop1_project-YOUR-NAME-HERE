@@ -25,4 +25,12 @@ void Robot::ChooseDirection()
 	else
 		setDirection((sf::Vector2f{ 0, 0 })); // defulte nat moving
 
+	
+}
+//------------------------------------------------------------------
+void Robot::move(float deltaTime)
+{
+	m_image.move(m_direction.x * (5 * m_pixelSize * deltaTime), m_direction.y * (5 * m_pixelSize * deltaTime));
+	m_location.x += m_direction.x * (5 * m_pixelSize * deltaTime);
+	m_location.y += m_direction.y * (5 * m_pixelSize * deltaTime);
 }

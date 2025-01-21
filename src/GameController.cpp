@@ -10,10 +10,13 @@ void GameController::run()
 
 	sf::Clock gameClock;
 	sf::Vector2f loc{ 0,0 };
-	//MovingObject tempObj(loc, m_SfmlManager, ObjName::E_Robot);
+	
+
 	Robot robot(loc, m_SfmlManager); 
 
 	GameBoard gameBoard(15, 15);
+	loc = { 8, 6 };
+	Guard guard(loc, m_SfmlManager);
 
     auto& window = gameBoard.getWindow();
 	sf::Vector2f direction{ 0,0 };
@@ -28,11 +31,16 @@ void GameController::run()
 				window.close();
 			robot.ChooseDirection();
 		}
+		else
 		
+		guard.updateDirection(robot.getLocation());
+
 		auto deltaTime = gameClock.restart().asSeconds();
-	//	tempObj.setDirection(direction);
+
 		window.clear();
 		robot.move(deltaTime);
+		guard.move(deltaTime);
+		guard.draw(window);
 		robot.draw(window);
 		window.display();
 	}
