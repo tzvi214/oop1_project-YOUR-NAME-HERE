@@ -47,10 +47,10 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	case E_Robot:
 		return m_RobotTex;
 		break;
-	case Wall:
+	case E_Wall:
 		return m_WallTex;
 		break;
-	case Rock:
+	case E_Rock:
 		return m_RockTex;
 		break;
 	case E_Guard:

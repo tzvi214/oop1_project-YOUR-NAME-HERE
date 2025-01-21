@@ -6,10 +6,11 @@ enum ObjName
     Start,
     Help,
     Font,
-    Wall,
+    E_Wall,
     E_Robot,
-    Rock,
-    E_Guard
+    E_Rock,
+    E_Guard,
+    E_Door
 };
 
 

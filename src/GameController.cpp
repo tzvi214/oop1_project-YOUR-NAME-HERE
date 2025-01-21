@@ -1,6 +1,10 @@
 #include "GameController.h"
+GameController::GameController()
+{ 
+	readNanalyze();
+}
 //--------------------------------------------------------
-void GameController::run()
+void GameController::play()
 {
 
 	FirstWindow firstWindow(m_SfmlManager);
@@ -8,7 +12,6 @@ void GameController::run()
 	if (firstWindow.need2exit())
 		return;
 
-	sf::Clock gameClock;
 	sf::Vector2f loc{ 0,0 };
 	
 
@@ -23,7 +26,7 @@ void GameController::run()
 
 	while(window.isOpen())
 	{
-	 sf::Event event;
+  sf::Event event;
 		if (window.pollEvent(event))
 		{
 
@@ -35,7 +38,7 @@ void GameController::run()
 		
 		guard.updateDirection(robot.getLocation());
 
-		auto deltaTime = gameClock.restart().asSeconds();
+		auto deltaTime = m_gameClock.restart().asSeconds();
 
 		window.clear();
 		robot.move(deltaTime);
@@ -60,4 +63,20 @@ void GameController::handleFirstWindow(FirstWindow& window) const
 	}
 }
 //--------------------------------------------------------
+void GameController::readNanalyze()
+{
+	//file >> boardHeight;
+	//file >> boardWidth;
+	//char c;
+	//file >> std::noskipws >> c; // read the '\n' character.
 
+	//for (int i = 0; i < boardHeight; i++)
+	//{
+	//	for (int j = 0; j <= boardWidth; j++)// <= because we need to read the '\n' character.
+	//	{
+	//		file >> std::noskipws >> c;
+	//		
+	//	}
+	//}
+
+}
