@@ -1,61 +1,146 @@
 #include "GameController.h"
-GameController::GameController()
-	:m_SfmlManager{}, m_height{1}, m_width{1}
-{ }					 
+
+
 //--------------------------------------------------------
 void GameController::run()
 {
-	//--------------------------
+	// ------ need do write this FirstWindow in private. ------
 	FirstWindow firstWindow(m_SfmlManager);
 	handleFirstWindow(firstWindow);
 	if (firstWindow.need2exit())
 		return;
-	//--------------------------
+	//---------------------------------------------------
+
 	std::string fileName = "level01.txt";
 	readAndAnalyze(fileName);
 
-	//--------------------------
-	GameBoard gameBoard(m_width, m_height);
+	GameBoard gameBoard(m_width, m_height + 2);
 	auto& window = gameBoard.getWindow();
-	//auto window
 
-	//--------------------------
-
-	sf::Vector2f loc{ 0,0 };
-	Robot robot(loc, m_SfmlManager); 
-	loc = { 8, 6 };
-	Guard guard(loc, m_SfmlManager);
-	//---------------------------
-
-	while(window.isOpen())
+	m_gameClock.restart();
+	while (window.isOpen())
 	{
-      sf::Event event;
+		sf::Event event;
 		if (window.pollEvent(event))
 		{
-
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		// thet verey nat good i need to move the robot from the vector of moving object
+		for (const auto& objMov : m_movingObjVec) // to find location for robot
+		{
+			//if (auto* robot = dynamic_cast<Robot*>(objMov.get()))
+			if(objMov.get()->getType() == ObjName::E_Robot)
+			{
+			//	m_robotLoc = robot->getLocation();
+				m_robotLoc = objMov.get()->getLocation();
+				break;
+			}
+		}
 
-		robot.updateDirection();
+		/*for (const auto& objMov : m_movingObjVec) {
+			objMov->updateDirection(m_robotLoc);
+		}*/
 
-		guard.updateDirection(robot.getLocation());
-
+		//****
 		auto deltaTime = m_gameClock.restart().asSeconds();
+		for (const auto& objMov : m_movingObjVec)
+		{
+			objMov->updateDirection(m_robotLoc);
+			handleCollisionController(*objMov); // call to function of this class.
+			objMov->move(deltaTime);
+			
+		}
+		//****
 
 		window.clear();
 
-		for (int i = 0; i < m_movingObjVec.size(); i++)
-			m_movingObjVec.at(i).get()->draw(window);
+		for (const auto& obj : m_movingObjVec) {
+			obj->draw(window);
+		}
+		for (const auto& obj : m_staticObjVec) {
+			obj->draw(window);
+		}
 
-		for (int i = 0; i < m_StaticObjectVec.size(); i++)
-			m_StaticObjectVec.at(i).get()->draw(window);
-
-		robot.move(deltaTime);
-		guard.move(deltaTime);
-		guard.draw(window);
-		robot.draw(window);
 		window.display();
+	}
+}
+
+
+void GameController::handleCollisionController(MovingObject& movingObject)
+{
+	// call to function of StaticObject class
+	for (const auto& obj : m_movingObjVec) // A moving object meets a moving object
+	{
+		if (movingObject.checkCollision(*obj)) // if (movingObject == obj) return false. else true
+		{
+			movingObject.handleCollision(*obj); // call to function of StaticObject class
+			/*
+			Function is correct both if a robot gets stuck in a guard and if the guard gets stuck in the robot
+			*/
+		}
+	}
+
+	for (const auto& obj : m_staticObjVec)  // A moving object meets a stationary object
+	{
+		if (movingObject.checkCollision(*obj)) //
+		{
+			movingObject.handleCollision(*obj);
+		}
+	}
+}
+
+void GameController::readAndAnalyze(std::string& fileName)
+{
+	auto file = std::ifstream(fileName);
+	if (!file.is_open())
+	{
+		std::cerr << "Error: Cannot open file " << fileName << std::endl;
+		return;
+	}
+
+	// Reset the rows and columns for each step.
+	m_height = m_width = 0;
+
+	// go to all line in file and update the vec.
+	std::string line;
+	while (getline(file, line))
+	{
+		updateThisLine(line);
+		m_height++;
+	}
+	m_width = static_cast<unsigned int>(line.size());
+}
+
+void GameController::updateThisLine(std::string& line)
+{
+	char ch;
+	for (int i = 0; i < line.size(); i++)
+	{
+		ch = line[i];
+		analyzeObj(ch, i);
+	}
+}
+
+void GameController::analyzeObj(char& ch, int col)
+{
+	switch (ch)
+	{
+	case '/':
+		m_movingObjVec.push_back(std::make_unique<Robot>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case '!':
+		m_movingObjVec.push_back(std::make_unique<Guard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case '#':
+		m_staticObjVec.push_back(std::make_unique<Wall>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case '@':
+		m_staticObjVec.push_back(std::make_unique<Rock>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case 'D':
+		m_staticObjVec.push_back(std::make_unique<Door>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
 	}
 }
 //--------------------------------------------------------
@@ -73,66 +158,26 @@ void GameController::handleFirstWindow(FirstWindow& window) const
 	}
 }
 //--------------------------------------------------------
-void GameController::readAndAnalyze(std::string& fileName)
+sf::Vector2f GameController::getDirection()
 {
-	// analyze the row and col every time
-	m_height = 0;
-	m_width = 0;
-	auto file = std::ifstream(fileName);
-	if (!file.is_open())
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		std::cerr << "Error Cannot open file" << fileName;
-		return;
+		return (sf::Vector2f{ 1, 0 });
 	}
-
-	std::string line;
-	while (getline(file, line))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		updateThisLine(line);
-		m_height++;
+		return (sf::Vector2f{ -1, 0 });
 	}
-	m_width = static_cast<unsigned int > (line.size());
-}
-//--------------------------------------------------------
-void GameController::updateThisLine(std::string& line)
-{
-	if(line.empty())
-		return;
-	char ch;
-	for (int i = 0; i < line.size(); i++)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		ch = line[i];
-		AnalyzeObj(ch, i);
+		return (sf::Vector2f{ 0, -1 });
 	}
-}
-//--------------------------------------------------------
-void GameController::AnalyzeObj(char& ch, int col)
-{
-	switch (ch)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-	case '/':
-        m_movingObjVec.push_back(std::make_unique<Robot>(sf::Vector2f{ (float)col, (float)m_height}, m_SfmlManager));
-		break;
-	case '!':
-		m_movingObjVec.push_back(std::make_unique<Guard>(sf::Vector2f{ (float)col, (float)m_height }, m_SfmlManager));
-		break;
-	case '#':
-		m_StaticObjectVec.push_back(std::make_unique<Wall>(sf::Vector2f{ (float)col, (float)m_height }, m_SfmlManager));
-		break;
-	case '@':
-		m_StaticObjectVec.push_back(std::make_unique<Rock>(sf::Vector2f{ (float)col, (float)m_height }, m_SfmlManager));
-		break;
-	case 'D':
-		m_StaticObjectVec.push_back(std::make_unique<Door>(sf::Vector2f{ (float)col, (float)m_height }, m_SfmlManager));
-		break;
+		return (sf::Vector2f{ 0, 1 });
 	}
-	//default ch will ba tile
-}
-//--------------------------------------------------------
-void GameController::updateWindow()
-{
-
-	
-}
+	else
+		return (sf::Vector2f{ 0, 0 });
 
 
+}

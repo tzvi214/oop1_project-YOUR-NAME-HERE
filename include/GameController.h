@@ -1,41 +1,40 @@
 #pragma once
+#include <string>
+#include <memory>
+#include <fstream>
+#include <vector>
 #include "FirstWindow.h"
-#include <SfmlManager.h>
+#include "SfmlManager.h"
 #include "StaticObject.h"
 #include "GameBoard.h"
-#include "Wall.h"
+#include "MovingObject.h"
+#include "Rock.h"
 #include "Robot.h"
 #include "Guard.h"
-#include "Rock.h"
 #include "Door.h"
-#include "MovingObject.h" // Fixed include statement
-#include <memory>
-#include "vector"
-#include "string"
-#include <iostream>
-#include <filesystem>
-#include <fstream>
-//
+#include "Wall.h"
+
 
 class GameController
 {
 public:
-	GameController() ;
+	GameController() = default;
+	void run();
 
- void run();
 private:
-	SfmlManager m_SfmlManager;
 	sf::Clock m_gameClock;
-	
-	std::vector<std::unique_ptr <MovingObject> > m_movingObjVec;
-	std::vector<std::unique_ptr <StaticObject> > m_StaticObjectVec;
+	sf::Vector2f m_robotLoc;
+	std::vector <std::unique_ptr<StaticObject>> m_staticObjVec;
+	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;
+	SfmlManager m_SfmlManager{};
+	unsigned int m_height = 0;
+	unsigned int m_width = 0;
 
-	unsigned int m_height ;//default
-	unsigned int m_width; //default
-
-	void handleFirstWindow(FirstWindow&) const;
+	void handleCollisionController(MovingObject&);
 	void readAndAnalyze(std::string&);
-	void updateThisLine(std::string &);
-	void AnalyzeObj(char&, int );
-	void updateWindow();
+	void updateThisLine(std::string&);
+	void analyzeObj(char&, int);
+	void handleFirstWindow(FirstWindow&) const;
+	sf::Vector2f getDirection();
+
 };
