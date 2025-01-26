@@ -11,7 +11,8 @@ void Wall::handleCollision(Robot& robot)
 }
 
 
-void Wall::handleCollision(Guard&)
+void Wall::handleCollision(Guard& guard)
 {
 	std::cout << "Guard hit a Wall , need to move reverse \n";
+	guard.dountMove();
 }

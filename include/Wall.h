@@ -3,6 +3,7 @@
 #include "ObjName.h"
 #include "SfmlManager.h"
 #include "Robot.h"
+#include "Guard.h"
 
 class Wall :public StaticObject
 {

@@ -4,6 +4,15 @@ Guard::Guard(sf::Vector2f location, SfmlManager& SfmlMan) :
     MovingObject(location, SfmlMan, ObjName::E_Guard), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
 { }
 //--------------------------------------------------------------
+void Guard::dountMove()
+{
+    int newX = (m_location.x + 25) / 50;
+    int newY = (m_location.y + 25) / 50;
+    newX *= 50;
+    newY *= 50;
+    m_location = sf::Vector2f{ (float)newX, (float)newY };
+}
+//--------------------------------------------------------------
 void Guard::updateDirection(sf::Vector2f robotLoc) {
     sf::Vector2f direction = { 0, 0 };
 

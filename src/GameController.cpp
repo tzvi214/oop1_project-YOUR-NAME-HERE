@@ -17,6 +17,8 @@ void GameController::run()
 	GameBoard gameBoard(m_width, m_height + 2);
 	auto& window = gameBoard.getWindow();
 
+	//window.setFramerateLimit(60);
+
 	m_gameClock.restart();
 	while (window.isOpen())
 	{
@@ -49,7 +51,6 @@ void GameController::run()
 			objMov->updateDirection(m_robotLoc);
 			handleCollisionController(*objMov); // call to function of this class.
 			objMov->move(deltaTime);
-			
 		}
 		//****
 

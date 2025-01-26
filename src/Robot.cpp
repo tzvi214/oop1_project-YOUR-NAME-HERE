@@ -8,15 +8,24 @@ Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan)
 //-----------------------------------------------------------
 void Robot::updateDirection(sf::Vector2f)
 {
-	m_stopped /*= m_cannotMove*/ = false;
+	m_stopped  = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		setDirection(sf::Vector2f{ 1, 0 });
+		//m_image.setOrigin(m_location.x+ 25.f, m_location.y+ 25.f);
+		//m_image.setScale(0.05f, 0.05f);	
+		//m_image.setOrigin(m_location.x, m_location.y);
+		//m_image.setOrigin(0.f, 0.f);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		setDirection(sf::Vector2f{ -1, 0 });
+		//m_image.setOrigin(m_location.x + 25.f, m_location.y + 25.f);
+		//m_image.setScale(-0.05f, 0.05f);
+		//m_image.setOrigin(0.f, 0.f);
+		//m_image.setOrigin(m_location.x, m_location.y);
+
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -40,6 +49,16 @@ void Robot::loseLife()
 		m_robotKilled = true;
 }
 //---------------------------------------------------------
+void Robot::dountMove()
+{
+	int newX = (m_location.x + 25) / 50;
+	int newY = (m_location.y + 25) / 50;
+	newX *= 50;
+	newY *= 50;
+	m_location = sf::Vector2f{ (float)newX, (float)newY };
+
+}
+//---------------------------------------------------------
 void Robot::draw(sf::RenderWindow& window)
 {
 	StaticObject::draw(window);
@@ -55,7 +74,7 @@ void Robot::move(float deltaTime)
    }
    //-----------------------------------
    
-   if (m_stopped/* || m_cannotMove*/) // if the robot didnt move dont move
+   if (m_stopped) // if the robot didnt move dont move
    	return;
    
    m_image.move(m_direction.x * (2 * m_pixelSize * deltaTime), m_direction.y * (2 * m_pixelSize * deltaTime));
@@ -90,7 +109,7 @@ void Robot::drawInformation(sf::RenderWindow& window)
 
 	//------time---------
 	text.setPosition(70, posy);
-	text.setString("The Time is: \n     0"  + std::to_string(m_seconds / 60) + ":" + std::to_string(m_seconds % 60));
+	text.setString("The Time is: \n     "  + std::to_string(m_seconds / 60) + ":" + std::to_string(m_seconds % 60));
 	text.setCharacterSize(24);
 	text.setFillColor(sf::Color::Red);
 	window.draw(text);

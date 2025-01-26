@@ -38,10 +38,7 @@ protected:
 private:
 	//--- data_member ---
 
-
-
 	ObjName m_type;
-
 	//---- function --------
 	void setSpritLoc();
 

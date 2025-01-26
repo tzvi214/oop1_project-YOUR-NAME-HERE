@@ -12,7 +12,8 @@ public:
 	sf::Vector2f getLocation() const { return m_location; }
 	void loseLife();
 	bool robotAreDead() const { return m_robotKilled; }
-	void dountMove() { m_direction.x *=-1, m_direction.y *=-1; }
+	void dountMove();
+	void FinishedLevel() const { std::cout << "You finished the level \n;"; }
 	//-----------------------------------------------------
 	virtual void updateDirection(sf::Vector2f) override;
 	virtual void draw(sf::RenderWindow&) override;
@@ -24,12 +25,11 @@ public:
 private:
 	sf::Vector2f m_firstLoc;
 	int m_life = 5;
-	float m_time = 10;// for new is default
+	float m_time = 0;// for new is default
 	int m_seconds = 0;
 	SfmlManager& m_sfmlManager;
 	bool m_robotKilled = false;
 	bool m_stopped = true;// when the program the object dident moved
-	bool m_cannotMove = false;
 	//--- function ---
 	void drawInformation(sf::RenderWindow&);
 

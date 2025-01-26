@@ -24,6 +24,7 @@ sf::Vector2f StaticObject::getLocation() const
 //---------------------------------------------------------------
 void StaticObject::draw(sf::RenderWindow& window)
 {
+	//m_image.setOrigin(m_pixelSize, m_pixelSize);
 	m_image.setPosition(m_location);
 	window.draw(m_image);
 }
@@ -36,6 +37,7 @@ bool StaticObject::checkCollision(StaticObject& other) const
 //------------------------ private function ---------------------
 void StaticObject::setSpritLoc()
 {
+	
 	m_image.setScale(0.05f, 0.05f);
 	m_image.setPosition(m_location);
 }
