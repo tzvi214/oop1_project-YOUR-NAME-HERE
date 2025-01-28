@@ -8,13 +8,15 @@ class Robot :public MovingObject
 {
 public:
 	Robot(sf::Vector2f, SfmlManager&);
-	void goToFirstLoc() { m_location = m_firstLoc; }
 	sf::Vector2f getLocation() const { return m_location; }
 	void loseLife();
 	bool robotAreDead() const { return m_robotKilled; }
-	void dountMove();
+	void dauntMove();
 	void FinishedLevel() const { std::cout << "You finished the level \n;"; }
+	//void touchBomb() { m_need2restartPlace = true ; }
 	//-----------------------------------------------------
+	void goToFirstLoc() { m_location = m_firstLoc; }
+
 	virtual void updateDirection(sf::Vector2f) override;
 	virtual void draw(sf::RenderWindow&) override;
 	virtual void move(float) override;
@@ -30,8 +32,14 @@ private:
 	SfmlManager& m_sfmlManager;
 	bool m_robotKilled = false;
 	bool m_stopped = true;// when the program the object dident moved
+	
+	//------------------
+	int m_currentFrame = 0;
 	//--- function ---
 	void drawInformation(sf::RenderWindow&);
-
-
+	
+	
+	
+	//----------------------
+	sf::Texture& m_texture;
 };

@@ -21,5 +21,8 @@ private:
 	sf::Texture m_RockTex;
 	sf::Texture m_Guard;
 	sf::Texture m_Door;
+	sf::Texture m_Temp;
+	sf::Texture m_Bomb;
+	sf::Texture m_Fire;
 
 };

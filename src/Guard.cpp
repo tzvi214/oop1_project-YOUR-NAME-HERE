@@ -4,7 +4,7 @@ Guard::Guard(sf::Vector2f location, SfmlManager& SfmlMan) :
     MovingObject(location, SfmlMan, ObjName::E_Guard), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
 { }
 //--------------------------------------------------------------
-void Guard::dountMove()
+void Guard::dauntMove()
 {
     int newX = (m_location.x + 25) / 50;
     int newY = (m_location.y + 25) / 50;
@@ -13,7 +13,9 @@ void Guard::dountMove()
     m_location = sf::Vector2f{ (float)newX, (float)newY };
 }
 //--------------------------------------------------------------
-void Guard::updateDirection(sf::Vector2f robotLoc) {
+void Guard::updateDirection(sf::Vector2f robotLoc) 
+{
+    m_need2restartPlace = false;
     sf::Vector2f direction = { 0, 0 };
 
     if (std::abs(robotLoc.x - m_location.x) > (m_pixelSize /10)) // because its almost never will ba 0 i took exception of 10 parcent
@@ -50,6 +52,5 @@ void Guard::handleCollision(Robot& robot)
 {
     std::cout << "guard hit a robot. and life-- \n";
     robot.loseLife();
-    goToFirstLoc();
-    robot.goToFirstLoc();
+    m_need2restartPlace = true;
 }

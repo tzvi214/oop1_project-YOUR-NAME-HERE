@@ -47,3 +47,12 @@ sf::Vector2f StaticObject::calculateLocation(sf::Vector2f location)
 	return sf::Vector2f(location.x * m_pixelSize, location.y * m_pixelSize);
 }
 //---------------------------------------------------------------
+void StaticObject::setDead(bool flag)
+{
+	m_Dead = flag;
+}
+//---------------------------------------------------------------
+//bool StaticObject::IsDead() const
+//{
+//	return m_Dead;
+//}

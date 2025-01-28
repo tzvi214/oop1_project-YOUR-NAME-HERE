@@ -2,13 +2,15 @@
 
 Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan)
 	: MovingObject(location, sfmlMan, ObjName::E_Robot), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
-	, m_sfmlManager{ sfmlMan }
+	, m_sfmlManager{ sfmlMan }, m_texture{sfmlMan.getTexture(ObjName::E_Temp)}
 {
+	//m_image.setTexture(m_texture);
+		// sprite.setTexture(sfm.getTexture(ObjName::E_Temp));
 }
 //-----------------------------------------------------------
 void Robot::updateDirection(sf::Vector2f)
 {
-	m_stopped  = false;
+	m_stopped  = m_need2restartPlace = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
@@ -49,20 +51,52 @@ void Robot::loseLife()
 		m_robotKilled = true;
 }
 //---------------------------------------------------------
-void Robot::dountMove()
+void Robot::dauntMove()
 {
 	int newX = (m_location.x + 25) / 50;
 	int newY = (m_location.y + 25) / 50;
 	newX *= 50;
 	newY *= 50;
 	m_location = sf::Vector2f{ (float)newX, (float)newY };
-
+	//-----------------------------
+	m_currentFrame = 1;
+	
 }
 //---------------------------------------------------------
 void Robot::draw(sf::RenderWindow& window)
 {
-	StaticObject::draw(window);
-	drawInformation(window);
+	////  currentFrame = (currentFrame + 1) % 3;
+	//// enum Direction { Up = 0, Left = 3, Down = 2, Right = 1 };
+	////   sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, direction * frameHeight, frameWidth, frameHeight));
+	////sprite.setScale(3.f, 3.f);
+	////
+	//m_currentFrame = (m_currentFrame + 1) % 3;
+	//if (m_direction == sf::Vector2f{ 1,0 })//right
+	//{
+	//	//m_image.setTextureRect(sf::IntRect(m_currentFrame * (48/3), 72/4, (48 / 3), 72 / 4));
+	//	//m_image.setScale(3.f, 3.f);
+	//}
+	//else if (m_direction == sf::Vector2f{ -1,0 })
+	//{
+
+	//}
+	//else if (m_direction == sf::Vector2f{ 0,1 })
+	//{
+
+	//}
+	//else if (m_direction == sf::Vector2f{ 0,-1 })//up
+	//{
+	//	
+	//	//m_image.setTextureRect(sf::IntRect(m_currentFrame * (48 / 3), 0, (48 / 3), 72 / 4));
+	//	//m_image.setScale(3.f, 3.f);
+	//}
+	//else if (m_direction == sf::Vector2f{ 0,0 })
+	//{
+
+	//}
+	//m_image.setScale(3.f, 3.f);
+	 StaticObject::draw(window);
+	 drawInformation(window);
 }
 //---------------------------------------------------------
 void Robot::move(float deltaTime)

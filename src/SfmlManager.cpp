@@ -31,6 +31,17 @@ SfmlManager::SfmlManager()
 	if (!m_Door.loadFromFile("Door.png"))
 		std::cerr << "Failed to load Door.png\n";
 
+	if (!m_Temp.loadFromFile("temp.png"))
+		std::cerr << "Failed to load Temp.png\n";
+
+	if (!m_Bomb.loadFromFile("Bomb.png"))
+		std::cerr << "Failed to load Bomb.png\n";
+
+	if (!m_Fire.loadFromFile("Fire.png"))
+		std::cerr << "Failed to load Fire.png\n";
+
+
+
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
 
@@ -62,6 +73,15 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 		break;
 	case E_Door:
 		return m_Door;
+		break;
+	case E_Temp:
+		return m_Temp;
+		break;
+	case E_Bomb:
+		return m_Bomb;
+		break;
+	case Fire:
+		return m_Fire;
 		break;
 
 	default:

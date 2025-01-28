@@ -10,6 +10,9 @@ configure_file ("Robot.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Rock.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Guard.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Door.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("temp.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Bomb.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Fire.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
 

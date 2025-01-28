@@ -13,6 +13,7 @@
 #include "Guard.h"
 #include "Door.h"
 #include "Wall.h"
+#include "Bomb.h"
 
 
 class GameController
@@ -26,6 +27,7 @@ private:
 	sf::Vector2f m_robotLoc;
 	std::vector <std::unique_ptr<StaticObject>> m_staticObjVec;
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;
+	std::vector <std::unique_ptr<Bomb>> m_BombVec;
 	SfmlManager m_SfmlManager{};
 	unsigned int m_height = 0;
 	unsigned int m_width = 0;
@@ -35,6 +37,13 @@ private:
 	void updateThisLine(std::string&);
 	void analyzeObj(char&, int);
 	void handleFirstWindow(FirstWindow&) const;
-	sf::Vector2f getDirection();
-
+	sf::Vector2f getDirection();// to delte this function
+	//-------------------------------------
+	void restartObjPlace();
+	void mainLoop(sf::RenderWindow&);
+	void draw(sf::RenderWindow&);
+	void handleEvent();
+	//-------------------------------------
+	void addBomb();
+	void deleteObjFromVec();
 };
