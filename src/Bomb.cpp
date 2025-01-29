@@ -87,10 +87,11 @@ void Bomb::handleCollision(Robot& robot)
 
 		if (this->collidesWith(robot)) 
 		{
-			robot.loseLife();
+			//robot.loseLife();
 			// need to: go to next level. 
 			//robot.setDead(true);
-			robot.touchBomb();
+			//robot.touchBomb();
+			robot.setDead();
 			return;
 		}
 		// 4 direction
@@ -100,9 +101,10 @@ void Bomb::handleCollision(Robot& robot)
 		setLocation();
 		if (this->collidesWith(robot))
 		{
-			robot.loseLife();
+			//robot.loseLife();
 			//robot.setDead(true);
-			robot.touchBomb();
+			//robot.touchBomb();
+			robot.setDead();
 			return;
 		}
 		m_location.x -= m_pixelSize;
@@ -113,9 +115,11 @@ void Bomb::handleCollision(Robot& robot)
 	    setLocation();
 		if (this->collidesWith(robot))
 		{
-			robot.loseLife();
+			//robot.loseLife();
 			//robot.setDead(true);
-			robot.touchBomb();
+			//robot.touchBomb();
+			robot.setDead();
+
 			return;
 		}
 		m_location.x += m_pixelSize;
@@ -125,9 +129,10 @@ void Bomb::handleCollision(Robot& robot)
 		setLocation();
 		if (this->collidesWith(robot))
 		{
-			robot.loseLife();
+			//robot.loseLife();
 			//robot.setDead(true);
-			robot.touchBomb();
+			//robot.touchBomb();
+			robot.setDead();
 			return;
 		}
 		m_location.y -= m_pixelSize;
@@ -138,15 +143,70 @@ void Bomb::handleCollision(Robot& robot)
 		setLocation();
 		if (this->collidesWith(robot))
 		{
-			robot.loseLife();
+			//robot.loseLife();
 			//robot.setDead(true);
-			robot.touchBomb();
+			//robot.touchBomb();
+			robot.setDead();
 			return;
 		}
 		m_location.y += m_pixelSize;
 		setLocation();
 	}
 }
+//------------------------------------------------------
+//void Bomb::handleCollision(StaticObject& other)
+//{
+//	if (m_exploded && !m_Dead)
+//	{
+//		if (this->collidesWith(other))
+//		{
+//			other.setDead(true);
+//		}
+//
+//		// 4 direction
+//
+//		// right place
+//		m_location.x += m_pixelSize;
+//		setLocation();
+//		if (this->collidesWith(other))
+//		{
+//			other.setDead(true);
+//		}
+//		m_location.x -= m_pixelSize;
+//
+//
+//		//left place
+//		m_location.x -= m_pixelSize;
+//		setLocation();
+//		if (this->collidesWith(other))
+//		{
+//
+//			other.setDead(true);
+//		}
+//		m_location.x += m_pixelSize;
+//
+//		//down place
+//		m_location.y += m_pixelSize;
+//		setLocation();
+//		if (this->collidesWith(other))
+//		{
+//			other.setDead(true);
+//
+//		}
+//		m_location.y -= m_pixelSize;
+//
+//
+//		//up place
+//		m_location.y -= m_pixelSize;
+//		setLocation();
+//		if (this->collidesWith(other))
+//		{
+//			other.setDead(true);
+//		}
+//		m_location.y += m_pixelSize;
+//		setLocation();
+//	}
+//}
 //----------------------------------------
 void Bomb::handleCollision(Rock& rock)
 {

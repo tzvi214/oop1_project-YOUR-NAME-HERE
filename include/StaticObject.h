@@ -19,7 +19,7 @@ public:
 	sf::Vector2f getLocation() const;
 	bool collidesWith(StaticObject&) ;
 	bool checkCollision(StaticObject&) const;
-	void setDead(bool);
+	virtual void setDead(bool = true);
 	bool IsDead() const { return m_Dead; }
 	//--- VIRTUAL ---
 	virtual void draw(sf::RenderWindow&);

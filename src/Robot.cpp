@@ -7,6 +7,14 @@ Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan)
 	//m_image.setTexture(m_texture);
 		// sprite.setTexture(sfm.getTexture(ObjName::E_Temp));
 }
+void Robot::setDead(bool flag)
+{
+	if (flag)
+	{
+		loseLife();
+		touchBomb();// need to restart place
+	}
+}
 //-----------------------------------------------------------
 void Robot::updateDirection(sf::Vector2f)
 {

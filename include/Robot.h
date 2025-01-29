@@ -16,7 +16,7 @@ public:
 	void touchBomb() { m_need2restartPlace = true ; }
 	//-----------------------------------------------------
 	void goToFirstLoc() { m_location = m_firstLoc; }
-
+	virtual void setDead(bool = true);
 	virtual void updateDirection(sf::Vector2f) override;
 	virtual void draw(sf::RenderWindow&) override;
 	virtual void move(float) override;
