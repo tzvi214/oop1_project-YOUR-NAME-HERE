@@ -1,6 +1,5 @@
 #include "GameController.h"
 
-
 //--------------------------------------------------------
 void GameController::run()
 {
@@ -43,12 +42,12 @@ void GameController::handleCollisionController(MovingObject& movingObject)
 			movingObject.handleCollision(*obj);
 		}
 	}
+
 	for (const auto& obj : m_BombVec)
 	{
 		movingObject.handleCollision(*obj);
 	}
 }
-
 //--------------------------------------------------
 void GameController::readAndAnalyze(std::string& fileName)
 {
@@ -148,6 +147,7 @@ void GameController::restartObjPlace()
 	{
 		objMov->goToFirstLoc();
 	}
+	m_BombVec.clear();
 }
 //--------------------------------------------------
 void GameController::mainLoop(sf::RenderWindow& window)
@@ -165,7 +165,19 @@ void GameController::mainLoop(sf::RenderWindow& window)
 		}
 		deleteObjFromVec();
 		handleEvent();
+		//----------- Bomb Event ---------------
+		for (auto& bomb : m_BombVec) 
+		{
+			for (const auto& obj : m_staticObjVec)  
+			{
+				{
+					obj->handleCollision(*bomb);
+				}
+			}
+		}
+
 		draw(window);
+
 	}
 }
 //--------------------------------------------------
@@ -217,7 +229,6 @@ void GameController::handleEvent()
 	
 	for (auto& bomb : m_BombVec) {
 		bomb->updateState(); // Replace sprite to fire 
-		
 	}
 }
 //--------------------------------------------------
@@ -235,5 +246,7 @@ void GameController::deleteObjFromVec()
 {
 	std::erase_if(m_movingObjVec, [](const auto& obj) { return obj->IsDead(); });
 	std::erase_if(m_BombVec, [](const auto& bomb) { return bomb->IsDead(); });
-  //std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->IsDead(); });
+    std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->IsDead(); });
+
+
 }

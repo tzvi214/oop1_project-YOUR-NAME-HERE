@@ -119,12 +119,12 @@ void Robot::move(float deltaTime)
 //---------------------------------------------------------
 void Robot::handleCollision(StaticObject& other)
 {
-	if (this->collidesWith(other))
-	{
-		std::cout << "Robot touch at StaticObject \n";
+	/*if (this->collidesWith(other))
+	{*/
+	//	std::cout << "Robot touch at StaticObject \n";
 		other.handleCollision(*this); // swap
 		// continue to wall->Robot OR guard->Robot
-	}
+	/*}*/
 }
 //---------------------------------------------------------
 void Robot::drawInformation(sf::RenderWindow& window)

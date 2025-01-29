@@ -11,10 +11,10 @@ bool StaticObject::touch(sf::Vector2f location) const
 	return  m_image.getGlobalBounds().contains(location);
 }
 //---------------------------------------------------------------
-bool StaticObject::collidesWith(const StaticObject& other) const
+bool StaticObject::collidesWith( StaticObject& other) 
 {
 	return m_image.getGlobalBounds().intersects(other.m_image.getGlobalBounds());
-
+	
 }
 //---------------------------------------------------------------
 sf::Vector2f StaticObject::getLocation() const
@@ -24,7 +24,6 @@ sf::Vector2f StaticObject::getLocation() const
 //---------------------------------------------------------------
 void StaticObject::draw(sf::RenderWindow& window)
 {
-	//m_image.setOrigin(m_pixelSize, m_pixelSize);
 	m_image.setPosition(m_location);
 	window.draw(m_image);
 }
@@ -52,7 +51,3 @@ void StaticObject::setDead(bool flag)
 	m_Dead = flag;
 }
 //---------------------------------------------------------------
-//bool StaticObject::IsDead() const
-//{
-//	return m_Dead;
-//}

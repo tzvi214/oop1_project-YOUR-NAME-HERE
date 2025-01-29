@@ -27,18 +27,181 @@ bool Bomb::IsExploded()
 //----------------------------------------
 void Bomb::handleCollision(Guard& guard)
 {
-	if (m_exploded) {
-		guard.setDead(true);
+	if (m_exploded && !m_Dead)
+	{
+		if (this->collidesWith(guard))
+		{
+			guard.setDead(true);
+		}
+
+		// 4 direction
+
+		// right place
+		m_location.x += m_pixelSize;
+		setLocation();
+		if (this->collidesWith(guard))
+		{
+			guard.setDead(true);
+		}
+		m_location.x -= m_pixelSize;
+
+
+		//left place
+		m_location.x -= m_pixelSize;
+		setLocation();
+		if (this->collidesWith(guard))
+		{
+			
+			guard.setDead(true);
+		}
+		m_location.x += m_pixelSize;
+
+		//down place
+		m_location.y += m_pixelSize;
+		setLocation();
+		if (this->collidesWith(guard))
+		{
+			guard.setDead(true);
+
+		}
+		m_location.y -= m_pixelSize;
+
+
+		//up place
+		m_location.y -= m_pixelSize;
+		setLocation();
+		if (this->collidesWith(guard))
+		{
+			guard.setDead(true);
+		}
+		m_location.y += m_pixelSize;
+		setLocation();
 	}
+
 }
 //----------------------------------------
 void Bomb::handleCollision(Robot& robot)
 {
-	if (m_exploded) {
-		robot.loseLife();
-		// need to: go to next level. 
-		robot.setDead(true);
+	if (m_exploded && !m_Dead)
+	{
+
+		if (this->collidesWith(robot)) 
+		{
+			robot.loseLife();
+			// need to: go to next level. 
+			//robot.setDead(true);
+			robot.touchBomb();
+			return;
+		}
+		// 4 direction
+
+		// right place
+		m_location.x += m_pixelSize;
+		setLocation();
+		if (this->collidesWith(robot))
+		{
+			robot.loseLife();
+			//robot.setDead(true);
+			robot.touchBomb();
+			return;
+		}
+		m_location.x -= m_pixelSize;
+
+
+		     //left place
+	    m_location.x -= m_pixelSize;
+	    setLocation();
+		if (this->collidesWith(robot))
+		{
+			robot.loseLife();
+			//robot.setDead(true);
+			robot.touchBomb();
+			return;
+		}
+		m_location.x += m_pixelSize;
+
+		  //down place
+		m_location.y += m_pixelSize;
+		setLocation();
+		if (this->collidesWith(robot))
+		{
+			robot.loseLife();
+			//robot.setDead(true);
+			robot.touchBomb();
+			return;
+		}
+		m_location.y -= m_pixelSize;
+
+
+		  //up place
+		m_location.y -= m_pixelSize;
+		setLocation();
+		if (this->collidesWith(robot))
+		{
+			robot.loseLife();
+			//robot.setDead(true);
+			robot.touchBomb();
+			return;
+		}
+		m_location.y += m_pixelSize;
+		setLocation();
 	}
+}
+//----------------------------------------
+void Bomb::handleCollision(Rock& rock)
+{
+	if (m_exploded && !m_Dead)
+	{
+		if (this->collidesWith(rock))
+		{
+			rock.setDead(true);
+		}
+
+		// 4 direction
+
+		// right place
+		m_location.x += m_pixelSize;
+		setLocation();
+		if (this->collidesWith(rock))
+		{
+			rock.setDead(true);
+		}
+		m_location.x -= m_pixelSize;
+
+
+		//left place
+		m_location.x -= m_pixelSize;
+		setLocation();
+		if (this->collidesWith(rock))
+		{
+
+			rock.setDead(true);
+		}
+		m_location.x += m_pixelSize;
+
+		//down place
+		m_location.y += m_pixelSize;
+		setLocation();
+		if (this->collidesWith(rock))
+		{
+			rock.setDead(true);
+
+		}
+		m_location.y -= m_pixelSize;
+
+
+		//up place
+		m_location.y -= m_pixelSize;
+		setLocation();
+		if (this->collidesWith(rock))
+		{
+			rock.setDead(true);
+		}
+		m_location.y += m_pixelSize;
+		setLocation();
+	}
+
+
 }
 //----------------------------------------
 void Bomb::draw(sf::RenderWindow& window)
@@ -68,6 +231,6 @@ void Bomb::draw(sf::RenderWindow& window)
 		m_location.y -= m_pixelSize;
 		StaticObject::draw(window);
 		m_location.y += m_pixelSize;
-
+		setLocation();
 	}
 }

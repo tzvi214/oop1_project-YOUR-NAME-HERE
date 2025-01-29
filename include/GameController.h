@@ -37,7 +37,7 @@ private:
 	void updateThisLine(std::string&);
 	void analyzeObj(char&, int);
 	void handleFirstWindow(FirstWindow&) const;
-	sf::Vector2f getDirection();// to delte this function
+	sf::Vector2f getDirection();// to delete this function
 	//-------------------------------------
 	void restartObjPlace();
 	void mainLoop(sf::RenderWindow&);

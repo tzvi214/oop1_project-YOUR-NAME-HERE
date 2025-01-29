@@ -13,6 +13,8 @@ public:
 	// --- Double Dispatch ---
 	virtual void  handleCollision(Robot&) override;
 	virtual void  handleCollision(Guard&) override;
-private:
+	virtual void  handleCollision(StaticObject&) override;
+private: 
+
 
 };

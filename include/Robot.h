@@ -13,7 +13,7 @@ public:
 	bool robotAreDead() const { return m_robotKilled; }
 	void dauntMove();
 	void FinishedLevel() const { std::cout << "You finished the level \n;"; }
-	//void touchBomb() { m_need2restartPlace = true ; }
+	void touchBomb() { m_need2restartPlace = true ; }
 	//-----------------------------------------------------
 	void goToFirstLoc() { m_location = m_firstLoc; }
 

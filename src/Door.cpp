@@ -7,6 +7,9 @@ Door::Door(sf::Vector2f location, SfmlManager& sfmlManager)
 //------------------------------------------
 void Door::handleCollision(Robot& robot)
 {
-	robot.FinishedLevel();
+	if (this->collidesWith(robot))
+	{
+		robot.FinishedLevel();
+	}
 }
 

@@ -4,6 +4,9 @@
 #include "SfmlManager.h"
 #include "Robot.h"
 #include "Guard.h"
+#include "Rock.h"
+//class Rock;
+
 
 class Bomb :public StaticObject
 {
@@ -14,6 +17,7 @@ public:
 
 	virtual void handleCollision(Guard&);
 	virtual void handleCollision(Robot&);
+	virtual void handleCollision(Rock&);
 	virtual void draw(sf::RenderWindow&) override;
 private:
 	sf::Clock m_clock;

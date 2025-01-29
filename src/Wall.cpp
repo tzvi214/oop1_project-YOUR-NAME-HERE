@@ -6,13 +6,18 @@ Wall::Wall(sf::Vector2f location, SfmlManager& sfmlManager)
 
 void Wall::handleCollision(Robot& robot)
 {
-	std::cout << "Robot hit a Wall , need to move reverse \n";
-	robot.dauntMove();
+	if (this->collidesWith(robot))
+	{
+		std::cout << "Robot hit a Wall , need to move reverse \n";
+		robot.dauntMove();
+	}
 }
 
 
 void Wall::handleCollision(Guard& guard)
 {
-	std::cout << "Guard hit a Wall , need to move reverse \n";
-	guard.dauntMove();
+	if (this->collidesWith(guard)) {
+		//std::cout << "Guard hit a Wall , need to move reverse \n";
+		guard.dauntMove();
+	}
 }

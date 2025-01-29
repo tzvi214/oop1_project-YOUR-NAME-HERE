@@ -10,12 +10,12 @@ int main()
    // window.setFramerateLimit(60);
 
    // // טעינת הטקסטורה
-   //// sf::Texture texture;
+   // sf::Texture texture;
    // 
-   ///* if (!texture.loadFromFile("temp.png")) {
+   // if (!texture.loadFromFile("temp.png")) {
    //     std::cerr << "Error loading texture!" << std::endl;
    //     return -1;
-   // }*/
+   // }
 
    // // הגדרת sprite
    // sf::Sprite sprite;
@@ -78,7 +78,7 @@ int main()
 
    //     // הגדרת ה-TextureRect בהתאם לכיוון ולפריים הנוכחי
    //     sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, direction * frameHeight, frameWidth, frameHeight));
-   //     sprite.setScale(3.f, 3.f);
+   //     //sprite.setScale(3.f, 3.f);
    //     // ציור
    //     window.clear(sf::Color::Black); // מנקה את החלון
    //     window.draw(sprite);           // מצייר את הספרייט

@@ -6,11 +6,22 @@ Rock::Rock(sf::Vector2f location, SfmlManager& sfmlManager)
 //-----------------------------------------------------------
 void Rock::handleCollision(Robot& robot)
 {
-	robot.dauntMove();
+	if (this->collidesWith(robot))
+	{
+		robot.dauntMove();
+	}
 }
 //-----------------------------------------------------------
 void Rock::handleCollision(Guard& guard)
 {
-	guard.dauntMove();
+	if (this->collidesWith(guard))
+	{
+		guard.dauntMove();
+	}
+}
+
+void Rock::handleCollision(StaticObject& other)
+{
+	other.handleCollision(*this); // swap.
 }
 

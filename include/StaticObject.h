@@ -3,9 +3,10 @@
 #include "SfmlManager.h"
 #include "ObjName.h"
 
-
 class Robot;
 class Guard;
+class Bomb;
+class Rock;
 
 class StaticObject
 {
@@ -16,7 +17,7 @@ public:
 	ObjName getType() const { return m_type; }
 	bool touch(sf::Vector2f location) const;
 	sf::Vector2f getLocation() const;
-	bool collidesWith(const StaticObject&) const;
+	bool collidesWith(StaticObject&) ;
 	bool checkCollision(StaticObject&) const;
 	void setDead(bool);
 	bool IsDead() const { return m_Dead; }
@@ -27,9 +28,12 @@ public:
 	virtual void handleCollision(StaticObject&) {};
 	virtual void handleCollision(Robot&) {};
 	virtual void handleCollision(Guard&) {};
+	virtual void handleCollision(Rock&) {};
 
 
 protected:
+	void setLocation() { m_image.setPosition(m_location); }
+
 	const int m_pixelSize;
 	sf::Sprite m_image;
 	sf::Vector2f getLoc() const { return m_location; }
