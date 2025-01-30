@@ -9,7 +9,7 @@ class SfmlManager
 public:
 	SfmlManager(); // c-tor load file to sf objects.
 	sf::Texture& getTexture(ObjName); // return reference of texture according the ObgName(Enum). 
-	sf::Text getText(ObjName) const; // return reference of font.
+    sf::Text getText(ObjName) const ; // return reference of font.
 
 private:
 	sf::Texture m_ExitTex;

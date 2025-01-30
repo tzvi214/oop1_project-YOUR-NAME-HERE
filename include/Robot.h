@@ -3,21 +3,23 @@
 #include "StaticObject.h"
 #include "ObjName.h"
 #include "SfmlManager.h"
+#include "Information.h"
+
 
 class Robot :public MovingObject
 {
 public:
-	Robot(sf::Vector2f, SfmlManager&);
+	Robot(sf::Vector2f, SfmlManager&, Information&);
 	sf::Vector2f getLocation() const { return m_location; }
 	void loseLife();
 	bool robotAreDead() const { return m_robotKilled; }
-	void dauntMove();
+	void dountMove();
 	void FinishedLevel() const { std::cout << "You finished the level \n;"; }
 	void touchBomb() { m_need2restartPlace = true ; }
 	//-----------------------------------------------------
 	void goToFirstLoc() { m_location = m_firstLoc; }
 	virtual void setDead(bool = true);
-	virtual void updateDirection(sf::Vector2f) override;
+	virtual void updateDirection() override;
 	virtual void draw(sf::RenderWindow&) override;
 	virtual void move(float) override;
 

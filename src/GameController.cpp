@@ -12,6 +12,8 @@ void GameController::run()
 
 	std::string fileName = "level01.txt";
 	readAndAnalyze(fileName);
+	m_information.setGameHeight((m_height-1) *50);
+	m_information.setGameWidth((m_width-1) *50);
 
 	GameBoard gameBoard(m_width, m_height + 2);
 	auto& window = gameBoard.getWindow();
@@ -86,10 +88,10 @@ void GameController::analyzeObj(char& ch, int col)
 	switch (ch)
 	{
 	case '/':
-		m_movingObjVec.push_back(std::make_unique<Robot>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		m_movingObjVec.push_back(std::make_unique<Robot>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
 		break;
 	case '!':
-		m_movingObjVec.push_back(std::make_unique<Guard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		m_movingObjVec.push_back(std::make_unique<Guard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
 		break;
 	case '#':
 		m_staticObjVec.push_back(std::make_unique<Wall>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
@@ -115,30 +117,6 @@ void GameController::handleFirstWindow(FirstWindow& window) const
 	{
 		std::cout << "Starting The Game\n";
 	}
-}
-//--------------------------------------------------------
-sf::Vector2f GameController::getDirection()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		return (sf::Vector2f{ 1, 0 });
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		return (sf::Vector2f{ -1, 0 });
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		return (sf::Vector2f{ 0, -1 });
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		return (sf::Vector2f{ 0, 1 });
-	}
-	else
-		return (sf::Vector2f{ 0, 0 });
-
-
 }
 //--------------------------------------------------
 void GameController::restartObjPlace()
@@ -201,19 +179,6 @@ void GameController::draw(sf::RenderWindow& window)
 //--------------------------------------------------
 void GameController::handleEvent()
 {
-	// that vary nat good i need to move the robot from the vector of moving object
-	for (const auto& objMov : m_movingObjVec) // to find location for robot
-	{
-		//if (auto* robot = dynamic_cast<Robot*>(objMov.get()))
-		if (objMov.get()->getType() == ObjName::E_Robot)
-		{
-			//	m_robotLoc = robot->getLocation();
-			m_robotLoc = objMov.get()->getLocation();
-			break;
-		}
-	}
-
-	//****
 	auto deltaTime = m_gameClock.restart().asSeconds();
 	for (const auto& objMov : m_movingObjVec) 
 	{
@@ -222,7 +187,7 @@ void GameController::handleEvent()
 	   	restartObjPlace();
 	   }
 
-	   objMov->updateDirection(m_robotLoc);// false
+	   objMov->updateDirection();// false
 	   handleCollisionController(*objMov); // call to function of this class.
 	   objMov->move(deltaTime);
 	}
@@ -235,11 +200,10 @@ void GameController::handleEvent()
 void GameController::addBomb()
 {
 	// update loc on tile
-	int newX = (m_robotLoc.x + 25) / 50;
-	int newY = (m_robotLoc.y + 25) / 50;
+	int newX = (m_information.getRobotLoc().x + 25) / 50;
+	int newY = (m_information.getRobotLoc().y + 25) / 50;
 
-	//Bomb bomb(sf::Vector2f(newX, newY), m_SfmlManager);
-	m_BombVec.push_back(std::make_unique<Bomb>(sf::Vector2f(newX, newY), m_SfmlManager));
+	m_BombVec.push_back(std::make_unique<Bomb>(sf::Vector2f(newX, newY), m_SfmlManager, m_information));
 }
 //--------------------------------------------------
 void GameController::deleteObjFromVec()
@@ -247,6 +211,4 @@ void GameController::deleteObjFromVec()
 	std::erase_if(m_movingObjVec, [](const auto& obj) { return obj->IsDead(); });
 	std::erase_if(m_BombVec, [](const auto& bomb) { return bomb->IsDead(); });
     std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->IsDead(); });
-
-
 }

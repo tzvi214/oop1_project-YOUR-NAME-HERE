@@ -1,7 +1,7 @@
 #include "Robot.h"
 
-Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan)
-	: MovingObject(location, sfmlMan, ObjName::E_Robot), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
+Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan, Information& info)
+	: MovingObject(location, sfmlMan, ObjName::E_Robot, info), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
 	, m_sfmlManager{ sfmlMan }, m_texture{sfmlMan.getTexture(ObjName::E_Temp)}
 {
 	//m_image.setTexture(m_texture);
@@ -16,7 +16,7 @@ void Robot::setDead(bool flag)
 	}
 }
 //-----------------------------------------------------------
-void Robot::updateDirection(sf::Vector2f)
+void Robot::updateDirection()
 {
 	m_stopped  = m_need2restartPlace = false;
 
@@ -59,8 +59,9 @@ void Robot::loseLife()
 		m_robotKilled = true;
 }
 //---------------------------------------------------------
-void Robot::dauntMove()
+void Robot::dountMove()
 {
+	
 	int newX = (m_location.x + 25) / 50;
 	int newY = (m_location.y + 25) / 50;
 	newX *= 50;
@@ -118,11 +119,16 @@ void Robot::move(float deltaTime)
    
    if (m_stopped) // if the robot didnt move dont move
    	return;
-   
-   m_image.move(m_direction.x * (2 * m_pixelSize * deltaTime), m_direction.y * (2 * m_pixelSize * deltaTime));
-   m_location.x += m_direction.x * (2 * m_pixelSize * deltaTime);
-   m_location.y += m_direction.y * (2 * m_pixelSize * deltaTime);
 
+   sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (2 * m_pixelSize * deltaTime),
+	                                  m_location.y + m_direction.y * (2 * m_pixelSize * deltaTime));
+
+   if (m_information.locInLevel(nextLoc))
+   {
+	   m_image.move(m_direction.x * (2 * m_pixelSize * deltaTime), m_direction.y * (2 * m_pixelSize * deltaTime));
+	   m_location = nextLoc;
+   }
+   m_information.setRobotLoc(m_location);
 }
 //---------------------------------------------------------
 void Robot::handleCollision(StaticObject& other)

@@ -9,7 +9,7 @@ void Wall::handleCollision(Robot& robot)
 	if (this->collidesWith(robot))
 	{
 		std::cout << "Robot hit a Wall , need to move reverse \n";
-		robot.dauntMove();
+		robot.dountMove();
 	}
 }
 
@@ -18,6 +18,6 @@ void Wall::handleCollision(Guard& guard)
 {
 	if (this->collidesWith(guard)) {
 		//std::cout << "Guard hit a Wall , need to move reverse \n";
-		guard.dauntMove();
+		guard.dountMove();
 	}
 }

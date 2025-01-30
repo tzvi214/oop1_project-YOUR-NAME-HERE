@@ -1,9 +1,9 @@
 ﻿#include "Bomb.h"
 
-Bomb::Bomb(sf::Vector2f location, SfmlManager& sfmlManager) :
+Bomb::Bomb(sf::Vector2f location, SfmlManager& sfmlManager, Information& info) :
 	StaticObject(location, sf::Sprite(sfmlManager.getTexture(ObjName::E_Bomb)), ObjName::E_Bomb), m_clock(),
-	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::Fire))) {
-}
+	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::Fire))) , m_information{info}
+{ }
 //----------------------------------------
 void Bomb::updateState()
 {
@@ -11,8 +11,8 @@ void Bomb::updateState()
 
 	if (elapsedTime > 4 && !m_exploded) {
 		m_image.setTexture(*m_fireSpr.getTexture());// why *m_fireSpr and nat m_fireSpr
-		//m_image = m_fireSpr;
 		m_exploded = true; 
+		initializationBombVec();
 	}
 
 	if (elapsedTime > 6) {
@@ -87,10 +87,6 @@ void Bomb::handleCollision(Robot& robot)
 
 		if (this->collidesWith(robot)) 
 		{
-			//robot.loseLife();
-			// need to: go to next level. 
-			//robot.setDead(true);
-			//robot.touchBomb();
 			robot.setDead();
 			return;
 		}
@@ -101,9 +97,7 @@ void Bomb::handleCollision(Robot& robot)
 		setLocation();
 		if (this->collidesWith(robot))
 		{
-			//robot.loseLife();
-			//robot.setDead(true);
-			//robot.touchBomb();
+			
 			robot.setDead();
 			return;
 		}
@@ -115,9 +109,6 @@ void Bomb::handleCollision(Robot& robot)
 	    setLocation();
 		if (this->collidesWith(robot))
 		{
-			//robot.loseLife();
-			//robot.setDead(true);
-			//robot.touchBomb();
 			robot.setDead();
 
 			return;
@@ -129,9 +120,7 @@ void Bomb::handleCollision(Robot& robot)
 		setLocation();
 		if (this->collidesWith(robot))
 		{
-			//robot.loseLife();
-			//robot.setDead(true);
-			//robot.touchBomb();
+			
 			robot.setDead();
 			return;
 		}
@@ -143,9 +132,6 @@ void Bomb::handleCollision(Robot& robot)
 		setLocation();
 		if (this->collidesWith(robot))
 		{
-			//robot.loseLife();
-			//robot.setDead(true);
-			//robot.touchBomb();
 			robot.setDead();
 			return;
 		}
@@ -271,26 +257,37 @@ void Bomb::draw(sf::RenderWindow& window)
 	else
 	{
 		// print 4 image for itch direction
-		   //this place
-		StaticObject::draw(window); 
+	    // and this place
+		sf::Vector2f loc = m_location;
+		for (const auto& bomb: m_explosionLocVec){
+			m_location = bomb;
+			StaticObject::draw(window);
+		}
+		m_location = loc;
+		StaticObject::draw(window);
+	}
+}
+//----------------------------------------
+void Bomb::initializationBombVec()
+{
+	sf::Vector2f newLoc = sf::Vector2f{ 0,0 };// = sf::Vector2f{ 0,0 } for the compailer
+	for (int i = 0; i < 4; i++)
+	{
+		if (i < 2)
+		{
+		   newLoc = (i == 0)? sf::Vector2f{ m_location.x + m_pixelSize, m_location.y }:
+			                  sf::Vector2f{ m_location.x - m_pixelSize, m_location.y };
+		}
+		else
+		{
+			newLoc = (i == 2)? sf::Vector2f{ m_location.x , m_location.y + m_pixelSize }: 
+				               sf::Vector2f{ m_location.x , m_location.y - m_pixelSize };
+		}
 
-		     // right place
-		m_location.x += m_pixelSize;
-		StaticObject::draw(window);
-		m_location.x -= m_pixelSize;
-		    // left place
-		m_location.x -= m_pixelSize;
-		StaticObject::draw(window);
-		m_location.x += m_pixelSize;
+		if (m_information.locInLevel(newLoc))
+		{
+			m_explosionLocVec.push_back(newLoc);
 
-		    // down place
-		m_location.y += m_pixelSize;
-		StaticObject::draw(window);
-		m_location.y -= m_pixelSize;
-		    // up place
-		m_location.y -= m_pixelSize;
-		StaticObject::draw(window);
-		m_location.y += m_pixelSize;
-		setLocation();
+		}
 	}
 }

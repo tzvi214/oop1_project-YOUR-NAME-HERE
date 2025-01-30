@@ -91,7 +91,7 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	}
 }
 
-sf::Text SfmlManager::getText(ObjName objName) const
+ sf::Text SfmlManager::getText(ObjName objName)const
 {
 	sf::Text textTemp;
 

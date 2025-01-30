@@ -1,11 +1,11 @@
 #include "MovingObject.h"
 #include "iostream"
 
-MovingObject::MovingObject(sf::Vector2f location, SfmlManager& sfmlManager, ObjName type)
-    :StaticObject(location, sf::Sprite{ sfmlManager.getTexture(type) }, type)
+MovingObject::MovingObject(sf::Vector2f location, SfmlManager& sfmlManager, ObjName type, Information& info)
+    :StaticObject(location, sf::Sprite{ sfmlManager.getTexture(type) }, type), m_information{info}
 
-{
-}
+{ }
+
 void MovingObject::setDirection(sf::Vector2f newDirection)
 {
     if (m_direction.x == newDirection.x && m_direction.y == newDirection.y)

@@ -8,7 +8,7 @@ void Rock::handleCollision(Robot& robot)
 {
 	if (this->collidesWith(robot))
 	{
-		robot.dauntMove();
+		robot.dountMove();
 	}
 }
 //-----------------------------------------------------------
@@ -16,7 +16,7 @@ void Rock::handleCollision(Guard& guard)
 {
 	if (this->collidesWith(guard))
 	{
-		guard.dauntMove();
+		guard.dountMove();
 	}
 }
 

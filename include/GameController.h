@@ -14,6 +14,7 @@
 #include "Door.h"
 #include "Wall.h"
 #include "Bomb.h"
+#include "Information.h"
 
 
 class GameController
@@ -31,13 +32,13 @@ private:
 	SfmlManager m_SfmlManager{};
 	unsigned int m_height = 0;
 	unsigned int m_width = 0;
+	Information m_information{};
 
 	void handleCollisionController(MovingObject&);
 	void readAndAnalyze(std::string&);
 	void updateThisLine(std::string&);
 	void analyzeObj(char&, int);
 	void handleFirstWindow(FirstWindow&) const;
-	sf::Vector2f getDirection();// to delete this function
 	//-------------------------------------
 	void restartObjPlace();
 	void mainLoop(sf::RenderWindow&);
