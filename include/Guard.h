@@ -16,6 +16,7 @@ public:
 	void dountMove();
 	virtual void updateDirection() override;
 	virtual void move(float) override;
+	virtual void setDead(bool = true);
 
 	// --- Double Dispatch ---
 	virtual void handleCollision(StaticObject& other) override;

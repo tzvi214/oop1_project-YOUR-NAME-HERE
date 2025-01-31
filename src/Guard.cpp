@@ -52,9 +52,17 @@ void Guard::move(float deltaTime)
     }
 }
 //--------------------------------------------------------------
+void Guard::setDead(bool flag)
+{
+    if (flag)
+    {
+        m_Dead =true;
+        m_information.setScore(3);// information need to do that collision with the 3 point
+    }
+}
+//--------------------------------------------------------------
 void Guard::handleCollision(StaticObject& other)
 {
-
   other.handleCollision(*this); // swap.
 }
 //--------------------------------------------------------------
@@ -63,7 +71,7 @@ void Guard::handleCollision(Robot& robot)
     if (this->collidesWith(robot))
     {
         std::cout << "guard hit a robot. and life-- \n";
-        robot.loseLife();
+       // robot.setDead();
         m_need2restartPlace = true;
        
     }

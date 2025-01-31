@@ -1,5 +1,8 @@
 #include "GameController.h"
 
+GameController::GameController()
+	:m_SfmlManager{}, m_information(m_SfmlManager)
+{}
 //--------------------------------------------------------
 void GameController::run()
 {
@@ -10,17 +13,25 @@ void GameController::run()
 		return;
 	//---------------------------------------------------
 
-	std::string fileName = "level01.txt";
-	readAndAnalyze(fileName);
-	m_information.setGameHeight((m_height-1) *50);
-	m_information.setGameWidth((m_width-1) *50);
+	for (int i = 1; i <= m_numLevel; i++)
+	{
+		m_information.setLevel(i);
+		m_information.setLevelFinish(false);
+		clearAllVec();
+		std::string fileName = "level" + std::string(i < 10 ? "0" : "") + std::to_string(i) + ".txt";
 
-	GameBoard gameBoard(m_width, m_height + 2);
-	auto& window = gameBoard.getWindow();
+		readAndAnalyze(fileName);
 
-	window.setFramerateLimit(60);
-	mainLoop(window);
+		m_information.setGameHeight((m_height - 1) * 50);
+		m_information.setGameWidth((m_width - 1) * 50);
 
+
+		GameBoard gameBoard(m_width, m_height + 2);
+		auto& window = gameBoard.getWindow();
+		window.setFramerateLimit(60);
+		m_gameClock.restart();// that in the first time the obj nat will jump
+		mainLoop(window);
+	}
 }
 //--------------------------------------------------
 void GameController::handleCollisionController(MovingObject& movingObject)
@@ -65,22 +76,33 @@ void GameController::readAndAnalyze(std::string& fileName)
 
 	// go to all line in file and update the vec.
 	std::string line;
+	
 	while (getline(file, line))
 	{
 		updateThisLine(line);
 		m_height++;
 	}
-	m_width = static_cast<unsigned int>(line.size());
+	
+	m_height--;
 }
 //--------------------------------------------------
 void GameController::updateThisLine(std::string& line)
 {
 	char ch;
+	if (isdigit(line[0]))
+	{
+		std::string str = line;
+		int second = std::stoi(str); // Convert the string to an integer
+		m_information.getClock().start(second);
+		return;
+	}
 	for (int i = 0; i < line.size(); i++)
 	{
 		ch = line[i];
 		analyzeObj(ch, i);
 	}
+	m_width = static_cast<unsigned int>(line.size());
+	
 }
 //--------------------------------------------------
 void GameController::analyzeObj(char& ch, int col)
@@ -91,6 +113,7 @@ void GameController::analyzeObj(char& ch, int col)
 		m_movingObjVec.push_back(std::make_unique<Robot>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
 		break;
 	case '!':
+		m_information.increaseGuardCount();
 		m_movingObjVec.push_back(std::make_unique<Guard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
 		break;
 	case '#':
@@ -126,6 +149,7 @@ void GameController::restartObjPlace()
 		objMov->goToFirstLoc();
 	}
 	m_BombVec.clear();
+	m_information.loseRobotLife();
 }
 //--------------------------------------------------
 void GameController::mainLoop(sf::RenderWindow& window)
@@ -155,6 +179,11 @@ void GameController::mainLoop(sf::RenderWindow& window)
 		}
 
 		draw(window);
+		if (m_information.getLevelFinish())
+			break;
+
+		if (m_information.getClock().isFinished() || m_information.getRobotKill())
+			gameOver();
 
 	}
 }
@@ -174,6 +203,8 @@ void GameController::draw(sf::RenderWindow& window)
 		bomb->draw(window); // Replace sprite to fire 
 
 	}
+	m_information.draw(window);
+
 	window.display();
 }
 //--------------------------------------------------
@@ -211,4 +242,17 @@ void GameController::deleteObjFromVec()
 	std::erase_if(m_movingObjVec, [](const auto& obj) { return obj->IsDead(); });
 	std::erase_if(m_BombVec, [](const auto& bomb) { return bomb->IsDead(); });
     std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->IsDead(); });
+}
+//--------------------------------------------------
+void GameController::clearAllVec()
+{
+	m_BombVec.clear();
+	m_movingObjVec.clear();
+	m_staticObjVec.clear();
+}
+//--------------------------------------------------
+void GameController::gameOver() const
+{
+	std::cout << "GameOver\n";
+	
 }

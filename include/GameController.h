@@ -15,31 +15,32 @@
 #include "Wall.h"
 #include "Bomb.h"
 #include "Information.h"
+#include "CountdownTimer.h"
 
 
 class GameController
 {
 public:
-	GameController() = default;
+	GameController();
 	void run();
 
 private:
 	sf::Clock m_gameClock;
-	sf::Vector2f m_robotLoc;
+	//sf::Vector2f m_robotLoc;
 	std::vector <std::unique_ptr<StaticObject>> m_staticObjVec;
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;
 	std::vector <std::unique_ptr<Bomb>> m_BombVec;
-	SfmlManager m_SfmlManager{};
+	SfmlManager m_SfmlManager;
+	Information m_information;
 	unsigned int m_height = 0;
 	unsigned int m_width = 0;
-	Information m_information{};
+	unsigned int m_numLevel = 2;
 
 	void handleCollisionController(MovingObject&);
 	void readAndAnalyze(std::string&);
 	void updateThisLine(std::string&);
 	void analyzeObj(char&, int);
 	void handleFirstWindow(FirstWindow&) const;
-	//-------------------------------------
 	void restartObjPlace();
 	void mainLoop(sf::RenderWindow&);
 	void draw(sf::RenderWindow&);
@@ -47,4 +48,7 @@ private:
 	//-------------------------------------
 	void addBomb();
 	void deleteObjFromVec();
+	//-------------------------------------
+	void clearAllVec();
+	void gameOver() const;
 };

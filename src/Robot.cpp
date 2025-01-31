@@ -11,8 +11,7 @@ void Robot::setDead(bool flag)
 {
 	if (flag)
 	{
-		loseLife();
-		touchBomb();// need to restart place
+		Defeated();
 	}
 }
 //-----------------------------------------------------------
@@ -55,8 +54,13 @@ void Robot::updateDirection()
 //---------------------------------------------------------
 void Robot::loseLife()
 {
-	if (m_life-- <= 0)
-		m_robotKilled = true;
+	//if (m_life-- <= 0)
+	//	m_robotKilled = true;
+
+	//m_information.loseRobotLife();
+	//// information need to do this function--
+	//if (m_information.getRobotLife() <= 0)
+	//	m_information.setRobotKill(true);
 }
 //---------------------------------------------------------
 void Robot::dountMove()
@@ -70,6 +74,12 @@ void Robot::dountMove()
 	//-----------------------------
 	m_currentFrame = 1;
 	
+}
+//---------------------------------------------------------
+void Robot::FinishedLevel() const
+{
+	m_information.setLevelFinish(true);
+	std::cout << "Robot hit a Door go to next level\n";
 }
 //---------------------------------------------------------
 void Robot::draw(sf::RenderWindow& window)
@@ -143,22 +153,5 @@ void Robot::handleCollision(StaticObject& other)
 //---------------------------------------------------------
 void Robot::drawInformation(sf::RenderWindow& window)
 {
-	/*sf::Text*/ auto text = m_sfmlManager.getText(ObjName::Font);
 
-	//2*50 ==> This is the extra space in the window for displaying the data. 
-	//------life---------
-	auto posy = window.getSize().y - (2 * 50);
-	text.setPosition(0, posy);
-	text.setString( "Life: \n " + std::to_string(m_life));
-	text.setCharacterSize(24);
-	const sf::Color lightBlue(173, 216, 230);
-	text.setFillColor(lightBlue);
-	window.draw(text);
-
-	//------time---------
-	text.setPosition(70, posy);
-	text.setString("The Time is: \n     "  + std::to_string(m_seconds / 60) + ":" + std::to_string(m_seconds % 60));
-	text.setCharacterSize(24);
-	text.setFillColor(sf::Color::Red);
-	window.draw(text);
 }
