@@ -7,6 +7,14 @@ class Robot;
 class Guard;
 class Bomb;
 class Rock;
+class Gift;
+class Gift1;
+class Gift2;
+class Gift3;
+class Gift4;
+
+
+
 
 class StaticObject
 {
@@ -17,7 +25,7 @@ public:
 	ObjName getType() const { return m_type; }
 	bool touch(sf::Vector2f location) const;
 	sf::Vector2f getLocation() const;
-	bool collidesWith(StaticObject&) ;
+	bool collidesWith(StaticObject&);
 	bool checkCollision(StaticObject&) const;
 	virtual void setDead(bool = true);
 	bool IsDead() const { return m_Dead; }
@@ -29,8 +37,10 @@ public:
 	virtual void handleCollision(Robot&) {};
 	virtual void handleCollision(Guard&) {};
 	virtual void handleCollision(Rock&) {};
-
-
+	virtual void handleCollision(Gift1&) {};
+	virtual void handleCollision(Gift2&) {};
+	virtual void handleCollision(Gift3&) {};
+	virtual void handleCollision(Gift4&) {};
 protected:
 	void setLocation() { m_image.setPosition(m_location); }
 
@@ -47,6 +57,4 @@ private:
 	ObjName m_type;
 	//---- function --------
 	void setSpritLoc();
-
-
 };

@@ -6,7 +6,6 @@
 #include "Guard.h"
 #include "Rock.h"
 #include "Information.h"
-
 #include <vector>
 
 

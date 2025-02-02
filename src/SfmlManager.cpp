@@ -40,6 +40,8 @@ SfmlManager::SfmlManager()
 	if (!m_Fire.loadFromFile("Fire.png"))
 		std::cerr << "Failed to load Fire.png\n";
 
+	if (!m_Gift1.loadFromFile("Present1.png"))
+		std::cerr << "Failed to load Present1.png\n";
 
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
@@ -80,8 +82,11 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	case E_Bomb:
 		return m_Bomb;
 		break;
-	case Fire:
+	case E_Fire:
 		return m_Fire;
+		break;
+	case E_Gift1:
+		return m_Gift1;
 		break;
 
 	default:

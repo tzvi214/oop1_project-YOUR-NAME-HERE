@@ -13,6 +13,8 @@ configure_file ("Door.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("temp.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Bomb.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Fire.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Present1.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
 
 
 

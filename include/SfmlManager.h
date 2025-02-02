@@ -7,11 +7,21 @@
 class SfmlManager
 {
 public:
-	SfmlManager(); // c-tor load file to sf objects.
+	static SfmlManager& getInstance()
+	{
+		static SfmlManager instance; // מופע יחיד
+		return instance;
+	}
 	sf::Texture& getTexture(ObjName); // return reference of texture according the ObgName(Enum). 
-    sf::Text getText(ObjName) const ; // return reference of font.
+    sf::Text getText(ObjName) const ; // 
 
+	SfmlManager(const SfmlManager&) = delete;
+	SfmlManager& operator=(const SfmlManager&) = delete;
+	
+
+	//int LoadFromFile();
 private:
+	SfmlManager(); // c-tor load file to sf objects.
 	sf::Texture m_ExitTex;
 	sf::Texture m_HelpTex;
 	sf::Texture m_StartTex;
@@ -24,5 +34,6 @@ private:
 	sf::Texture m_Temp;
 	sf::Texture m_Bomb;
 	sf::Texture m_Fire;
+	sf::Texture m_Gift1;
 
 };

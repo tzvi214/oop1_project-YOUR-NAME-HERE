@@ -13,7 +13,11 @@ enum ObjName
     E_Door,
     E_Temp,
     E_Bomb,
-    Fire
+    E_Fire,
+    E_Gift1,
+
+
+
 };
 
 

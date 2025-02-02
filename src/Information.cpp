@@ -1,7 +1,22 @@
 #include "Information.h"
-
+//--------------------------------------------------------------
 Information::Information(SfmlManager& sfMan) :
-    m_SfmlManager(sfMan), m_levelCompleted(false), m_score(0), m_countGuard(0), m_robotKill(false) {
+	m_SfmlManager(sfMan), m_levelCompleted(false), m_score(0), m_countGuard(0), m_robotKill(false) {
+}
+//--------------------------------------------------------------
+void Information::frozeGuard()
+{
+	m_froze = true;
+	m_frozeClock.restart();
+}
+//--------------------------------------------------------------
+
+bool Information::areFroze()
+{
+	if (m_frozeClock.getElapsedTime().asSeconds() >= 20) {
+		m_froze = false;
+	}
+	return m_froze;
 }
 //--------------------------------------------------------------
 bool Information::locInLevel(sf::Vector2f location) const
@@ -27,7 +42,6 @@ void Information::setScore(const int score)
 void Information::loseRobotLife()
 {
 	
-
 	if (m_lifeRobot-- <= 0) {
 		m_robotKill = true;
 	}
@@ -42,9 +56,20 @@ void Information::setLevel(const int num)
 	m_level = num;
 }
 //--------------------------------------------------------------
-void Information::setRobotKill(const bool flag)
+bool Information::need2addGift()
 {
-	m_robotKill = flag;
+	if (m_need2addGift) {
+		m_need2addGift = false;
+		return true;
+	}
+	
+	return m_need2addGift;
+}
+//--------------------------------------------------------------
+void Information::addRandomGift(sf::Vector2f loc)
+{
+	m_need2addGift = true;
+	m_newGiftLoc = loc;
 }
 //--------------------------------------------------------------
 bool Information::getRobotKill() const

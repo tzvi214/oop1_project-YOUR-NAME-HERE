@@ -4,6 +4,12 @@ CountdownTimer::CountdownTimer(float duration)
     : m_duration(sf::seconds(duration)), m_remainingTime(m_duration) {
 }
 
+void CountdownTimer::addTime()
+{
+    m_remainingTime += sf::seconds(20);
+    m_duration += sf::seconds(20);
+}
+
 void CountdownTimer::start(float duration) {
     m_duration = sf::seconds(duration);  
     m_remainingTime = m_duration;        

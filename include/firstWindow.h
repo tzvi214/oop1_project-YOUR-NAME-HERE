@@ -17,7 +17,7 @@ public:
 
 private:
 	//--- data members----
-	SfmlManager m_sfmlManager{};
+	SfmlManager& m_sfmlManager;
 	ObjName m_objName{};
 	std::vector<Button> m_buttons;
 	bool m_need2exit = false;

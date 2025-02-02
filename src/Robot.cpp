@@ -143,13 +143,37 @@ void Robot::move(float deltaTime)
 //---------------------------------------------------------
 void Robot::handleCollision(StaticObject& other)
 {
-	/*if (this->collidesWith(other))
-	{*/
-	//	std::cout << "Robot touch at StaticObject \n";
-		other.handleCollision(*this); // swap
-		// continue to wall->Robot OR guard->Robot
-	/*}*/
+	other.handleCollision(*this); // swap
 }
+//------------------------------------------------------
+void Robot::handleCollision(Gift1&)
+{
+	m_information.frozeGuard();
+}
+//------------------------------------------------------
+void Robot::handleCollision(Gift2& gift1)
+{
+	m_information.addRobotLife();
+}
+//------------------------------------------------------
+void Robot::handleCollision(Gift3& gift3)
+{
+	m_information.addTime();
+}
+//------------------------------------------------------
+void Robot::handleCollision(Gift4& gift4)
+{
+	m_information.need2killedGuard();
+}
+//---------------------------------------------------------
+//void Robot::handleCollision(Gift& gift)
+//{
+//	gift.setDead();
+//	//m_information.addRobotLife();
+//	//m_information.need2killedGuard();
+//	//m_information.addTime();
+//	//m_information.frozeGuard();
+//}
 //---------------------------------------------------------
 void Robot::drawInformation(sf::RenderWindow& window)
 {

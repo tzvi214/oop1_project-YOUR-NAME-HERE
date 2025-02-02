@@ -1,7 +1,7 @@
 #include "GameController.h"
 
 GameController::GameController()
-	:m_SfmlManager{}, m_information(m_SfmlManager)
+	: m_information(m_SfmlManager)
 {}
 //--------------------------------------------------------
 void GameController::run()
@@ -13,7 +13,7 @@ void GameController::run()
 		return;
 	//---------------------------------------------------
 
-	for (int i = 1; i <= m_numLevel; i++)
+	for (int i = 1; i <= m_numLevel ; i++)
 	{
 		m_information.setLevel(i);
 		m_information.setLevelFinish(false);
@@ -31,6 +31,16 @@ void GameController::run()
 		window.setFramerateLimit(60);
 		m_gameClock.restart();// that in the first time the obj nat will jump
 		mainLoop(window);
+		if (m_information.getRobotKill()) {
+			std::cout << "Robot end of life \nGame over \n";
+			return;
+		}
+			
+
+		if (m_information.getClock().isFinished()) {
+			i--;
+			continue;
+		}
 	}
 }
 //--------------------------------------------------
@@ -84,6 +94,8 @@ void GameController::readAndAnalyze(std::string& fileName)
 	}
 	
 	m_height--;
+
+	file.close();
 }
 //--------------------------------------------------
 void GameController::updateThisLine(std::string& line)
@@ -124,6 +136,18 @@ void GameController::analyzeObj(char& ch, int col)
 		break;
 	case 'D':
 		m_staticObjVec.push_back(std::make_unique<Door>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case 'A':
+		m_staticObjVec.push_back(std::make_unique<Gift2>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case 'B':
+		m_staticObjVec.push_back(std::make_unique<Gift3>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case 'C':
+		m_staticObjVec.push_back(std::make_unique<Gift1>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		break;
+	case 'F':
+		m_staticObjVec.push_back(std::make_unique<Gift4>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
 		break;
 	}
 }
@@ -179,12 +203,14 @@ void GameController::mainLoop(sf::RenderWindow& window)
 		}
 
 		draw(window);
-		if (m_information.getLevelFinish())
+		if (m_information.getLevelFinish() || m_information.getRobotKill())
 			break;
 
-		if (m_information.getClock().isFinished() || m_information.getRobotKill())
-			gameOver();
-
+		if (m_information.getClock().isFinished()) {
+			m_information.loseRobotLife();
+			return;
+		}
+		
 	}
 }
 //--------------------------------------------------
@@ -226,6 +252,9 @@ void GameController::handleEvent()
 	for (auto& bomb : m_BombVec) {
 		bomb->updateState(); // Replace sprite to fire 
 	}
+	if (m_information.need2addGift()) {
+		addGift();
+	}
 }
 //--------------------------------------------------
 void GameController::addBomb()
@@ -233,7 +262,6 @@ void GameController::addBomb()
 	// update loc on tile
 	int newX = (m_information.getRobotLoc().x + 25) / 50;
 	int newY = (m_information.getRobotLoc().y + 25) / 50;
-
 	m_BombVec.push_back(std::make_unique<Bomb>(sf::Vector2f(newX, newY), m_SfmlManager, m_information));
 }
 //--------------------------------------------------
@@ -254,5 +282,4 @@ void GameController::clearAllVec()
 void GameController::gameOver() const
 {
 	std::cout << "GameOver\n";
-	
 }

@@ -4,6 +4,11 @@
 #include "ObjName.h"
 #include "SfmlManager.h"
 #include "Information.h"
+class Gift1;
+class Gift2;
+class Gift3;
+class Gift4;
+
 
 
 class Robot :public MovingObject
@@ -25,6 +30,13 @@ public:
 
 	// --- Double Dispatch ---
 	virtual void handleCollision(StaticObject& other) override;
+	virtual void handleCollision(Gift1&);
+	virtual void handleCollision(Gift2&);
+	virtual void handleCollision(Gift3&);
+	virtual void handleCollision(Gift4&);
+
+
+
 
 private:
 	sf::Vector2f m_firstLoc;
@@ -39,9 +51,7 @@ private:
 	int m_currentFrame = 0;
 	//--- function ---
 	void drawInformation(sf::RenderWindow&);
-	
-	
-	
+
 	//----------------------
 	sf::Texture& m_texture;
 };

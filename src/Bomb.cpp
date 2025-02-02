@@ -2,7 +2,7 @@
 
 Bomb::Bomb(sf::Vector2f location, SfmlManager& sfmlManager, Information& info) :
 	StaticObject(location, sf::Sprite(sfmlManager.getTexture(ObjName::E_Bomb)), ObjName::E_Bomb), m_clock(),
-	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::Fire))) , m_information{info}
+	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::E_Fire))) , m_information{info}
 { }
 //----------------------------------------
 void Bomb::updateState()
@@ -201,6 +201,7 @@ void Bomb::handleCollision(Rock& rock)
 		if (this->collidesWith(rock))
 		{
 			rock.setDead(true);
+			m_information.addRandomGift(m_location);
 		}
 
 		// 4 direction
@@ -211,6 +212,7 @@ void Bomb::handleCollision(Rock& rock)
 		if (this->collidesWith(rock))
 		{
 			rock.setDead(true);
+			m_information.addRandomGift(m_location);
 		}
 		m_location.x -= m_pixelSize;
 
@@ -220,8 +222,8 @@ void Bomb::handleCollision(Rock& rock)
 		setLocation();
 		if (this->collidesWith(rock))
 		{
-
 			rock.setDead(true);
+			m_information.addRandomGift(m_location);
 		}
 		m_location.x += m_pixelSize;
 
@@ -231,7 +233,7 @@ void Bomb::handleCollision(Rock& rock)
 		if (this->collidesWith(rock))
 		{
 			rock.setDead(true);
-
+			m_information.addRandomGift(m_location);
 		}
 		m_location.y -= m_pixelSize;
 
@@ -242,6 +244,7 @@ void Bomb::handleCollision(Rock& rock)
 		if (this->collidesWith(rock))
 		{
 			rock.setDead(true);
+			m_information.addRandomGift(m_location);
 		}
 		m_location.y += m_pixelSize;
 		setLocation();

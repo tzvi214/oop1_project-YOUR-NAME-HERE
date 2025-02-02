@@ -42,6 +42,18 @@ void Guard::updateDirection()
 //--------------------------------------------------------------
 void Guard::move(float deltaTime)
 {
+    //------------ gift 2 ------------
+    if (m_information.need2killed()){
+        setDead();
+        m_information.killedGuard();
+        return;
+    }
+
+    if (m_information.areFroze()){
+        return;
+    }
+
+
     sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (m_pixelSize * deltaTime),
         m_location.y + m_direction.y * (m_pixelSize * deltaTime));
 
@@ -71,8 +83,8 @@ void Guard::handleCollision(Robot& robot)
     if (this->collidesWith(robot))
     {
         std::cout << "guard hit a robot. and life-- \n";
-       // robot.setDead();
-        m_need2restartPlace = true;
+      //  robot.setDead();
+      m_need2restartPlace = true;
        
     }
 }
