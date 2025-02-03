@@ -2,20 +2,36 @@
 
 Bomb::Bomb(sf::Vector2f location, SfmlManager& sfmlManager, Information& info) :
 	StaticObject(location, sf::Sprite(sfmlManager.getTexture(ObjName::E_Bomb)), ObjName::E_Bomb), m_clock(),
-	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::E_Fire))) , m_information{info}
-{ }
+	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::E_Fire))) , m_information{info},
+	m_explSnd(), m_ticSnd()
+		
+{ 
+	m_explSnd.setBuffer(sfmlManager.getSound(Snd::explosion));	
+	m_ticSnd.setBuffer(sfmlManager.getSound(Snd::bombTic));
+
+}
 //----------------------------------------
 void Bomb::updateState()
 {
-	float elapsedTime = m_clock.getElapsedTime().asSeconds();
+	// m_time = m_clock.getElapsedTime().asSeconds();
+	m_time += m_clock.restart().asSeconds();
+	if (m_time >= m_second + 1) {
+		m_second++;
+		//print on the bomb 5 - m_second
+		//play bomb tic
+		playTic();
+	}
 
-	if (elapsedTime > 4 && !m_exploded) {
+	
+
+	if (m_second > 4 && !m_exploded) {
+		playExpl();
 		m_image.setTexture(*m_fireSpr.getTexture());// why *m_fireSpr and nat m_fireSpr
 		m_exploded = true; 
 		initializationBombVec();
 	}
 
-	if (elapsedTime > 6) {
+	if (m_second > 6) {
 		m_Dead = true;
 	}
 }
@@ -293,4 +309,18 @@ void Bomb::initializationBombVec()
 
 		}
 	}
+}
+//----------------------------------------
+void Bomb::playExpl()
+{
+	//m_explSnd.sfmlManager(sfmlManager.getSound(Snd::explosion));
+	m_explSnd.setVolume(100);
+	m_explSnd.play();
+}
+//----------------------------------------
+void Bomb::playTic()
+{
+	
+	m_ticSnd.setVolume(70);
+	m_ticSnd.play();
 }

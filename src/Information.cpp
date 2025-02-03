@@ -1,7 +1,10 @@
 #include "Information.h"
 //--------------------------------------------------------------
 Information::Information(SfmlManager& sfMan) :
-	m_SfmlManager(sfMan), m_levelCompleted(false), m_score(0), m_countGuard(0), m_robotKill(false) {
+	m_SfmlManager(sfMan), m_levelCompleted(false), m_score(0), m_countGuard(0), m_robotKill(false),
+	m_hurtSnd{}
+{
+	m_hurtSnd.setBuffer(m_SfmlManager.getSound(Snd::hurt));
 }
 //--------------------------------------------------------------
 void Information::frozeGuard()
@@ -24,6 +27,12 @@ bool Information::locInLevel(sf::Vector2f location) const
    
     return (location.x >= 0 && location.x <= (m_gameWidth +5) &&
         location.y >= 0 && location.y < (m_gameHeight +5));
+}
+//--------------------------------------------------------------
+void Information::playMusic()
+{
+	m_hurtSnd.setVolume(100);
+	m_hurtSnd.play();
 }
 //--------------------------------------------------------------
 void Information::setLevelFinish(const bool flag)

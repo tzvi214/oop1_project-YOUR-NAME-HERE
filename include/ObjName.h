@@ -15,9 +15,14 @@ enum ObjName
     E_Bomb,
     E_Fire,
     E_Gift1,
-
-
-
+    E_Gift2,
+    E_Gift3,
+    E_Gift4,
 };
 
-
+enum Snd
+{
+    hurt,
+    explosion,
+    bombTic
+};

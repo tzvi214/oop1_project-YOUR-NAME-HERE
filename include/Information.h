@@ -51,8 +51,9 @@ public:
 	void setGameHeight(int row) { m_gameHeight = row ; }
 	bool locInLevel(sf::Vector2f) const;
 	sf::Vector2f getRobotLoc() const { return m_roobotLoc ; }
-
+	void playMusic();
 private:
+	sf::Sound m_hurtSnd;
 	bool m_levelCompleted;
 	bool m_robotKill;
 	int m_score;
@@ -72,5 +73,5 @@ private:
 	//----------------------------------
 	bool m_need2addGift = false;
 	sf::Vector2f m_newGiftLoc{0 ,0};
-
+	
 };

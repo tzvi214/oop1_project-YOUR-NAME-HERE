@@ -168,6 +168,7 @@ void GameController::handleFirstWindow(FirstWindow& window) const
 //--------------------------------------------------
 void GameController::restartObjPlace()
 {
+	m_information.playMusic();
 	for (const auto& objMov : m_movingObjVec)
 	{
 		objMov->goToFirstLoc();
@@ -179,6 +180,7 @@ void GameController::restartObjPlace()
 void GameController::mainLoop(sf::RenderWindow& window)
 {
 	m_gameClock.restart();// that in rhe first time the obj nat will jump
+	playMusic();
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -264,6 +266,28 @@ void GameController::addBomb()
 	int newY = (m_information.getRobotLoc().y + 25) / 50;
 	m_BombVec.push_back(std::make_unique<Bomb>(sf::Vector2f(newX, newY), m_SfmlManager, m_information));
 }
+void GameController::addGift()
+{
+	srand(time(0));
+	int random_number = rand() % (10 + m_numLevel *2 )+ 1;
+	switch (random_number)
+	{
+	case 1:
+		m_staticObjVec.push_back(std::make_unique<Gift1>(m_information.getNewGiftLoc(), m_SfmlManager));
+		break;
+	case 2:
+		m_staticObjVec.push_back(std::make_unique<Gift2>(m_information.getNewGiftLoc(), m_SfmlManager));
+		break;
+	case 3:
+		m_staticObjVec.push_back(std::make_unique<Gift3>(m_information.getNewGiftLoc(), m_SfmlManager));
+		break;
+	case 4:
+		m_staticObjVec.push_back(std::make_unique<Gift4>(m_information.getNewGiftLoc(), m_SfmlManager));
+		break;
+	default:
+		break;
+	}
+}
 //--------------------------------------------------
 void GameController::deleteObjFromVec()
 {
@@ -282,4 +306,11 @@ void GameController::clearAllVec()
 void GameController::gameOver() const
 {
 	std::cout << "GameOver\n";
+}
+//--------------------------------------------------
+void GameController::playMusic()
+{
+	m_soundGame.openFromFile("gameSound.mp3");
+	m_soundGame.setLoop(true);
+	m_soundGame.play();
 }

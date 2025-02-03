@@ -1,9 +1,5 @@
 #include "FirstWindow.h"
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <thread>
-#include <chrono>
+
 
 FirstWindow::FirstWindow(SfmlManager& sfmlManager)
 	: Windows(15, 15), m_sfmlManager{ sfmlManager }
@@ -34,7 +30,7 @@ void FirstWindow::customerChoice()
 	m_need2exit = false; // analyze aviary time
 	m_need2exit = false; // analyze aviary time
 	sf::Text text;
-
+	playMusic();
 
 	while (m_window.isOpen())
 	{
@@ -43,8 +39,10 @@ void FirstWindow::customerChoice()
 		{
 
 
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed) {
 				m_window.close();
+				m_menuSnd.stop();
+			}
 
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
@@ -59,6 +57,7 @@ void FirstWindow::customerChoice()
 							std::cout << "Start button pressed \n";
 							m_need2start = true;
 							m_window.close();
+							m_menuSnd.stop();
 							return;
 						case ObjName::Help:
 							std::cout << "Help button pressed \n";
@@ -81,6 +80,13 @@ void FirstWindow::customerChoice()
 		m_window.display();
 
 	}
+}
+//------------------------------------------------------------------
+void FirstWindow::playMusic()
+{
+	m_menuSnd.openFromFile("menu.wav");
+	m_menuSnd.setLoop(true);
+	m_menuSnd.play();
 }
 //------------------------------------------------------------------
 sf::Text FirstWindow::readHelpFromFile() const

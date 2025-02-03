@@ -4,6 +4,11 @@
 #include "ObjName.h"
 #include <vector>
 #include"SfmlManager.h"
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <thread>
+#include <chrono>
 
 class FirstWindow : public Windows
 {
@@ -23,10 +28,12 @@ private:
 	bool m_need2exit = false;
 	bool m_need2start = false;
 
+
+	sf::Music m_menuSnd;
 	//--- functions----
 	sf::Text readHelpFromFile()const;
 	void showHelp(sf::Text&);
 	void wrapText(sf::Text& text, float maxWidth);
-
+	void playMusic();
 
 };

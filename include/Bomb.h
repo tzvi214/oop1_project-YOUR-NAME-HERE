@@ -20,13 +20,18 @@ public:
 	virtual void handleCollision(Robot&);
 	virtual void handleCollision(Rock&);
 	virtual void draw(sf::RenderWindow&) override;
-
+	
 private:
+	int m_second = 0;
+	float m_time = 0;
+	sf::Sound m_explSnd;
+	sf::Sound m_ticSnd;
 	sf::Clock m_clock;
 	sf::Sprite m_fireSpr;
 	bool m_exploded = false;
 	std::vector <sf::Vector2f> m_explosionLocVec;
 	Information& m_information;
-
 	void initializationBombVec();
+	void playExpl();
+	void playTic();
 };

@@ -21,11 +21,9 @@
 #include "Gift2.h"
 #include "Gift3.h"
 #include "Gift4.h"
-
-
-
-
-
+#include <cstdlib>  
+#include <ctime> 
+#include <SFML/Audio.hpp>
 
 
 class GameController
@@ -36,7 +34,7 @@ public:
 
 private:
 	sf::Clock m_gameClock;
-	//sf::Vector2f m_robotLoc;
+	sf::Music m_soundGame;
 	std::vector <std::unique_ptr<StaticObject>> m_staticObjVec;
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;
 	std::vector <std::unique_ptr<Bomb>> m_BombVec;
@@ -44,7 +42,7 @@ private:
 	Information m_information;
 	unsigned int m_height = 0;
 	unsigned int m_width = 0;
-	unsigned int m_numLevel = 2;
+	unsigned int m_numLevel = 3;
 
 	void handleCollisionController(MovingObject&);
 	void readAndAnalyze(std::string&);
@@ -57,12 +55,12 @@ private:
 	void handleEvent();
 	//-------------------------------------
 	void addBomb();
-	void addGift() {
-		/*m_staticObjVec.push_back(std::make_unique<Gift2>(m_information.getNewGiftLoc(), m_SfmlManager))*/;
-	}
+	void addGift();
 
 	void deleteObjFromVec();
 	//-------------------------------------
 	void clearAllVec();
 	void gameOver() const;
+	//-------------------------------------
+	void playMusic();
 };

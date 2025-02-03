@@ -43,6 +43,24 @@ SfmlManager::SfmlManager()
 	if (!m_Gift1.loadFromFile("Present1.png"))
 		std::cerr << "Failed to load Present1.png\n";
 
+	if (!m_Gift2.loadFromFile("Present2.png"))
+		std::cerr << "Failed to load Present2.png\n";
+
+	if (!m_Gift3.loadFromFile("Present3.png"))
+		std::cerr << "Failed to load Present3.png\n";
+
+	if (!m_Gift4.loadFromFile("Present4.png"))
+		std::cerr << "Failed to load Present4.png\n";
+
+	if (!m_hurtSnd.loadFromFile("hurt.wav"))
+		std::cerr << "Failed to load hurt.wav\n";
+
+	if (!m_explSnd.loadFromFile("expl.wav"))
+		std::cerr << "Failed to load expl.wav\n";
+
+	if (!m_bombTicSnd.loadFromFile("BombTic.ogg"))
+		std::cerr << "Failed to load BombTic.ogg\n";
+
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
@@ -88,6 +106,17 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	case E_Gift1:
 		return m_Gift1;
 		break;
+	case E_Gift2:
+		return m_Gift2;
+		break;
+	case E_Gift3:
+		return m_Gift3;
+		break;
+	case E_Gift4:
+		return m_Gift4;
+		break;
+
+
 
 	default:
 		std::cerr << "Error: ObjName not found\n";
@@ -114,3 +143,16 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 	}
 
 }
+
+ sf::SoundBuffer& SfmlManager::getSound(Snd snd)
+ {
+	 switch (snd)
+	 {
+	 case hurt:
+		 return m_hurtSnd;
+	 case explosion:
+		 return m_explSnd;
+	 case bombTic:
+		 return m_bombTicSnd;
+	 }
+ }
