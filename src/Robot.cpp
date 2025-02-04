@@ -120,6 +120,8 @@ void Robot::draw(sf::RenderWindow& window)
 //---------------------------------------------------------
 void Robot::move(float deltaTime)
 {
+	//for the first time or after robot deed
+	m_information.setRobotLoc(m_location);
    //---------- update time past -----
    if ((m_time += deltaTime) >= m_seconds + 1)
    {
@@ -166,14 +168,7 @@ void Robot::handleCollision(Gift4& gift4)
 	m_information.need2killedGuard();
 }
 //---------------------------------------------------------
-//void Robot::handleCollision(Gift& gift)
-//{
-//	gift.setDead();
-//	//m_information.addRobotLife();
-//	//m_information.need2killedGuard();
-//	//m_information.addTime();
-//	//m_information.frozeGuard();
-//}
+
 //---------------------------------------------------------
 void Robot::drawInformation(sf::RenderWindow& window)
 {

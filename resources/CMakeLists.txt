@@ -3,6 +3,7 @@ configure_file ("level02.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("level03.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 
 
+
 configure_file ("help.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("CENSCBK.TTF" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Exit.png" ${CMAKE_BINARY_DIR} COPYONLY)

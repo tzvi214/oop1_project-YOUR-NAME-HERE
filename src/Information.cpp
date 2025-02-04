@@ -38,9 +38,11 @@ void Information::playMusic()
 void Information::setLevelFinish(const bool flag)
 {
 	m_levelCompleted = flag;
-
+	
 	if (flag)
 		m_score += (3 * m_countGuard) + 25;
+	// nat to be froze in the nwxt level
+	m_froze = false;
 }
 //--------------------------------------------------------------
 void Information::setScore(const int score)

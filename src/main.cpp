@@ -4,8 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include "SfmlManager.h"
 #include "ObjName.h"
+//-------------------
+#include <cstdlib>  
+#include <ctime> 
 int main()
 {
+	
+	//
    // sf::RenderWindow window(sf::VideoMode(800, 600), "Sprite Animation");
    // window.setFramerateLimit(60);
 
@@ -87,5 +92,6 @@ int main()
 
 	GameController game;
 	game.run();
+	return EXIT_SUCCESS;
 	return EXIT_SUCCESS;
 }
