@@ -61,6 +61,9 @@ SfmlManager::SfmlManager()
 	if (!m_bombTicSnd.loadFromFile("BombTic.ogg"))
 		std::cerr << "Failed to load BombTic.ogg\n";
 
+	if (!m_TouchGiftSnd.loadFromFile("touchGift.wav"))
+		std::cerr << "Failed to load touchGift.wav\n";
+
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
@@ -154,5 +157,7 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 		 return m_explSnd;
 	 case bombTic:
 		 return m_bombTicSnd;
+	 case touchGift:
+		 return m_TouchGiftSnd;
 	 }
  }

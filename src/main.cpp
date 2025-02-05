@@ -9,7 +9,8 @@
 #include <ctime> 
 int main()
 {
-	
+	srand(time(0));
+
 	//
    // sf::RenderWindow window(sf::VideoMode(800, 600), "Sprite Animation");
    // window.setFramerateLimit(60);

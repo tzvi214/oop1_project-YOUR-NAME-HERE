@@ -24,6 +24,9 @@
 #include <cstdlib>  
 #include <ctime> 
 #include <SFML/Audio.hpp>
+#include "SmartGuard.h"
+#include "StupidGuard.h"
+
 
 
 class GameController

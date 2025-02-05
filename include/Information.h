@@ -15,7 +15,7 @@ public:
 
 	  //-------------- gift 2  ------------
 	void need2killedGuard() { m_needToKillGuard = true; }
-	bool need2killed() const { return m_needToKillGuard ; }
+	bool isNeed2killed() const { return m_needToKillGuard ; }
 	void killedGuard() { m_needToKillGuard = false; }
 
 	//-------------- gift 3  ------------

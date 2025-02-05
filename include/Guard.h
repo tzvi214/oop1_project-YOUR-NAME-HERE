@@ -5,7 +5,8 @@
 #include "MovingObject.h"
 #include "Robot.h"
 #include "Information.h"
-
+#include <cstdlib>  
+#include <ctime> 
 
 class Robot;
 
@@ -14,7 +15,7 @@ class Guard : public MovingObject
 public:
 	Guard(sf::Vector2f, SfmlManager&, Information&);
 	void dountMove();
-	virtual void updateDirection() override;
+	virtual void updateDirection() ;
 	virtual void move(float) override;
 	virtual void setDead(bool = true);
 
@@ -23,7 +24,13 @@ public:
 	virtual void handleCollision(Robot& robot) override;
 	virtual void goToFirstLoc()override { m_location = m_firstLoc; }
 
-
+protected:
+	bool m_Collided = false;
+	void trackRobotX();
+	void trackRobotY();
+	void goInRandom();
 private:
 	sf::Vector2f m_firstLoc;
+	int m_track = 0;
+	bool m_firstTime = true;// to get direction on the first time
 };

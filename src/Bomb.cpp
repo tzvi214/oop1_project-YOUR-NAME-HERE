@@ -13,15 +13,13 @@ Bomb::Bomb(sf::Vector2f location, SfmlManager& sfmlManager, Information& info) :
 //----------------------------------------
 void Bomb::updateState()
 {
-	// m_time = m_clock.getElapsedTime().asSeconds();
+	
 	m_time += m_clock.restart().asSeconds();
 	if (m_time >= m_second + 1) {
 		m_second++;
 		playTic();
 	}
 
-
-	
 
 	if (m_second > 4 && !m_exploded) {
 		playExpl();
@@ -42,27 +40,15 @@ bool Bomb::IsExploded()
 //----------------------------------------
 void Bomb::handleCollision(Guard& guard)
 {
-	if (m_exploded && !m_Dead)
-	{
-		sf::Vector2f originalLocation = m_location;
-		for (const auto& offset : m_explosionLocVec)
-		{
-			m_location = offset;
-			setLocation();
-
-			if (this->collidesWith(guard))
-			{
-				guard.setDead(true);
-				return;
-			}
-		}
-		m_location = originalLocation;
-		
-	}
-
+	handleCollision(dynamic_cast<MovingObject&>(guard));
 }
 //----------------------------------------
 void Bomb::handleCollision(Robot& robot)
+{
+	handleCollision(dynamic_cast<MovingObject&>(robot));
+}
+//----------------------------------------
+void Bomb::handleCollision(MovingObject& movObg)
 {
 	if (m_exploded && !m_Dead)
 	{
@@ -72,185 +58,16 @@ void Bomb::handleCollision(Robot& robot)
 			m_location = offset;
 			setLocation();
 
-			if (this->collidesWith(robot))
+			if (this->collidesWith(movObg))
 			{
-				robot.setDead(true);
+				movObg.setDead(true);
 				return;
 			}
 		}
 		m_location = originalLocation;
 
 	}
-
-
-	////--------------------------------------------
-	//if (m_exploded && !m_Dead)
-	//{
-
-	//	if (this->collidesWith(robot)) 
-	//	{
-	//		robot.setDead();
-	//		return;
-	//	}
-	//	// 4 direction
-
-	//	// right place
-	//	m_location.x += m_pixelSize;
-	//	setLocation();
-	//	if (this->collidesWith(robot))
-	//	{
-	//		
-	//		robot.setDead();
-	//		return;
-	//	}
-	//	m_location.x -= m_pixelSize;
-
-
-	//	     //left place
-	//    m_location.x -= m_pixelSize;
-	//    setLocation();
-	//	if (this->collidesWith(robot))
-	//	{
-	//		robot.setDead();
-
-	//		return;
-	//	}
-	//	m_location.x += m_pixelSize;
-
-	//	  //down place
-	//	m_location.y += m_pixelSize;
-	//	setLocation();
-	//	if (this->collidesWith(robot))
-	//	{
-	//		
-	//		robot.setDead();
-	//		return;
-	//	}
-	//	m_location.y -= m_pixelSize;
-
-
-	//	  //up place
-	//	m_location.y -= m_pixelSize;
-	//	setLocation();
-	//	if (this->collidesWith(robot))
-	//	{
-	//		robot.setDead();
-	//		return;
-	//	}
-	//	m_location.y += m_pixelSize;
-	//	setLocation();
-	//}
 }
-//------------------------------------------------------
-//void Bomb::handleCollision(MovingObject& movObg)
-//{
-//
-//	if (m_exploded && !m_Dead)
-//	{
-//		if (this->collidesWith(movObg))
-//		{
-//			movObg.setDead(true);
-//		}
-//
-//		// 4 direction
-//
-//		// right place
-//		m_location.x += m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(movObg))
-//		{
-//			movObg.setDead(true);
-//		}
-//		m_location.x -= m_pixelSize;
-//
-//
-//		//left place
-//		m_location.x -= m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(movObg))
-//		{
-//
-//			movObg.setDead(true);
-//		}
-//		m_location.x += m_pixelSize;
-//
-//		//down place
-//		m_location.y += m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(movObg))
-//		{
-//			movObg.setDead(true);
-//
-//		}
-//		m_location.y -= m_pixelSize;
-//
-//
-//		//up place
-//		m_location.y -= m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(movObg))
-//		{
-//			movObg.setDead(true);
-//		}
-//		m_location.y += m_pixelSize;
-//		setLocation();
-//	}
-//
-//}
-//------------------------------------------------------
-//void Bomb::handleCollision(StaticObject& other)
-//{
-//	if (m_exploded && !m_Dead)
-//	{
-//		if (this->collidesWith(other))
-//		{
-//			other.setDead(true);
-//		}
-//
-//		// 4 direction
-//
-//		// right place
-//		m_location.x += m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(other))
-//		{
-//			other.setDead(true);
-//		}
-//		m_location.x -= m_pixelSize;
-//
-//
-//		//left place
-//		m_location.x -= m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(other))
-//		{
-//
-//			other.setDead(true);
-//		}
-//		m_location.x += m_pixelSize;
-//
-//		//down place
-//		m_location.y += m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(other))
-//		{
-//			other.setDead(true);
-//
-//		}
-//		m_location.y -= m_pixelSize;
-//
-//
-//		//up place
-//		m_location.y -= m_pixelSize;
-//		setLocation();
-//		if (this->collidesWith(other))
-//		{
-//			other.setDead(true);
-//		}
-//		m_location.y += m_pixelSize;
-//		setLocation();
-//	}
-//}
 //----------------------------------------
 void Bomb::handleCollision(Rock& rock)
 {

@@ -12,6 +12,10 @@ class Gift1;
 class Gift2;
 class Gift3;
 class Gift4;
+class MovingObject;
+class SmartGuard;
+
+
 
 class StaticObject
 {
@@ -39,7 +43,7 @@ public:
 	virtual void handleCollision(Gift3&) {};
 	virtual void handleCollision(Gift4&) {};
 	//--------------------------------------
-	//virtual void handleCollision(MovingObject&) {};
+
 protected:
 	void setLocation() { m_image.setPosition(m_location); }
 

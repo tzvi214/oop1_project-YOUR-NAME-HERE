@@ -40,6 +40,7 @@ private:
 	sf::SoundBuffer m_hurtSnd;
 	sf::SoundBuffer m_explSnd;
 	sf::SoundBuffer m_bombTicSnd;
+	sf::SoundBuffer m_TouchGiftSnd;
 
 
 

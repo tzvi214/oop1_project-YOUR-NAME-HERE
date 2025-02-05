@@ -19,9 +19,7 @@ public:
 
 	virtual void handleCollision(Guard&);
 	virtual void handleCollision(Robot&); 
-	//virtual void handleCollision(MovingObject&);
 	virtual void handleCollision(Rock&);
-
 	virtual void draw(sf::RenderWindow&) override;
 	
 private:
@@ -36,6 +34,7 @@ private:
 	Information& m_information;
 	sf::Text m_bombTime;
 	//--------------------------------------
+	void handleCollision(MovingObject&);
 	void initializationBombVec();
 	void playExpl();
 	void playTic();

@@ -24,5 +24,6 @@ enum Snd
 {
     hurt,
     explosion,
-    bombTic
+    bombTic,
+    touchGift,
 };

@@ -11,5 +11,6 @@ void Gift2::handleCollision(Robot& robot)
 	{
 		robot.handleCollision(*this);
 		setDead();
+
 	}
 }

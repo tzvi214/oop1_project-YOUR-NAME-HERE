@@ -20,4 +20,5 @@ protected:
 	//sf::Vector2f m_dirBeforeStopped{ 0,0 };
 	bool m_need2restartPlace = false;
 	Information& m_information;
+
 };

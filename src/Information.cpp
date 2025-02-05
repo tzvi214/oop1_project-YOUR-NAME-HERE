@@ -65,6 +65,7 @@ void Information::increaseGuardCount() {
 void Information::setLevel(const int num)
 {
 	m_level = num;
+	m_countGuard = 0;
 }
 //--------------------------------------------------------------
 bool Information::need2addGift()

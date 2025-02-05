@@ -127,7 +127,12 @@ void GameController::analyzeObj(char& ch, int col)
 		break;
 	case '!':
 		m_information.increaseGuardCount();
-		m_movingObjVec.push_back(std::make_unique<Guard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
+		//add stupid or smart guard
+		if(col%3 == 1)//SmartGuard StupidGuard
+		m_movingObjVec.push_back(std::make_unique<SmartGuard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
+		else 
+		m_movingObjVec.push_back(std::make_unique<StupidGuard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
+
 		break;
 	case '#':
 		m_staticObjVec.push_back(std::make_unique<Wall>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
@@ -269,7 +274,7 @@ void GameController::addBomb()
 }
 void GameController::addGift()
 {
-	srand(time(0));
+	
 	int random_number = rand() % (10 + m_numLevel *2 )+ 1;
 	switch (random_number)
 	{
