@@ -44,6 +44,22 @@ sf::Vector2f StaticObject::calculateLocation(sf::Vector2f location)
 	return sf::Vector2f(location.x * m_pixelSize, location.y * m_pixelSize);
 }
 //---------------------------------------------------------------
+bool StaticObject::ApproxCollided(sf::Vector2f otherLoc) const
+{
+	int hit = 0;
+	for (int i = (int) otherLoc.x; i < (int) otherLoc.x + m_pixelSize; i++)
+	{
+		for (int j = (int) otherLoc.y; j < (int) otherLoc.y + m_pixelSize; j++)
+		{
+			if (touch(sf::Vector2f((float) i, (float) j)))
+				hit++;
+		}
+	}
+
+	// return if object touch more then 95 percent
+	return hit > (5 *m_pixelSize);
+}
+//---------------------------------------------------------------
 void StaticObject::setDead(bool flag)
 {
 	m_Dead = flag;

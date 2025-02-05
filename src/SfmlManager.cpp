@@ -65,8 +65,8 @@ SfmlManager::SfmlManager()
 
 	//-------------------------------------------------
 
-	if (!m_Temp.loadFromFile("temp_2.png"))
-		std::cerr << "Failed to load temp_2.png\n";
+	if (!m_Temp.loadFromFile("temp_5.png"))
+		std::cerr << "Failed to load temp_5.png\n";
 
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";

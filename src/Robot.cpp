@@ -2,9 +2,8 @@
 
 Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan, Information& info)
 	: MovingObject(location, sfmlMan, ObjName::E_Robot, info), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
-	, m_sfmlManager{ sfmlMan }, m_texture{sfmlMan.getTexture(ObjName::E_Temp)}
+	, m_sfmlManager{ sfmlMan }
 {
-	m_image.setTexture(m_texture);
 }
 void Robot::setDead(bool flag)
 {
@@ -21,12 +20,10 @@ void Robot::updateDirection()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		setDirection(sf::Vector2f{ 1, 0 });
-		//m_image.setTexture();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		setDirection(sf::Vector2f{ -1, 0 });
-		
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -70,42 +67,8 @@ void Robot::FinishedLevel() const
 //---------------------------------------------------------
 void Robot::draw(sf::RenderWindow& window)
 {
-	//m_currentFrame = (m_currentFrame + 1) % 3; // מעבר בין 3 פריימים (0, 1, 2)
-	sf::IntRect textureRect;
 
-	// בחר את השורה הנכונה (בהתאם לכיוון) ואת העמודה הנכונה (בהתאם לפריים הנוכחי)
-	if (m_direction == sf::Vector2f{ 0, -1 } ) // למעלה
-		//textureRect = sf::IntRect(m_currentFrame * 50, 0, 50, 50);//temp
-	textureRect = sf::IntRect(m_currentFrame * 50, 50, 50, 50);//temp_2
-
-	else if (m_direction == sf::Vector2f{ 1, 0 }) // ימינה
-		//textureRect = sf::IntRect(m_currentFrame * 50, 50, 50, 50); //temp
-		textureRect = sf::IntRect(m_currentFrame * 50, 150, 50, 50); //temp_2
-
-
-	else if (m_direction == sf::Vector2f{ 0, 1 }) // למטה
-		//textureRect = sf::IntRect(m_currentFrame * 50, 100, 50, 50);//temp
-		textureRect = sf::IntRect(m_currentFrame * 50, 0, 50, 50);
-		
-	else if (m_direction == sf::Vector2f{ -1, 0 }) // שמאלה
-		//textureRect = sf::IntRect(m_currentFrame * 50, 150, 50, 50);//temp
-		textureRect = sf::IntRect(m_currentFrame * 50, 100, 50, 50);//temp_2
-
-	else // עמידה במקום
-		textureRect = sf::IntRect(50, 0, 50, 50);
-
-	// הגדר את המלבנים עבור ה-Sprite
-	m_image.setTextureRect(textureRect);
-	/*m_image.setPosition(m_location);
-	window.draw(m_image);*/
-	StaticObject::draw(window);
-
-
-
-
-
-	/* StaticObject::draw(window);
-	 drawInformation(window);*/
+	MovingObject::print(window, m_rowImage);
 }
 //---------------------------------------------------------
 void Robot::move(float deltaTime)

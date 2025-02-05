@@ -29,6 +29,9 @@ configure_file ("Bombtic.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("temp.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("temp_2.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("temp_4.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("temp_5.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
 
 
 

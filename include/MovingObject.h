@@ -20,5 +20,10 @@ protected:
 	//sf::Vector2f m_dirBeforeStopped{ 0,0 };
 	bool m_need2restartPlace = false;
 	Information& m_information;
+	float m_time = 0;// for new is default
+	int m_currentFrame = 0;
+	sf::Texture& m_texture;
+	//-------------------------------------------
+	virtual void print(sf::RenderWindow& window, int);
 
 };

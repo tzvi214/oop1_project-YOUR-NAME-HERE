@@ -1,7 +1,8 @@
 ﻿#include "Guard.h"
 
 Guard::Guard(sf::Vector2f location, SfmlManager& SfmlMan, Information& info) :
-    MovingObject(location, SfmlMan, ObjName::E_Guard, info), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
+    MovingObject(location, SfmlMan, ObjName::E_Guard, info),
+    m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
 { 
   
 }
@@ -14,6 +15,8 @@ void Guard::dountMove()
     newY *= 50;
     m_location = sf::Vector2f{ (float)newX, (float)newY };
     m_Collided = true;
+    
+
 }
 //--------------------------------------------------------------
 void Guard::updateDirection() 
@@ -34,6 +37,12 @@ void Guard::move(float deltaTime)
         return;
     }
 
+    m_time += deltaTime;
+    if (m_time > 0.2f)
+    {
+        m_time = 0;
+        m_currentFrame = (m_currentFrame + 1) % 3;
+    }
 
     sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (m_pixelSize * deltaTime),
         m_location.y + m_direction.y * (m_pixelSize * deltaTime));
@@ -59,6 +68,11 @@ void Guard::setDead(bool flag)
 //--------------------------------------------------------------
 void Guard::handleCollision(StaticObject& other)
 {
+    if (m_touchTheEnd) {
+        m_Collided = true;
+    }
+    m_touchTheEnd = false;
+
   other.handleCollision(*this); // swap.
 }
 //--------------------------------------------------------------
@@ -71,6 +85,11 @@ void Guard::handleCollision(Robot& robot)
       m_need2restartPlace = true;
        
     }
+}
+//--------------------------------------------------------------
+void Guard::draw(sf::RenderWindow& window)
+{
+    MovingObject::print(window, m_rowImage);
 }
 //--------------------------------------------------------------
 void Guard::trackRobotX()
@@ -131,10 +150,10 @@ void Guard::trackRobotY()
 //--------------------------------------------------------------
 void Guard::goInRandom()
 {
-    if (m_touchTheEnd){
+    /*if (m_touchTheEnd){
         m_Collided = true;
         m_touchTheEnd = false;
-    }
+    }*/
 
     if (m_Collided)
         m_track++;

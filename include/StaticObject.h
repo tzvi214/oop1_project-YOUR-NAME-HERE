@@ -46,14 +46,13 @@ public:
 
 protected:
 	void setLocation() { m_image.setPosition(m_location); }
-
 	const int m_pixelSize;
 	sf::Sprite m_image;
 	sf::Vector2f getLoc() const { return m_location; }
 	sf::Vector2f m_location;
 	bool m_Dead = false;
 	sf::Vector2f calculateLocation(sf::Vector2f);
-
+	bool ApproxCollided(sf::Vector2f) const;
 private:
 	//--- data_member ---
 

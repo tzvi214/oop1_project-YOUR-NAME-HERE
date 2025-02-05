@@ -23,7 +23,8 @@ public:
 	virtual void handleCollision(StaticObject& other) override;
 	virtual void handleCollision(Robot& robot) override;
 	virtual void goToFirstLoc()override { m_location = m_firstLoc; }
-
+	//-------------------------------
+	virtual void draw(sf::RenderWindow&) override;
 protected:
 	bool m_Collided = false;
 	void trackRobotX();
@@ -34,4 +35,5 @@ private:
 	int m_track = 0;
 	bool m_firstTime = true;// to get direction on the first time
 	bool m_touchTheEnd = false;
+	int m_rowImage = 150;
 };

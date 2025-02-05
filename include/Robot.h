@@ -35,23 +35,19 @@ public:
 	virtual void handleCollision(Gift3&);
 	virtual void handleCollision(Gift4&);
 
-
-
-
 private:
 	sf::Vector2f m_firstLoc;
 	int m_life = 5;
-	float m_time = 0;// for new is default
 	int m_seconds = 0;
 	SfmlManager& m_sfmlManager;
 	bool m_robotKilled = false;
 	bool m_stopped = true;// when the program the object dident moved
 	
 	//------------------
-	int m_currentFrame = 0;
+	int m_rowImage = 0;
 	//--- function ---
 	void drawInformation(sf::RenderWindow&);
 
 	//----------------------
-	sf::Texture& m_texture;
+	
 };

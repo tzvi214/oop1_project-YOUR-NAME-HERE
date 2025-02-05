@@ -55,15 +55,17 @@ void Bomb::handleCollision(MovingObject& movObg)
 		sf::Vector2f originalLocation = m_location;
 		for (const auto& offset : m_explosionLocVec)
 		{
+			
 			m_location = offset;
 			setLocation();
 
-			if (this->collidesWith(movObg))
+			if (this->ApproxCollided(movObg.getLocation())) 
 			{
 				movObg.setDead(true);
 				return;
 			}
 		}
+
 		m_location = originalLocation;
 
 	}
@@ -130,20 +132,29 @@ void Bomb::handleCollision(Rock& rock)
 //----------------------------------------
 void Bomb::draw(sf::RenderWindow& window)
 {
-	if(!m_exploded) StaticObject::draw(window);
-	
-	else
-	{
-		// print 4 image for itch direction
-	    // and this place
-		sf::Vector2f loc = m_location;
-		for (const auto& bomb: m_explosionLocVec){
-			m_location = bomb;
-			StaticObject::draw(window);
+
+	StaticObject::draw(window);
+
+	if (m_exploded) {
+		for ( auto expZone : m_explosionZoneVec) {
+			expZone.draw(window);
 		}
-		m_location = loc;
-		StaticObject::draw(window);
+
 	}
+	//if(!m_exploded) StaticObject::draw(window);
+	//
+	//else
+	//{
+	//	// print 4 image for itch direction
+	//    // and this place
+	//	sf::Vector2f loc = m_location;
+	//	for (const auto& bomb: m_explosionLocVec){
+	//		m_location = bomb;
+	//		StaticObject::draw(window);
+	//	}
+	//	m_location = loc;
+	//	StaticObject::draw(window);
+	//}
 	drawTime(window);
 
 }
@@ -163,11 +174,9 @@ void Bomb::initializationBombVec()
 			newLoc = (i == 2)? sf::Vector2f{ m_location.x , m_location.y + m_pixelSize }: 
 				               sf::Vector2f{ m_location.x , m_location.y - m_pixelSize };
 		}
-
-		if (m_information.locInLevel(newLoc))
-		{
+		if (m_information.locInLevel(newLoc)){
 			m_explosionLocVec.push_back(newLoc);
-
+			m_explosionZoneVec.push_back(ExplosionZone(newLoc, m_fireSpr));
 		}
 	}
 	m_explosionLocVec.push_back(m_location);
