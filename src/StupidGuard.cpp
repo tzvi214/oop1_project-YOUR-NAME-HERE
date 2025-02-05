@@ -7,5 +7,6 @@ StupidGuard::StupidGuard(sf::Vector2f loc, SfmlManager& sfMan, Information& Info
 //---------------------------------------
 void StupidGuard::updateDirection()
 {
+	
 	Guard::goInRandom();
 }

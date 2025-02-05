@@ -36,8 +36,6 @@ bool StaticObject::checkCollision(StaticObject& other) const
 //------------------------ private function ---------------------
 void StaticObject::setSpritLoc()
 {
-	
-	m_image.setScale(0.05f, 0.05f);
 	m_image.setPosition(m_location);
 }
 //---------------------------------------------------------------

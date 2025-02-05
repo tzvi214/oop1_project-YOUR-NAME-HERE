@@ -33,4 +33,5 @@ private:
 	sf::Vector2f m_firstLoc;
 	int m_track = 0;
 	bool m_firstTime = true;// to get direction on the first time
+	bool m_touchTheEnd = false;
 };

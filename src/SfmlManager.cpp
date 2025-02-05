@@ -31,8 +31,7 @@ SfmlManager::SfmlManager()
 	if (!m_Door.loadFromFile("Door.png"))
 		std::cerr << "Failed to load Door.png\n";
 
-	if (!m_Temp.loadFromFile("temp.png"))
-		std::cerr << "Failed to load Temp.png\n";
+	
 
 	if (!m_Bomb.loadFromFile("Bomb.png"))
 		std::cerr << "Failed to load Bomb.png\n";
@@ -63,6 +62,11 @@ SfmlManager::SfmlManager()
 
 	if (!m_TouchGiftSnd.loadFromFile("touchGift.wav"))
 		std::cerr << "Failed to load touchGift.wav\n";
+
+	//-------------------------------------------------
+
+	if (!m_Temp.loadFromFile("temp_2.png"))
+		std::cerr << "Failed to load temp_2.png\n";
 
 
 	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";

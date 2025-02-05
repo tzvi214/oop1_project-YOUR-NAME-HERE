@@ -44,7 +44,8 @@ void Guard::move(float deltaTime)
         m_location = nextLoc;
     }
     else
-        m_Collided = true;
+        m_touchTheEnd = true;
+    
 }
 //--------------------------------------------------------------
 void Guard::setDead(bool flag)
@@ -130,6 +131,10 @@ void Guard::trackRobotY()
 //--------------------------------------------------------------
 void Guard::goInRandom()
 {
+    if (m_touchTheEnd){
+        m_Collided = true;
+        m_touchTheEnd = false;
+    }
 
     if (m_Collided)
         m_track++;

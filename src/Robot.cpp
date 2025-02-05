@@ -4,8 +4,7 @@ Robot::Robot(sf::Vector2f location, SfmlManager& sfmlMan, Information& info)
 	: MovingObject(location, sfmlMan, ObjName::E_Robot, info), m_firstLoc{ location.x * m_pixelSize, location.y * m_pixelSize }
 	, m_sfmlManager{ sfmlMan }, m_texture{sfmlMan.getTexture(ObjName::E_Temp)}
 {
-	//m_image.setTexture(m_texture);
-		// sprite.setTexture(sfm.getTexture(ObjName::E_Temp));
+	m_image.setTexture(m_texture);
 }
 void Robot::setDead(bool flag)
 {
@@ -22,19 +21,12 @@ void Robot::updateDirection()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		setDirection(sf::Vector2f{ 1, 0 });
-		//m_image.setOrigin(m_location.x+ 25.f, m_location.y+ 25.f);
-		//m_image.setScale(0.05f, 0.05f);	
-		//m_image.setOrigin(m_location.x, m_location.y);
-		//m_image.setOrigin(0.f, 0.f);
+		//m_image.setTexture();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		setDirection(sf::Vector2f{ -1, 0 });
-		//m_image.setOrigin(m_location.x + 25.f, m_location.y + 25.f);
-		//m_image.setScale(-0.05f, 0.05f);
-		//m_image.setOrigin(0.f, 0.f);
-		//m_image.setOrigin(m_location.x, m_location.y);
-
+		
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -54,13 +46,7 @@ void Robot::updateDirection()
 //---------------------------------------------------------
 void Robot::loseLife()
 {
-	//if (m_life-- <= 0)
-	//	m_robotKilled = true;
-
-	//m_information.loseRobotLife();
-	//// information need to do this function--
-	//if (m_information.getRobotLife() <= 0)
-	//	m_information.setRobotKill(true);
+	
 }
 //---------------------------------------------------------
 void Robot::dountMove()
@@ -84,53 +70,57 @@ void Robot::FinishedLevel() const
 //---------------------------------------------------------
 void Robot::draw(sf::RenderWindow& window)
 {
-	////  currentFrame = (currentFrame + 1) % 3;
-	//// enum Direction { Up = 0, Left = 3, Down = 2, Right = 1 };
-	////   sprite.setTextureRect(sf::IntRect(currentFrame * frameWidth, direction * frameHeight, frameWidth, frameHeight));
-	////sprite.setScale(3.f, 3.f);
-	////
-	//m_currentFrame = (m_currentFrame + 1) % 3;
-	//if (m_direction == sf::Vector2f{ 1,0 })//right
-	//{
-	//	//m_image.setTextureRect(sf::IntRect(m_currentFrame * (48/3), 72/4, (48 / 3), 72 / 4));
-	//	//m_image.setScale(3.f, 3.f);
-	//}
-	//else if (m_direction == sf::Vector2f{ -1,0 })
-	//{
+	//m_currentFrame = (m_currentFrame + 1) % 3; // מעבר בין 3 פריימים (0, 1, 2)
+	sf::IntRect textureRect;
 
-	//}
-	//else if (m_direction == sf::Vector2f{ 0,1 })
-	//{
+	// בחר את השורה הנכונה (בהתאם לכיוון) ואת העמודה הנכונה (בהתאם לפריים הנוכחי)
+	if (m_direction == sf::Vector2f{ 0, -1 } ) // למעלה
+		//textureRect = sf::IntRect(m_currentFrame * 50, 0, 50, 50);//temp
+	textureRect = sf::IntRect(m_currentFrame * 50, 50, 50, 50);//temp_2
 
-	//}
-	//else if (m_direction == sf::Vector2f{ 0,-1 })//up
-	//{
-	//	
-	//	//m_image.setTextureRect(sf::IntRect(m_currentFrame * (48 / 3), 0, (48 / 3), 72 / 4));
-	//	//m_image.setScale(3.f, 3.f);
-	//}
-	//else if (m_direction == sf::Vector2f{ 0,0 })
-	//{
+	else if (m_direction == sf::Vector2f{ 1, 0 }) // ימינה
+		//textureRect = sf::IntRect(m_currentFrame * 50, 50, 50, 50); //temp
+		textureRect = sf::IntRect(m_currentFrame * 50, 150, 50, 50); //temp_2
 
-	//}
-	//m_image.setScale(3.f, 3.f);
-	 StaticObject::draw(window);
-	 drawInformation(window);
+
+	else if (m_direction == sf::Vector2f{ 0, 1 }) // למטה
+		//textureRect = sf::IntRect(m_currentFrame * 50, 100, 50, 50);//temp
+		textureRect = sf::IntRect(m_currentFrame * 50, 0, 50, 50);
+		
+	else if (m_direction == sf::Vector2f{ -1, 0 }) // שמאלה
+		//textureRect = sf::IntRect(m_currentFrame * 50, 150, 50, 50);//temp
+		textureRect = sf::IntRect(m_currentFrame * 50, 100, 50, 50);//temp_2
+
+	else // עמידה במקום
+		textureRect = sf::IntRect(50, 0, 50, 50);
+
+	// הגדר את המלבנים עבור ה-Sprite
+	m_image.setTextureRect(textureRect);
+	/*m_image.setPosition(m_location);
+	window.draw(m_image);*/
+	StaticObject::draw(window);
+
+
+
+
+
+	/* StaticObject::draw(window);
+	 drawInformation(window);*/
 }
 //---------------------------------------------------------
 void Robot::move(float deltaTime)
 {
 	//for the first time or after robot deed
 	m_information.setRobotLoc(m_location);
-   //---------- update time past -----
-   if ((m_time += deltaTime) >= m_seconds + 1)
-   {
-   	m_seconds++;
-   }
-   //-----------------------------------
-   
+
    if (m_stopped) // if the robot didnt move dont move
    	return;
+   m_time += deltaTime;
+   if (m_time > 0.2f)
+   {
+	   m_time = 0;
+	   m_currentFrame = (m_currentFrame + 1) % 3;
+   }
 
    sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (2 * m_pixelSize * deltaTime),
 	                                  m_location.y + m_direction.y * (2 * m_pixelSize * deltaTime));
@@ -153,7 +143,7 @@ void Robot::handleCollision(Gift1&)
 	m_information.frozeGuard();
 }
 //------------------------------------------------------
-void Robot::handleCollision(Gift2& gift1)
+void Robot::handleCollision(Gift2& gift2)
 {
 	m_information.addRobotLife();
 }
@@ -167,7 +157,6 @@ void Robot::handleCollision(Gift4& gift4)
 {
 	m_information.need2killedGuard();
 }
-//---------------------------------------------------------
 
 //---------------------------------------------------------
 void Robot::drawInformation(sf::RenderWindow& window)
