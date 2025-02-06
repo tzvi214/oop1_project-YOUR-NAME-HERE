@@ -28,16 +28,13 @@ void MovingObject::setDirection(sf::Vector2f newDirection)
             }
         }
 
-        if ((static_cast<int>(m_location.x) % m_pixelSize) > 5 || (static_cast<int>(m_location.y) % m_pixelSize) > 5)
+        if ((static_cast<int>(m_location.x) % m_pixelSize) > Data::throwable || 
+               (static_cast<int>(m_location.y) % m_pixelSize) > Data::throwable)
         {
             return;
         }
 
-        int newX = (m_location.x + 25) / m_pixelSize;
-        int newY = (m_location.y + 25) / m_pixelSize;
-        newX *= m_pixelSize;
-        newY *= m_pixelSize;
-        m_location = sf::Vector2f{ (float)newX, (float)newY };
+        m_location = Place::toPlace(m_location, Data::pixelSize);
 
        m_direction = newDirection;
     }
@@ -49,29 +46,25 @@ void MovingObject::print(sf::RenderWindow& window, int row)
     sf::IntRect textureRect;
 
   
-    // בחר את העמודה (פריים הנוכחי) והשורה (בהתאם לכיוון)
-    if (m_direction == sf::Vector2f{ 0, 1 }) // למטה
-        textureRect = sf::IntRect(m_currentFrame * 50, row, 50, 50); // שורה 0
+    if (m_direction == Place::Directions::Down) 
+        textureRect = sf::IntRect(m_currentFrame * Data::pixelSize + Place::PicMatrix::Down,
+                                                   row, Data::pixelSize, Data::pixelSize); 
 
-    else if (m_direction == sf::Vector2f{ -1, 0 }) // שמאלה
-        textureRect = sf::IntRect(m_currentFrame * 50 + 3 * 50, row, 50, 50); // שורה 1
+    else if (m_direction == Place::Directions::Left) 
+        textureRect = sf::IntRect(m_currentFrame * Data::pixelSize + Place::PicMatrix::Left * Data::pixelSize,
+                                                                       row, Data::pixelSize, Data::pixelSize); 
+    else if (m_direction == Place::Directions::Right) 
+        textureRect = sf::IntRect(m_currentFrame * Data::pixelSize + Place::PicMatrix::Right * Data::pixelSize,
+                                                                         row, Data::pixelSize, Data::pixelSize); 
+    else if (m_direction == Place::Directions::Up) 
+        textureRect = sf::IntRect(m_currentFrame * Data::pixelSize + Place::PicMatrix::Up * Data::pixelSize,
+                                                                      row, Data::pixelSize, Data::pixelSize); 
+    else 
+        textureRect = sf::IntRect(Place::PicMatrix::Stand, row, Data::pixelSize, Data::pixelSize); 
 
-    else if (m_direction == sf::Vector2f{ 1, 0 }) // ימינה
-        textureRect = sf::IntRect(m_currentFrame * 50 + 6 * 50, row, 50, 50); // שורה 2
-
-    else if (m_direction == sf::Vector2f{ 0, -1 }) // למעלה
-        textureRect = sf::IntRect(m_currentFrame * 50 + 9 * 50, row, 50, 50); // שורה 3
-
-    else // עמידה במקום (תשתמש בפריים הראשון של "למטה" כדוגמה)
-        textureRect = sf::IntRect(0, row, 50, 50); // פריים הראשון בשורה 0
-
-    // הגדר את המלבנים עבור ה-Sprite
     m_image.setTextureRect(textureRect);
 
-
     GameObject::draw(window);
-
-
 
 }
 

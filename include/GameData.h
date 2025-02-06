@@ -14,6 +14,13 @@ namespace Place
         const sf::Vector2f Down{ 0.0f,  1.0f }; 
 
     }
+    namespace PicMatrix {
+           const int Right = 6;
+            const int Left = 3;
+            const int Up = 9;
+            const int Down = 0;
+            const int Stand = 0;
+    }
 }
 
 namespace Score
