@@ -14,8 +14,9 @@ class Guard : public MovingObject
 {
 public:
 	Guard(sf::Vector2f, SfmlManager&, Information&);
+	~Guard() = default;
 	void dountMove();
-	virtual void updateDirection() ;
+	virtual void updateDirection() {};
 	virtual void move(float) override;
 	virtual void setDead(bool = true);
 

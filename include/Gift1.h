@@ -10,6 +10,7 @@ class Gift1 :public Gift
 {
 public:
 	Gift1(sf::Vector2f, SfmlManager&);
+	~Gift1() {};
 	virtual void  handleCollision(Robot&) override;
 private:
 

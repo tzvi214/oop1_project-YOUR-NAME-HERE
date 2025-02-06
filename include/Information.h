@@ -3,6 +3,8 @@
 #include "SfmlManager.h"
 #include "ObjName.h"
 #include "CountdownTimer.h"
+#include "GameData.h"
+
 
 
 class Information
@@ -55,9 +57,9 @@ public:
 private:
 	sf::Sound m_hurtSnd;
 	bool m_levelCompleted;
-	bool m_robotKill;
+	bool m_robotKill = false;
 	int m_score;
-	int m_lifeRobot = 5;  // default
+	int m_lifeRobot = 5;  
 	int m_countGuard;
 	bool m_needToKillGuard = false;
 	int m_level;

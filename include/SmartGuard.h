@@ -13,6 +13,7 @@ class SmartGuard : public Guard
 {
 public:
 	SmartGuard(sf::Vector2f, SfmlManager&, Information&);
+	~SmartGuard() = default;
 	virtual void updateDirection() ;// override
 private:
 	int m_status =0;

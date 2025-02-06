@@ -8,11 +8,10 @@ class MovingObject :public StaticObject
 {
 public:
 	MovingObject(sf::Vector2f, SfmlManager&, ObjName, Information& infro);
-
+	~MovingObject() {};
 	void setDirection(sf::Vector2f);
 	virtual void move(float) {};
 	virtual void updateDirection() {};
-	virtual ~MovingObject() = default;
 	virtual bool need2restartPlace() const { return m_need2restartPlace; }
 	virtual void goToFirstLoc() {};
 protected:

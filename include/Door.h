@@ -7,6 +7,7 @@ class Door :public StaticObject
 {
 public:
 	Door (sf::Vector2f, SfmlManager&);
+	~Door() = default;
 	virtual void  handleCollision(Robot&) override;
 private:
 

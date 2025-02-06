@@ -9,6 +9,7 @@ class Rock : public StaticObject
 {
 public:
 	Rock(sf::Vector2f, SfmlManager&);
+	~Rock() {};
 
 	// --- Double Dispatch ---
 	virtual void  handleCollision(Robot&) override;

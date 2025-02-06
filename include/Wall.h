@@ -9,6 +9,7 @@ class Wall :public StaticObject
 {
 public:
 	Wall(sf::Vector2f, SfmlManager&);
+	~Wall() {};
 
 	// --- Double Dispatch ---
 	virtual void  handleCollision(Robot&) override;

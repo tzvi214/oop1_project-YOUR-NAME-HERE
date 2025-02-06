@@ -56,6 +56,7 @@ private:
 	void mainLoop(sf::RenderWindow&);
 	void draw(sf::RenderWindow&);
 	void handleEvent();
+	void handleBombEvent() const;
 	//-------------------------------------
 	void addBomb();
 	void addGift();

@@ -19,19 +19,19 @@ void Robot::updateDirection()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		setDirection(sf::Vector2f{ 1, 0 });
+		setDirection(Place::Directions::Right);//sf::Vector2f{ 1, 0 }
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		setDirection(sf::Vector2f{ -1, 0 });
+		setDirection(Place::Directions::Left);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		setDirection(sf::Vector2f{ 0, -1 });
+		setDirection(Place::Directions::Up);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		setDirection(sf::Vector2f{ 0, 1 });
+		setDirection(Place::Directions::Down);
 	}
 	else
 	{

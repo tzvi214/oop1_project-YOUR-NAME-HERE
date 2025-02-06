@@ -19,10 +19,6 @@ void Guard::dountMove()
 
 }
 //--------------------------------------------------------------
-void Guard::updateDirection() 
-{
- 
-}
 //--------------------------------------------------------------
 void Guard::move(float deltaTime)
 {
@@ -150,10 +146,9 @@ void Guard::trackRobotY()
 //--------------------------------------------------------------
 void Guard::goInRandom()
 {
-    /*if (m_touchTheEnd){
-        m_Collided = true;
-        m_touchTheEnd = false;
-    }*/
+   
+    m_need2restartPlace = false;
+
 
     if (m_Collided)
         m_track++;

@@ -10,6 +10,7 @@ class Gift :public StaticObject
 {
 public:
 	Gift(sf::Vector2f, sf::Sprite);
+	~Gift() = default;
 protected:
 
 private:

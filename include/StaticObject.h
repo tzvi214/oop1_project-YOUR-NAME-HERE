@@ -43,6 +43,7 @@ public:
 	virtual void handleCollision(Gift3&) {};
 	virtual void handleCollision(Gift4&) {};
 	//--------------------------------------
+	virtual	bool ApproxCollided(sf::Vector2f) const;
 
 protected:
 	void setLocation() { m_image.setPosition(m_location); }
@@ -52,7 +53,6 @@ protected:
 	sf::Vector2f m_location;
 	bool m_Dead = false;
 	sf::Vector2f calculateLocation(sf::Vector2f);
-	bool ApproxCollided(sf::Vector2f) const;
 private:
 	//--- data_member ---
 

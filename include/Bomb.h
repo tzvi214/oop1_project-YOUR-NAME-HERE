@@ -16,6 +16,7 @@ class Bomb :public StaticObject
 {
 public:
 	Bomb(sf::Vector2f, SfmlManager&, Information&);
+	~Bomb() {};
 	void updateState();
 	bool IsExploded();
 

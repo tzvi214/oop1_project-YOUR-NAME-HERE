@@ -6,6 +6,7 @@ class Button
 {
 public:
 	Button(sf::Vector2f , sf::Sprite&, ObjName);
+	~Button() = default;
 	bool userPressOnTheButton(sf::Vector2f&) const;
 	void draw(sf::RenderWindow& window) const { window.draw(m_image); } //maybe it should nat be const
 	ObjName getObjType() const { return m_objType; }

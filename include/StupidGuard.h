@@ -12,7 +12,7 @@ class StupidGuard : public Guard
 {
 public:
 	StupidGuard(sf::Vector2f, SfmlManager&, Information&);
-
+	~StupidGuard() = default;
 	virtual void updateDirection();
 
 private:

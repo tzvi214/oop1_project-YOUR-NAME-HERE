@@ -4,6 +4,8 @@
 #include "ObjName.h"
 #include "SfmlManager.h"
 #include "Information.h"
+#include "GameData.h"
+
 class Gift1;
 class Gift2;
 class Gift3;
@@ -15,9 +17,9 @@ class Robot :public MovingObject
 {
 public:
 	Robot(sf::Vector2f, SfmlManager&, Information&);
+	~Robot() = default;
 	sf::Vector2f getLocation() const { return m_location; }
 	void loseLife();
-	bool robotAreDead() const { return m_robotKilled; }
 	void dountMove();
 	void FinishedLevel() const;
 	void Defeated() { m_need2restartPlace = true ; }
@@ -40,7 +42,6 @@ private:
 	int m_life = 5;
 	int m_seconds = 0;
 	SfmlManager& m_sfmlManager;
-	bool m_robotKilled = false;
 	bool m_stopped = true;// when the program the object dident moved
 	
 	//------------------

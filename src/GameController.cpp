@@ -53,9 +53,7 @@ void GameController::handleCollisionController(MovingObject& movingObject)
 		if (movingObject.checkCollision(*obj)) // if (movingObject == obj) return false. else true
 		{
 			movingObject.handleCollision(*obj); // call to function of StaticObject class
-			/*
-			Function is correct both if a robot gets stuck in a guard and if the guard gets stuck in the robot
-			*/
+			
 		}
 	}
 
@@ -128,7 +126,7 @@ void GameController::analyzeObj(char& ch, int col)
 	case '!':
 		m_information.increaseGuardCount();
 		//add stupid or smart guard
-		if(col%3 == 1)//SmartGuard StupidGuard
+		if(col%3 == 1)// ranom guard
 		m_movingObjVec.push_back(std::make_unique<SmartGuard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
 		else 
 		m_movingObjVec.push_back(std::make_unique<StupidGuard>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager, m_information));
@@ -199,16 +197,7 @@ void GameController::mainLoop(sf::RenderWindow& window)
 		}
 		deleteObjFromVec();
 		handleEvent();
-		//----------- Bomb Event ---------------
-		for (auto& bomb : m_BombVec) 
-		{
-			for (const auto& obj : m_staticObjVec)  
-			{
-				{
-					obj->handleCollision(*bomb);
-				}
-			}
-		}
+		handleBombEvent();
 
 		draw(window);
 		if (m_information.getLevelFinish() || m_information.getRobotKill())
@@ -252,16 +241,34 @@ void GameController::handleEvent()
 	   	restartObjPlace();
 	   }
 
-	   objMov->updateDirection();// false
+	   objMov->updateDirection();
 	   handleCollisionController(*objMov); // call to function of this class.
 	   objMov->move(deltaTime);
 	}
 	
-	for (auto& bomb : m_BombVec) {
-		bomb->updateState(); // Replace sprite to fire 
-	}
+	
 	if (m_information.need2addGift()) {
 		addGift();
+	}
+}
+//--------------------------------------------------
+void GameController::handleBombEvent() const
+{
+
+	
+
+	for (auto& bomb : m_BombVec)
+	{
+		for (const auto& obj : m_staticObjVec)
+		{
+			{
+				obj->handleCollision(*bomb);
+			}
+		}
+	}
+
+	for (auto& bomb : m_BombVec) {
+		bomb->updateState();
 	}
 }
 //--------------------------------------------------
