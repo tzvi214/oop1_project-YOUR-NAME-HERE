@@ -27,9 +27,7 @@ configure_file ("gameSound.mp3" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("touchGift.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Bombtic.ogg" ${CMAKE_BINARY_DIR} COPYONLY)
 
-configure_file ("temp.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("temp_2.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("temp_4.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
 configure_file ("temp_5.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 

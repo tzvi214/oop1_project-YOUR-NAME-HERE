@@ -6,7 +6,6 @@ GameController::GameController()
 //--------------------------------------------------------
 void GameController::run()
 {
-	// ------ need do write this FirstWindow in private. ------
 	FirstWindow firstWindow(m_SfmlManager);
 	handleFirstWindow(firstWindow);
 	if (firstWindow.need2exit())
@@ -26,8 +25,10 @@ void GameController::run()
 		m_information.setGameWidth((m_width - 1) * 50);
 
 
-		GameBoard gameBoard(m_width, m_height + 2);
-		auto& window = gameBoard.getWindow();
+		int width = m_width * Data::pixelSize;
+		int height = (m_height + 2) * Data::pixelSize;
+		sf::RenderWindow window(sf::VideoMode(width, height), fileName);
+
 		window.setFramerateLimit(60);
 		m_gameClock.restart();// that in the first time the obj nat will jump
 		mainLoop(window);

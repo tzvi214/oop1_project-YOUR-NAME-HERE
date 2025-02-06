@@ -1,21 +1,37 @@
-#include "FirstWindow.h"
+﻿#include "FirstWindow.h"
 
-
-FirstWindow::FirstWindow(SfmlManager& sfmlManager)
-	: Windows(15, 15), m_sfmlManager{ sfmlManager }
+FirstWindow::FirstWindow(SfmlManager& sfmlMan)
+	: m_sfmlManager{ sfmlMan }, m_height(15 * Data::pixelSize), m_width(15 * Data::pixelSize),
+	m_window(sf::VideoMode(m_width, m_height), "First Window")
 {
-	//analyze the buttons	
-	sf::Sprite startSprite(m_sfmlManager.getTexture(ObjName::Start));
-	m_buttons.push_back(Button(sf::Vector2f(0, 0), startSprite, ObjName::Start));
+	// ����� ������ �� ��������
+	float buttonWidth = m_width / 1.5;   // ���� ������ ���� ��� ����� �����
+	float buttonHeight = m_height / 4; // ���� ������ ���� ���� ����� �����
 
-	sf::Sprite HelpSprite(m_sfmlManager.getTexture(ObjName::Help));
-	m_buttons.push_back(Button(sf::Vector2f(5, 0), HelpSprite, ObjName::Help));
+	// ����� ������ �� ��������
+	float spacing = 20.f; // ���� ��� ��������
 
-	sf::Sprite ExitSprite(m_sfmlManager.getTexture(ObjName::Exit));
-	m_buttons.push_back(Button(sf::Vector2f(10, 0), ExitSprite, ObjName::Exit));
+	float x = (m_width - buttonWidth) / 2; // ����� �� ������ ����� ������
+	float y = (m_height - 3 * buttonHeight - 2 * spacing) / 2; 
 
+	sf::RectangleShape button1(sf::Vector2f(buttonWidth, buttonHeight));
+	sf::RectangleShape button2(sf::Vector2f(buttonWidth, buttonHeight));
+	sf::RectangleShape button3(sf::Vector2f(buttonWidth, buttonHeight));
+
+	button1.setFillColor(sf::Color(0, 122, 255)); 
+	button2.setFillColor(sf::Color(34, 139, 34)); 
+	button3.setFillColor(sf::Color(220, 20, 60)); 
+
+	button1.setPosition(x, y);
+	button2.setPosition(x, y + buttonHeight + spacing);
+	button3.setPosition(x, y + 2 * (buttonHeight + spacing)); 
+
+	m_buttons.push_back(Button(button1, ObjName::Start, sfmlMan));
+	m_buttons.push_back(Button(button2, ObjName::Help, sfmlMan));
+	m_buttons.push_back(Button(button3, ObjName::Exit, sfmlMan));
 
 }
+
 //-------------------------------------------------------------------
 void FirstWindow::draw()
 {
@@ -30,19 +46,19 @@ void FirstWindow::customerChoice()
 	m_need2exit = false; // analyze aviary time
 	m_need2exit = false; // analyze aviary time
 	sf::Text text;
-	playMusic();
 
+	playMusic();
 	while (m_window.isOpen())
 	{
 		sf::Event event;
 		if (m_window.pollEvent(event))
 		{
-
-
-			if (event.type == sf::Event::Closed) {
+			if (event.type == sf::Event::Closed)
+			{
 				m_window.close();
 				m_menuSnd.stop();
 			}
+
 
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
@@ -81,7 +97,6 @@ void FirstWindow::customerChoice()
 
 	}
 }
-//------------------------------------------------------------------
 void FirstWindow::playMusic()
 {
 	m_menuSnd.openFromFile("menu.wav");
@@ -122,14 +137,16 @@ sf::Text FirstWindow::readHelpFromFile() const
 
 void FirstWindow::showHelp(sf::Text& text)
 {
-	// show the ALL text on the window 
-	wrapText(text, m_window.getSize().x - 20); // 20 is some padding from the edges
+	wrapText(text, m_window.getSize().x - 20);
 
+	sf::RectangleShape exitButton(sf::Vector2f(150.f, 100.f)); 
+	exitButton.setFillColor(sf::Color::Green); 
 
+	float buttonX = m_window.getSize().x * 4 / 5;  
+	float buttonY = m_window.getSize().y * 3 / 4;  
+	exitButton.setPosition(buttonX, buttonY); 
 
-	// create new button.
-	sf::Sprite ExitSprite(m_sfmlManager.getTexture(ObjName::Exit));
-	Button button(sf::Vector2f(10, 10), ExitSprite, ObjName::Exit);
+	Button button(exitButton, ObjName::Exit, m_sfmlManager);
 
 	while (m_window.isOpen())
 	{
@@ -142,17 +159,18 @@ void FirstWindow::showHelp(sf::Text& text)
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
 				sf::Vector2f location = { float(event.mouseButton.x), float(event.mouseButton.y) };
-				if (button.userPressOnTheButton(location))
-					return;
+				if (button.userPressOnTheButton(location))  
+					return; 
 			}
 		}
 
 		m_window.clear();
-		m_window.draw(text);
-		button.draw(m_window);
+		m_window.draw(text);   
+		button.draw(m_window); 
 		m_window.display();
 	}
 }
+
 
 void FirstWindow::wrapText(sf::Text& text, float maxWidth)
 {
