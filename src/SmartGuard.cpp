@@ -7,10 +7,10 @@ SmartGuard::SmartGuard(sf::Vector2f loc, SfmlManager& sfMan, Information& Infor)
 void SmartGuard::updateDirection()
 {
 	m_status++;
-	m_status %= 330;
-	if (m_status < 110)
+	m_status %= Data::changedFunction *3;
+	if (m_status < Data::changedFunction)
 		Guard::goInRandom();
-	else if (m_status <= 220)
+	else if (m_status <= Data::changedFunction *2)
 		Guard::trackRobotX();
 	else
 		Guard::trackRobotY();

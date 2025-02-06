@@ -37,4 +37,5 @@ namespace Data
     const int throwable = 5;
     const int numFrame = 3;
     const float timePerFrame = 0.2f;
+    const int changedFunction = 110;
 }
