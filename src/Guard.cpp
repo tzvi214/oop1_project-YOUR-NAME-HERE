@@ -9,17 +9,13 @@ Guard::Guard(sf::Vector2f location, SfmlManager& SfmlMan, Information& info) :
 //--------------------------------------------------------------
 void Guard::dountMove()
 {
-    int newX = (m_location.x + 25) / 50;
-    int newY = (m_location.y + 25) / 50;
-    newX *= 50;
-    newY *= 50;
-    m_location = sf::Vector2f{ (float)newX, (float)newY };
+   
+    m_location = Place::toPlace(m_location, Data::pixelSize);
     m_Collided = true;
-    
-
+   
 }
 //--------------------------------------------------------------
-//--------------------------------------------------------------
+
 void Guard::move(float deltaTime)
 {
     //------------ gift 2 ------------
@@ -34,10 +30,10 @@ void Guard::move(float deltaTime)
     }
 
     m_time += deltaTime;
-    if (m_time > 0.2f)
+    if (m_time > Data::timePerFrame)
     {
         m_time = 0;
-        m_currentFrame = (m_currentFrame + 1) % 3;
+        m_currentFrame = (m_currentFrame + 1) % Data::numFrame;
     }
 
     sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (m_pixelSize * deltaTime),
@@ -58,7 +54,7 @@ void Guard::setDead(bool flag)
     if (flag)
     {
         m_Dead =true;
-        m_information.setScore(3);// information need to do that collision with the 3 point
+        m_information.setScore(3);
     }
 }
 //--------------------------------------------------------------
@@ -76,8 +72,6 @@ void Guard::handleCollision(Robot& robot)
 {
     if (this->collidesWith(robot))
     {
-        std::cout << "guard hit a robot. and life-- \n";
-      //  robot.setDead();
       m_need2restartPlace = true;
        
     }
@@ -94,15 +88,10 @@ void Guard::trackRobotX()
     m_need2restartPlace = false;
     sf::Vector2f direction = { 0, 0 };
 
-    //
-    int newX = (robotLocation.x + 25) / m_pixelSize;
-    int newY = (robotLocation.y + 25) / m_pixelSize;
-    newX *= m_pixelSize;
-    newY *= m_pixelSize;
-    robotLocation = sf::Vector2f{ (float)newX, (float)newY };
-    //
+    robotLocation = Place::toPlace(m_information.getRobotLoc(), Data::pixelSize);
 
-    if (std::abs(robotLocation.x - m_location.x) > (m_pixelSize / 10)) // because its almost never will ba 0 i took exception of 10 parcent
+
+    if (std::abs(robotLocation.x - m_location.x) > (m_pixelSize / Data::throwable *2)) // because its almost never will ba 0 i took exception of 10 parcent
     {
         // Move horizontally
         direction.x = (robotLocation.x > m_location.x) ? 1.f : -1.f;
@@ -123,15 +112,9 @@ void Guard::trackRobotY()
     m_need2restartPlace = false;
     sf::Vector2f direction = { 0, 0 };
 
-    //
-    int newX = (robotLocation.x + 25) / m_pixelSize;
-    int newY = (robotLocation.y + 25) / m_pixelSize;
-    newX *= m_pixelSize;
-    newY *= m_pixelSize;
-    robotLocation = sf::Vector2f{ (float)newX, (float)newY };
-    //
-
-    if (std::abs(robotLocation.y - m_location.y) > (m_pixelSize / 10)) // because its almost never will ba 0 i took exception of 10 parcent
+    robotLocation = Place::toPlace(m_information.getRobotLoc(), Data::pixelSize);
+    
+    if (std::abs(robotLocation.y - m_location.y) > (m_pixelSize / Data::throwable * 2)) // because its almost never will ba 0 i took exception of 10 parcent
     {
         // Move horizontally
         direction.y = (robotLocation.y > m_location.y) ? 1.f : -1.f;
@@ -161,16 +144,16 @@ void Guard::goInRandom()
         switch (randomNum)
         {
         case 1:
-            setDirection(sf::Vector2f(1, 0));
+            setDirection(Place::Directions::Right);
             break;
         case 2:
-            setDirection(sf::Vector2f(-1, 0));
+            setDirection(Place::Directions::Left);
             break;
         case 3:
-            setDirection(sf::Vector2f(0, 1));
+            setDirection(Place::Directions::Up);
             break;
         case 4:
-            setDirection(sf::Vector2f(0, -1));
+            setDirection(Place::Directions::Down);
             break;
         default:
             break;

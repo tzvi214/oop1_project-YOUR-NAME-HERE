@@ -9,6 +9,8 @@
 #include "Information.h"
 #include <vector>
 #include "ExplosionZone.h"
+#include "GameData.h"
+
 
 
 

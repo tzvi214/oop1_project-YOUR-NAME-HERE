@@ -24,7 +24,7 @@ public:
 	virtual void handleCollision(StaticObject& other) override;
 	virtual void handleCollision(Robot& robot) override;
 	virtual void goToFirstLoc()override { m_location = m_firstLoc; }
-	//-------------------------------
+
 	virtual void draw(sf::RenderWindow&) override;
 protected:
 	bool m_Collided = false;
