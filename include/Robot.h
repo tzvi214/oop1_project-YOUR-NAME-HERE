@@ -19,11 +19,9 @@ public:
 	Robot(sf::Vector2f, SfmlManager&, Information&);
 	~Robot() = default;
 	sf::Vector2f getLocation() const { return m_location; }
-	void loseLife();
 	void dountMove();
 	void FinishedLevel() const;
 	void Defeated() { m_need2restartPlace = true ; }
-	//-----------------------------------------------------
 	void goToFirstLoc() { m_location = m_firstLoc; }
 	virtual void setDead(bool = true);
 	virtual void updateDirection() override;
@@ -43,12 +41,9 @@ private:
 	int m_seconds = 0;
 	SfmlManager& m_sfmlManager;
 	bool m_stopped = true;// when the program the object dident moved
-	
-	//------------------
+	int m_robotSpeed = 2;
 	int m_rowImage = 0;
-	//--- function ---
-	void drawInformation(sf::RenderWindow&);
 
-	//----------------------
+	
 	
 };

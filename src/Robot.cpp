@@ -35,26 +35,16 @@ void Robot::updateDirection()
 	}
 	else
 	{
-		setDirection(sf::Vector2f{ 0, 0 }); // default nat moving
+		setDirection(Place::Directions::Center); // default nat moving
 		m_stopped = true;
 	}
 
 }
 //---------------------------------------------------------
-void Robot::loseLife()
-{
-	
-}
-//---------------------------------------------------------
 void Robot::dountMove()
 {
 	
-	int newX = (m_location.x + 25) / 50;
-	int newY = (m_location.y + 25) / 50;
-	newX *= 50;
-	newY *= 50;
-	m_location = sf::Vector2f{ (float)newX, (float)newY };
-	//-----------------------------
+	m_location = Place::toPlace(m_location, Data::pixelSize);
 	m_currentFrame = 1;
 	
 }
@@ -62,12 +52,10 @@ void Robot::dountMove()
 void Robot::FinishedLevel() const
 {
 	m_information.setLevelFinish(true);
-	std::cout << "Robot hit a Door go to next level\n";
 }
 //---------------------------------------------------------
 void Robot::draw(sf::RenderWindow& window)
 {
-
 	MovingObject::print(window, m_rowImage);
 }
 //---------------------------------------------------------
@@ -79,18 +67,18 @@ void Robot::move(float deltaTime)
    if (m_stopped) // if the robot didnt move dont move
    	return;
    m_time += deltaTime;
-   if (m_time > 0.2f)
+   if (m_time > Data::timePerFrame)
    {
 	   m_time = 0;
-	   m_currentFrame = (m_currentFrame + 1) % 3;
+	   m_currentFrame = (m_currentFrame + 1) % Data::numFrame;
    }
 
-   sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (2 * m_pixelSize * deltaTime),
-	                                  m_location.y + m_direction.y * (2 * m_pixelSize * deltaTime));
+   sf::Vector2f nextLoc = sf::Vector2f(m_location.x + m_direction.x * (m_robotSpeed * m_pixelSize * deltaTime),
+	                                  m_location.y + m_direction.y * (m_robotSpeed * m_pixelSize * deltaTime));
 
    if (m_information.locInLevel(nextLoc))
    {
-	   m_image.move(m_direction.x * (2 * m_pixelSize * deltaTime), m_direction.y * (2 * m_pixelSize * deltaTime));
+	   m_image.move(m_direction.x * (m_robotSpeed * m_pixelSize * deltaTime), m_direction.y * (m_robotSpeed * m_pixelSize * deltaTime));
 	   m_location = nextLoc;
    }
    m_information.setRobotLoc(m_location);
@@ -121,8 +109,4 @@ void Robot::handleCollision(Gift4& gift4)
 	m_information.need2killedGuard();
 }
 
-//---------------------------------------------------------
-void Robot::drawInformation(sf::RenderWindow& window)
-{
 
-}

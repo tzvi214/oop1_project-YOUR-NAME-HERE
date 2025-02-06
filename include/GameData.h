@@ -28,4 +28,6 @@ namespace Data
     const unsigned int halfPixelSize = 25;
     const int lifeRobot = 5;
     const int throwable = 5;
+    const int numFrame = 3;
+    const float timePerFrame = 0.2f;
 }
