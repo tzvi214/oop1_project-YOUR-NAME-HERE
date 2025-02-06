@@ -5,7 +5,7 @@
 #include "Guard.h"
 #include "Robot.h"
 
-class Rock : public StaticObject
+class Rock : public GameObject
 {
 public:
 	Rock(sf::Vector2f, SfmlManager&);
@@ -14,7 +14,7 @@ public:
 	// --- Double Dispatch ---
 	virtual void  handleCollision(Robot&) override;
 	virtual void  handleCollision(Guard&) override;
-	virtual void  handleCollision(StaticObject&) override;
+	virtual void  handleCollision(GameObject&) override;
 private: 
 
 

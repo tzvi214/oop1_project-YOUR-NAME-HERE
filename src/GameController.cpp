@@ -142,16 +142,16 @@ void GameController::analyzeObj(char& ch, int col)
 		m_staticObjVec.push_back(std::make_unique<Door>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
 		break;
 	case 'A':
-		m_staticObjVec.push_back(std::make_unique<Gift2>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<LifeGift>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
 		break;
 	case 'B':
-		m_staticObjVec.push_back(std::make_unique<Gift3>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<TimeGift>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
 		break;
 	case 'C':
-		m_staticObjVec.push_back(std::make_unique<Gift1>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<FrozeGift>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
 		break;
 	case 'F':
-		m_staticObjVec.push_back(std::make_unique<Gift4>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<KilledGift>(sf::Vector2f((float)col, (float)m_height), m_SfmlManager));
 		break;
 	}
 }
@@ -286,16 +286,16 @@ void GameController::addGift()
 	switch (random_number)
 	{
 	case 1:
-		m_staticObjVec.push_back(std::make_unique<Gift1>(m_information.getNewGiftLoc(), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<FrozeGift>(m_information.getNewGiftLoc(), m_SfmlManager));
 		break;
 	case 2:
-		m_staticObjVec.push_back(std::make_unique<Gift2>(m_information.getNewGiftLoc(), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<LifeGift>(m_information.getNewGiftLoc(), m_SfmlManager));
 		break;
 	case 3:
-		m_staticObjVec.push_back(std::make_unique<Gift3>(m_information.getNewGiftLoc(), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<TimeGift>(m_information.getNewGiftLoc(), m_SfmlManager));
 		break;
 	case 4:
-		m_staticObjVec.push_back(std::make_unique<Gift4>(m_information.getNewGiftLoc(), m_SfmlManager));
+		m_staticObjVec.push_back(std::make_unique<KilledGift>(m_information.getNewGiftLoc(), m_SfmlManager));
 		break;
 	default:
 		break;

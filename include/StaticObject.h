@@ -8,40 +8,40 @@ class Guard;
 class Bomb;
 class Rock;
 class Gift;
-class Gift1;
-class Gift2;
-class Gift3;
-class Gift4;
+class FrozeGift;
+class LifeGift;
+class TimeGift;
+class KilledGift;
 class MovingObject;
 class SmartGuard;
 
 
 
-class StaticObject
+class GameObject
 {
 public:
-	StaticObject(sf::Vector2f, sf::Sprite, ObjName);
-	virtual ~StaticObject() = default;
+	GameObject(sf::Vector2f, sf::Sprite, ObjName);
+	virtual ~GameObject() = default;
 
 	ObjName getType() const { return m_type; }
 	bool touch(sf::Vector2f location) const;
 	sf::Vector2f getLocation() const;
-	bool collidesWith(StaticObject&);
-	bool checkCollision(StaticObject&) const;
+	bool collidesWith(GameObject&);
+	bool checkCollision(GameObject&) const;
 	virtual void setDead(bool = true);
 	bool IsDead() const { return m_Dead; }
 	//--- VIRTUAL ---
 	virtual void draw(sf::RenderWindow&);
 
 	// --- Double Dispatch ---
-	virtual void handleCollision(StaticObject&) {};
+	virtual void handleCollision(GameObject&) {};
 	virtual void handleCollision(Robot&) {};
 	virtual void handleCollision(Guard&) {};
 	virtual void handleCollision(Rock&) {};
-	virtual void handleCollision(Gift1&) {};
-	virtual void handleCollision(Gift2&) {};
-	virtual void handleCollision(Gift3&) {};
-	virtual void handleCollision(Gift4&) {};
+	virtual void handleCollision(FrozeGift&) {};
+	virtual void handleCollision(LifeGift&) {};
+	virtual void handleCollision(TimeGift&) {};
+	virtual void handleCollision(KilledGift&) {};
 	//--------------------------------------
 	virtual	bool ApproxCollided(sf::Vector2f) const;
 

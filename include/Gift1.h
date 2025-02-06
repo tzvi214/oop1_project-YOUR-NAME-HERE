@@ -6,11 +6,11 @@
 #include "Gift.h"
 #include "Robot.h"
 
-class Gift1 :public Gift
+class FrozeGift :public Gift
 {
 public:
-	Gift1(sf::Vector2f, SfmlManager&);
-	~Gift1() {};
+	FrozeGift(sf::Vector2f, SfmlManager&);
+	~FrozeGift() {};
 	virtual void  handleCollision(Robot&) override;
 private:
 

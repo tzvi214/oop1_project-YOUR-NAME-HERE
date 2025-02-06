@@ -84,27 +84,27 @@ void Robot::move(float deltaTime)
    m_information.setRobotLoc(m_location);
 }
 //---------------------------------------------------------
-void Robot::handleCollision(StaticObject& other)
+void Robot::handleCollision(GameObject& other)
 {
 	other.handleCollision(*this); // swap
 }
 //------------------------------------------------------
-void Robot::handleCollision(Gift1&)
+void Robot::handleCollision(FrozeGift&)
 {
 	m_information.frozeGuard();
 }
 //------------------------------------------------------
-void Robot::handleCollision(Gift2& gift2)
+void Robot::handleCollision(LifeGift& gift2)
 {
 	m_information.addRobotLife();
 }
 //------------------------------------------------------
-void Robot::handleCollision(Gift3& gift3)
+void Robot::handleCollision(TimeGift& gift3)
 {
 	m_information.addTime();
 }
 //------------------------------------------------------
-void Robot::handleCollision(Gift4& gift4)
+void Robot::handleCollision(KilledGift& gift4)
 {
 	m_information.need2killedGuard();
 }

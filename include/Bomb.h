@@ -14,7 +14,7 @@
 
 
 
-class Bomb :public StaticObject
+class Bomb :public GameObject
 {
 public:
 	Bomb(sf::Vector2f, SfmlManager&, Information&);

@@ -1,50 +1,50 @@
 #include "StaticObject.h"
 
-StaticObject::StaticObject(sf::Vector2f location, sf::Sprite image, ObjName type)
+GameObject::GameObject(sf::Vector2f location, sf::Sprite image, ObjName type)
 	: m_pixelSize{ 50 }, m_location{ calculateLocation(location) }, m_image{ image }, m_type{ type }
 {
 	setSpritLoc();
 }
 
-bool StaticObject::touch(sf::Vector2f location) const
+bool GameObject::touch(sf::Vector2f location) const
 {
 	return  m_image.getGlobalBounds().contains(location);
 }
 //---------------------------------------------------------------
-bool StaticObject::collidesWith( StaticObject& other) 
+bool GameObject::collidesWith( GameObject& other) 
 {
 	return m_image.getGlobalBounds().intersects(other.m_image.getGlobalBounds());
 	
 }
 //---------------------------------------------------------------
-sf::Vector2f StaticObject::getLocation() const
+sf::Vector2f GameObject::getLocation() const
 {
 	return m_location;
 }
 //---------------------------------------------------------------
-void StaticObject::draw(sf::RenderWindow& window)
+void GameObject::draw(sf::RenderWindow& window)
 {
 	m_image.setPosition(m_location);
 	window.draw(m_image);
 }
 //---------------------------------------------------------------
-bool StaticObject::checkCollision(StaticObject& other) const
+bool GameObject::checkCollision(GameObject& other) const
 {
 	if (&other == this) return false;
 	return true;
 }
 //------------------------ private function ---------------------
-void StaticObject::setSpritLoc()
+void GameObject::setSpritLoc()
 {
 	m_image.setPosition(m_location);
 }
 //---------------------------------------------------------------
-sf::Vector2f StaticObject::calculateLocation(sf::Vector2f location)
+sf::Vector2f GameObject::calculateLocation(sf::Vector2f location)
 {
 	return sf::Vector2f(location.x * m_pixelSize, location.y * m_pixelSize);
 }
 //---------------------------------------------------------------
-bool StaticObject::ApproxCollided(sf::Vector2f otherLoc) const
+bool GameObject::ApproxCollided(sf::Vector2f otherLoc) const
 {
 	int hit = 0;
 	for (int i = (int) otherLoc.x; i < (int) otherLoc.x + m_pixelSize; i++)
@@ -60,7 +60,7 @@ bool StaticObject::ApproxCollided(sf::Vector2f otherLoc) const
 	return hit > (5 *m_pixelSize);
 }
 //---------------------------------------------------------------
-void StaticObject::setDead(bool flag)
+void GameObject::setDead(bool flag)
 {
 	m_Dead = flag;
 }

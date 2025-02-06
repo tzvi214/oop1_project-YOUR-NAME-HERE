@@ -16,7 +16,7 @@ void Information::frozeGuard()
 
 bool Information::areFroze()
 {
-	if (m_frozeClock.getElapsedTime().asSeconds() >= 20) {
+	if (m_frozeClock.getElapsedTime().asSeconds() >= m_timeOfFroze) {
 		m_froze = false;
 	}
 	return m_froze;
@@ -25,8 +25,8 @@ bool Information::areFroze()
 bool Information::locInLevel(sf::Vector2f location) const
 {
    
-    return (location.x >= 0 && location.x <= (m_gameWidth +5) &&
-        location.y >= 0 && location.y < (m_gameHeight +5));
+    return (location.x >= 0 && location.x <= (m_gameWidth +Data::throwable) &&
+        location.y >= 0 && location.y < (m_gameHeight + Data::throwable));
 }
 //--------------------------------------------------------------
 void Information::playMusic()
@@ -40,8 +40,8 @@ void Information::setLevelFinish(const bool flag)
 	m_levelCompleted = flag;
 	
 	if (flag)
-		m_score += (3 * m_countGuard) + 25;
-	// nat to be froze in the nwxt level
+		m_score += (Score::Guard * m_countGuard) + Score::NextLevel;
+	// nat to be froze in the next level
 	m_froze = false;
 }
 //--------------------------------------------------------------
@@ -152,11 +152,4 @@ void Information::draw(sf::RenderWindow& window)
 	window.draw(level);
 	window.draw(clock);
 
-
-	//------time---------
-	//text.setPosition(70, posy);
-	//text.setString("The Time is: \n     " + std::to_string(m_seconds / 60) + ":" + std::to_string(m_seconds % 60));
-	//text.setCharacterSize(24);
-	//text.setFillColor(sf::Color::Red);
-	//window.draw(text);
 }

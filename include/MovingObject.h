@@ -4,7 +4,7 @@
 #include "SfmlManager.h"
 #include "Information.h"
 
-class MovingObject :public StaticObject
+class MovingObject :public GameObject
 {
 public:
 	MovingObject(sf::Vector2f, SfmlManager&, ObjName, Information& infro);

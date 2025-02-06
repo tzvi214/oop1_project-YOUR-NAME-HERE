@@ -58,7 +58,7 @@ void Guard::setDead(bool flag)
     }
 }
 //--------------------------------------------------------------
-void Guard::handleCollision(StaticObject& other)
+void Guard::handleCollision(GameObject& other)
 {
     if (m_touchTheEnd) {
         m_Collided = true;

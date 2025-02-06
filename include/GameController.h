@@ -38,7 +38,7 @@ public:
 private:
 	sf::Clock m_gameClock;
 	sf::Music m_soundGame;
-	std::vector <std::unique_ptr<StaticObject>> m_staticObjVec;
+	std::vector <std::unique_ptr<GameObject>> m_staticObjVec;
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;
 	std::vector <std::unique_ptr<Bomb>> m_BombVec;
 	SfmlManager& m_SfmlManager = SfmlManager::getInstance();

@@ -4,6 +4,8 @@
 #include "ObjName.h"
 #include "CountdownTimer.h"
 #include "GameData.h"
+#include "GameData.h"
+
 
 
 
@@ -26,14 +28,12 @@ public:
 	void frozeGuard();
 	bool areFroze();
 
-	 //-----------------------------------
-	
 	void setLevelFinish(const bool);
 	void setScore(const int);
 	void loseRobotLife();
 	void increaseGuardCount();
 	void setLevel(const int);
-	//----------------------------------------
+	
 	bool need2addGift();
 	void addRandomGift(sf::Vector2f loc);
 	sf::Vector2f getNewGiftLoc() { return sf::Vector2f(m_newGiftLoc.x/50, m_newGiftLoc.y/50); }
@@ -47,12 +47,11 @@ public:
 
 	void draw(sf::RenderWindow&);
 
-	 //-----------------------------------
-	void setRobotLoc(sf::Vector2f& robotLoc) { m_roobotLoc = robotLoc; }
+	void setRobotLoc(sf::Vector2f& robotLoc) { m_robotLoc = robotLoc; }
 	void setGameWidth(int col) { m_gameWidth = col; }
 	void setGameHeight(int row) { m_gameHeight = row ; }
 	bool locInLevel(sf::Vector2f) const;
-	sf::Vector2f getRobotLoc() const { return m_roobotLoc ; }
+	sf::Vector2f getRobotLoc() const { return m_robotLoc ; }
 	void playMusic();
 private:
 	sf::Sound m_hurtSnd;
@@ -65,15 +64,15 @@ private:
 	int m_level;
 	SfmlManager& m_SfmlManager;
 	CountdownTimer m_clock{ 0 };
-	//-----------------------------------
+	
 	int m_gameWidth =0;
 	int m_gameHeight =0;
-	sf::Vector2f m_roobotLoc{0,0};
+	sf::Vector2f m_robotLoc{0,0};
 	//---------------- gift 4---------
 	sf::Clock m_frozeClock;
 	bool m_froze = false;
-	//----------------------------------
 	bool m_need2addGift = false;
 	sf::Vector2f m_newGiftLoc{0 ,0};
+	int m_timeOfFroze = 10;
 	
 };

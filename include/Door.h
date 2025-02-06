@@ -3,7 +3,7 @@
 #include "ObjName.h"
 #include "SfmlManager.h"
 #include "Robot.h"
-class Door :public StaticObject
+class Door :public GameObject
 {
 public:
 	Door (sf::Vector2f, SfmlManager&);

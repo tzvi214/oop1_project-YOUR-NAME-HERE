@@ -6,7 +6,7 @@
 #include "Guard.h"
 
 
-class Gift :public StaticObject
+class Gift :public GameObject
 {
 public:
 	Gift(sf::Vector2f, sf::Sprite);

@@ -5,7 +5,7 @@
 #include "Robot.h"
 #include "Guard.h"
 
-class Wall :public StaticObject
+class Wall :public GameObject
 {
 public:
 	Wall(sf::Vector2f, SfmlManager&);

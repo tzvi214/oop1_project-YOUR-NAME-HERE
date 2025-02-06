@@ -6,10 +6,10 @@
 #include "Information.h"
 #include "GameData.h"
 
-class Gift1;
-class Gift2;
-class Gift3;
-class Gift4;
+class FrozeGift;
+class LifeGift;
+class TimeGift;
+class KilledGift;
 
 
 
@@ -29,11 +29,11 @@ public:
 	virtual void move(float) override;
 
 	// --- Double Dispatch ---
-	virtual void handleCollision(StaticObject& other) override;
-	virtual void handleCollision(Gift1&);
-	virtual void handleCollision(Gift2&);
-	virtual void handleCollision(Gift3&);
-	virtual void handleCollision(Gift4&);
+	virtual void handleCollision(GameObject& other) override;
+	virtual void handleCollision(FrozeGift&);
+	virtual void handleCollision(LifeGift&);
+	virtual void handleCollision(TimeGift&);
+	virtual void handleCollision(KilledGift&);
 
 private:
 	sf::Vector2f m_firstLoc;

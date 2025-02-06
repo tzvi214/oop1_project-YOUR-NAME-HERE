@@ -1,7 +1,7 @@
 #include "Rock.h"
 
 Rock::Rock(sf::Vector2f location, SfmlManager& sfmlManager)
-	:StaticObject(location, sf::Sprite{ sfmlManager.getTexture(ObjName::E_Rock) }, ObjName::E_Rock)
+	:GameObject(location, sf::Sprite{ sfmlManager.getTexture(ObjName::E_Rock) }, ObjName::E_Rock)
 { }
 //-----------------------------------------------------------
 void Rock::handleCollision(Robot& robot)
@@ -20,7 +20,7 @@ void Rock::handleCollision(Guard& guard)
 	}
 }
 
-void Rock::handleCollision(StaticObject& other)
+void Rock::handleCollision(GameObject& other)
 {
 	other.handleCollision(*this); // swap.
 }

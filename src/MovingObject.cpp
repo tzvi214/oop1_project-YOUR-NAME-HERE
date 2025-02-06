@@ -2,7 +2,7 @@
 #include "iostream"
 
 MovingObject::MovingObject(sf::Vector2f location, SfmlManager& sfmlManager, ObjName type, Information& info)
-    :StaticObject(location, sf::Sprite{ sfmlManager.getTexture(type) }, type), m_information{info}
+    :GameObject(location, sf::Sprite{ sfmlManager.getTexture(type) }, type), m_information{info}
     , m_texture{ sfmlManager.getTexture(ObjName::E_Temp) }
 { 
     m_image.setTexture(m_texture);
@@ -69,7 +69,7 @@ void MovingObject::print(sf::RenderWindow& window, int row)
     m_image.setTextureRect(textureRect);
 
 
-    StaticObject::draw(window);
+    GameObject::draw(window);
 
 
 

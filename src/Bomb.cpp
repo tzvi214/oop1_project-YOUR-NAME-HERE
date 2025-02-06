@@ -1,7 +1,7 @@
 ﻿#include "Bomb.h"
 
 Bomb::Bomb(sf::Vector2f location, SfmlManager& sfmlManager, Information& info) :
-	StaticObject(location, sf::Sprite(sfmlManager.getTexture(ObjName::E_Bomb)), ObjName::E_Bomb), m_clock(),
+	GameObject(location, sf::Sprite(sfmlManager.getTexture(ObjName::E_Bomb)), ObjName::E_Bomb), m_clock(),
 	m_fireSpr(sf::Sprite(sfmlManager.getTexture(ObjName::E_Fire))) , m_information{info},
 	m_explSnd(), m_ticSnd(), m_bombTime{ sfmlManager.getText(ObjName::Font) }
 		
@@ -82,7 +82,7 @@ void Bomb::handleCollision(Rock& rock)
 void Bomb::draw(sf::RenderWindow& window)
 {
 
-	StaticObject::draw(window);
+	GameObject::draw(window);
 
 	if (m_exploded) {
 		for ( auto expZone : m_explosionZoneVec) {
