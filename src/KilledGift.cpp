@@ -1,4 +1,4 @@
-#include "Gift4.h"
+#include "KilledGift.h"
 
 
 KilledGift::KilledGift(sf::Vector2f location, SfmlManager& sf)

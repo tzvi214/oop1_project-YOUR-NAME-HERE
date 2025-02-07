@@ -1,5 +1,4 @@
-#include "Gift2.h"
-#include "Gift2.h"
+#include "LifeGift.h"
 
 LifeGift::LifeGift(sf::Vector2f location, SfmlManager& sf)
 	:Gift(location, sf::Sprite{ sf.getTexture(ObjName::E_Gift2) })

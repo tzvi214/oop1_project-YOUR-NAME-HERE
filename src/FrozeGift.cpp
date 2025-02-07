@@ -1,4 +1,4 @@
-#include "Gift1.h"
+#include "FrozeGift.h"
 
 
 FrozeGift::FrozeGift(sf::Vector2f location, SfmlManager& sf)

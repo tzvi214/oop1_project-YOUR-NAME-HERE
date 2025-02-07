@@ -1,4 +1,4 @@
-#include "Gift3.h"
+#include "TimeGift.h"
 
 
 TimeGift::TimeGift(sf::Vector2f location, SfmlManager& sf)

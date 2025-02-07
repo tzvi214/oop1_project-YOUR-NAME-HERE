@@ -16,10 +16,10 @@
 #include "Information.h"
 #include "CountdownTimer.h"
 #include "Gift.h"
-#include "Gift1.h"
-#include "Gift2.h"
-#include "Gift3.h"
-#include "Gift4.h"
+#include "FrozeGift.h"
+#include "LifeGift.h"
+#include "TimeGift.h"
+#include "KilledGift.h"
 #include <cstdlib>  
 #include <ctime> 
 #include <SFML/Audio.hpp>
