@@ -1,5 +1,4 @@
 #pragma once
-#include "Windows.h"
 #include "Button.h"
 #include "ObjName.h"
 #include <vector>
@@ -17,7 +16,6 @@ public:
 	FirstWindow(SfmlManager&);// =15 for default size of window
 	void draw();
 	void customerChoice();
-	void playMusic();
 	bool need2exit() const { return m_need2exit; }
 	bool need2start() const { return m_need2start; }
 
@@ -38,6 +36,7 @@ private:
 	sf::Text readHelpFromFile()const;
 	void showHelp(sf::Text&);
 	void wrapText(sf::Text& text, float maxWidth);
+	void playMusic();
 
 
 };

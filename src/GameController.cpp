@@ -10,7 +10,7 @@ void GameController::run()
 	handleFirstWindow(firstWindow);
 	if (firstWindow.need2exit())
 		return;
-	//---------------------------------------------------
+	
 
 	for (int i = 1; i <= m_numLevel ; i++)
 	{
@@ -214,7 +214,9 @@ void GameController::mainLoop(sf::RenderWindow& window)
 //--------------------------------------------------
 void GameController::draw(sf::RenderWindow& window)
 {
+
 	window.clear();
+	drawTile(window);
 
 	for (const auto& obj : m_movingObjVec) {
 		obj->draw(window);
@@ -224,7 +226,7 @@ void GameController::draw(sf::RenderWindow& window)
 	}
 
 	for (auto& bomb : m_BombVec) {
-		bomb->draw(window); // Replace sprite to fire 
+		bomb->draw(window); 
 
 	}
 	m_information.draw(window);
@@ -327,4 +329,17 @@ void GameController::playMusic()
 	m_soundGame.openFromFile("gameSound.mp3");
 	m_soundGame.setLoop(true);
 	m_soundGame.play();
+}
+//--------------------------------------------------
+void GameController::drawTile(sf::RenderWindow& window)
+{
+	sf::Sprite tile(m_SfmlManager.getTexture(ObjName::E_Tile));
+	for (int i = 0; i < m_width; i++)
+	{
+		for (int j = 0; j < m_height; j++)
+		{
+			tile.setPosition(i * Data::pixelSize, j * Data::pixelSize);
+			window.draw(tile);
+		}
+	}
 }

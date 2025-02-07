@@ -1,12 +1,11 @@
 #include <iostream>
-#include "Windows.h"
 #include "GameController.h"
 #include <SFML/Graphics.hpp>
 #include "SfmlManager.h"
 #include "ObjName.h"
-//-------------------
 #include <cstdlib>  
 #include <ctime> 
+
 int main()
 {
 	srand(time(0));

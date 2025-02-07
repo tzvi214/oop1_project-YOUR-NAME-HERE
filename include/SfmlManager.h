@@ -37,6 +37,8 @@ private:
 	sf::Texture m_Gift2;
 	sf::Texture m_Gift3;
 	sf::Texture m_Gift4;
+	sf::Texture m_Tile;
+
 	sf::SoundBuffer m_hurtSnd;
 	sf::SoundBuffer m_explSnd;
 	sf::SoundBuffer m_bombTicSnd;

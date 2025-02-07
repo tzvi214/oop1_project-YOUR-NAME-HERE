@@ -6,7 +6,6 @@
 #include "FirstWindow.h"
 #include "SfmlManager.h"
 #include "StaticObject.h"
-#include "GameBoard.h"
 #include "MovingObject.h"
 #include "Rock.h"
 #include "Robot.h"
@@ -57,14 +56,15 @@ private:
 	void draw(sf::RenderWindow&);
 	void handleEvent();
 	void handleBombEvent() const;
-	//-------------------------------------
+	
 	void addBomb();
 	void addGift();
 
 	void deleteObjFromVec();
-	//-------------------------------------
+	
 	void clearAllVec();
 	void gameOver() const;
-	//-------------------------------------
+	
 	void playMusic();
+	void drawTile(sf::RenderWindow&);
 };

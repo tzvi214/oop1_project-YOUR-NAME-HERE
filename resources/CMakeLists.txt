@@ -20,6 +20,9 @@ configure_file ("Present1.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Present2.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Present3.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Present4.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Tile.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
+
 configure_file ("hurt.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("expl.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("menu.wav" ${CMAKE_BINARY_DIR} COPYONLY)

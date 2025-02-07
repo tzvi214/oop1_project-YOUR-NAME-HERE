@@ -63,13 +63,13 @@ SfmlManager::SfmlManager()
 	if (!m_TouchGiftSnd.loadFromFile("touchGift.wav"))
 		std::cerr << "Failed to load touchGift.wav\n";
 
-	//-------------------------------------------------
+	if (!m_Tile.loadFromFile("Tile.png"))
+		std::cerr << "Failed to load Tile.png\n";
 
 	if (!m_Temp.loadFromFile("temp_5.png"))
 		std::cerr << "Failed to load temp_5.png\n";
 
 
-	std::cout << " c-tor SfmlMananger: SfmlMananger loaded successfully\n";
 }
 
 sf::Texture& SfmlManager::getTexture(ObjName objName)
@@ -109,6 +109,9 @@ sf::Texture& SfmlManager::getTexture(ObjName objName)
 		break;
 	case E_Fire:
 		return m_Fire;
+		break;
+	case E_Tile:
+		return m_Tile;
 		break;
 	case E_Gift1:
 		return m_Gift1;

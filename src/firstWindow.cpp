@@ -4,14 +4,12 @@ FirstWindow::FirstWindow(SfmlManager& sfmlMan)
 	: m_sfmlManager{ sfmlMan }, m_height(15 * Data::pixelSize), m_width(15 * Data::pixelSize),
 	m_window(sf::VideoMode(m_width, m_height), "First Window")
 {
-	// ����� ������ �� ��������
-	float buttonWidth = m_width / 1.5;   // ���� ������ ���� ��� ����� �����
-	float buttonHeight = m_height / 4; // ���� ������ ���� ���� ����� �����
+	float buttonWidth = m_width / 1.5; 
+	float buttonHeight = m_height / 4; 
 
-	// ����� ������ �� ��������
-	float spacing = 20.f; // ���� ��� ��������
+	float spacing = 20.f; 
 
-	float x = (m_width - buttonWidth) / 2; // ����� �� ������ ����� ������
+	float x = (m_width - buttonWidth) / 2; 
 	float y = (m_height - 3 * buttonHeight - 2 * spacing) / 2; 
 
 	sf::RectangleShape button1(sf::Vector2f(buttonWidth, buttonHeight));
@@ -97,6 +95,7 @@ void FirstWindow::customerChoice()
 
 	}
 }
+//-------------------------------------------------------------------
 void FirstWindow::playMusic()
 {
 	m_menuSnd.openFromFile("menu.wav");
@@ -106,8 +105,7 @@ void FirstWindow::playMusic()
 //------------------------------------------------------------------
 sf::Text FirstWindow::readHelpFromFile() const
 {
-	//I want to read the contents of the file and print it to the SFML window,
-	//	(Continue - if there are many characters I want the window to be scrollable.)
+	
 
 	std::cout << "reading from file ... \n";
 
@@ -134,7 +132,7 @@ sf::Text FirstWindow::readHelpFromFile() const
 
 	return text;
 }
-
+//-------------------------------------------------------------------
 void FirstWindow::showHelp(sf::Text& text)
 {
 	wrapText(text, m_window.getSize().x - 20);
@@ -170,8 +168,7 @@ void FirstWindow::showHelp(sf::Text& text)
 		m_window.display();
 	}
 }
-
-
+//-------------------------------------------------------------------
 void FirstWindow::wrapText(sf::Text& text, float maxWidth)
 {
 	std::string originalString = text.getString();
@@ -195,4 +192,3 @@ void FirstWindow::wrapText(sf::Text& text, float maxWidth)
 	wrappedString += currentLine; // Add the last line
 	text.setString(wrappedString);
 }
-//-------------------------------------------------------------------
