@@ -24,4 +24,10 @@ void Rock::handleCollision(GameObject& other)
 {
 	other.handleCollision(*this); // swap.
 }
+//------------------------------------------
+void Rock::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+
+}
 

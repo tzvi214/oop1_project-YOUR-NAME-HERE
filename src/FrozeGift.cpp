@@ -14,3 +14,8 @@ void FrozeGift::handleCollision(Robot& robot)
 		setDead();
 	}
 }
+//---------------------------------------
+void FrozeGift::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+}

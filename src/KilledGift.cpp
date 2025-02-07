@@ -15,3 +15,8 @@ void KilledGift::handleCollision(Robot& robot)
 
 	}
 }
+//------------------------------------------
+void KilledGift::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+}

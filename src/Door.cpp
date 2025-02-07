@@ -12,4 +12,10 @@ void Door::handleCollision(Robot& robot)
 		robot.FinishedLevel();
 	}
 }
+//------------------------------------------
+void Door::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+
+}
 

@@ -12,6 +12,8 @@ public:
 	TimeGift(sf::Vector2f, SfmlManager&);
 	~TimeGift() {};
 	virtual void  handleCollision(Robot&) override;
+	virtual void draw(sf::RenderWindow&) override ;
+
 private:
 
 };

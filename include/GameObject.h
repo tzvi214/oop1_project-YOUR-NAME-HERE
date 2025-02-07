@@ -31,7 +31,7 @@ public:
 	virtual void setDead(bool = true);
 	bool IsDead() const { return m_Dead; }
 	//--- VIRTUAL ---
-	virtual void draw(sf::RenderWindow&);
+	virtual void draw(sf::RenderWindow&) =0;
 
 	// --- Double Dispatch ---
 	virtual void handleCollision(GameObject&) {};

@@ -15,6 +15,7 @@ public:
 	virtual void  handleCollision(Robot&) override;
 	virtual void  handleCollision(Guard&) override;
 
+	virtual void draw(sf::RenderWindow&) override ;
 private:
 
 };

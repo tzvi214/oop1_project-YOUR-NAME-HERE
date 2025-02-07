@@ -12,6 +12,8 @@ public:
 	FrozeGift(sf::Vector2f, SfmlManager&);
 	~FrozeGift() {};
 	virtual void  handleCollision(Robot&) override;
+	virtual void draw(sf::RenderWindow&) override;
+
 private:
 
 };

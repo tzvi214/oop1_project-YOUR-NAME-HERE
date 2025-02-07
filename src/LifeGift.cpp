@@ -13,3 +13,9 @@ void LifeGift::handleCollision(Robot& robot)
 
 	}
 }
+//------------------------------------------
+void LifeGift::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+
+}

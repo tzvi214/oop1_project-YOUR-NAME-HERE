@@ -19,3 +19,9 @@ void Wall::handleCollision(Guard& guard)
 		guard.dountMove();
 	}
 }
+//------------------------------------------
+void Wall::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+
+}

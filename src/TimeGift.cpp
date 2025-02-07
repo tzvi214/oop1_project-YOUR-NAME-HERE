@@ -15,3 +15,9 @@ void TimeGift::handleCollision(Robot& robot)
 
 	}
 }
+//------------------------------------------
+void TimeGift::draw(sf::RenderWindow& window)
+{
+	GameObject::draw(window);
+
+}

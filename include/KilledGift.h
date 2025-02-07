@@ -12,6 +12,8 @@ public:
 	KilledGift(sf::Vector2f, SfmlManager&);
 	~KilledGift() {};
 	virtual void  handleCollision(Robot&) override;
+	virtual void draw(sf::RenderWindow&) override ;
+
 private:
 
 };
