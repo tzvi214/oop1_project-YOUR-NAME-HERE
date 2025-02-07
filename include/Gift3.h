@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "StaticObject.h"
+#include "GameObject.h"
 #include "ObjName.h"
 #include "SfmlManager.h"
 #include "Gift.h"

@@ -2,7 +2,7 @@
 
 enum ObjName
 {
-    Exit, // default = 0
+    Exit, 
     Start,
     Help,
     Font,

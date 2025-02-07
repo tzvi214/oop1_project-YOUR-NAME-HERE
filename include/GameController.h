@@ -5,7 +5,7 @@
 #include <vector>
 #include "FirstWindow.h"
 #include "SfmlManager.h"
-#include "StaticObject.h"
+#include "GameObject.h"
 #include "MovingObject.h"
 #include "Rock.h"
 #include "Robot.h"

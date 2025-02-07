@@ -1,4 +1,4 @@
-#include "StaticObject.h"
+#include "GameObject.h"
 
 GameObject::GameObject(sf::Vector2f location, sf::Sprite image, ObjName type)
 	: m_pixelSize{ 50 }, m_location{ calculateLocation(location) }, m_image{ image }, m_type{ type }

@@ -1,5 +1,5 @@
 #pragma once
-#include "StaticObject.h"
+#include "GameObject.h"
 #include "ObjName.h"
 #include "SfmlManager.h"
 #include "Information.h"
