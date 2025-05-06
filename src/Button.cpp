@@ -41,7 +41,7 @@ std::string Button::textButton(ObjName obj)
 	case Help:
 		return "SHOEW HELP";
 	case Start:
-		return "STERT GAME";
+		return "START GAME";
 	}
 }
 

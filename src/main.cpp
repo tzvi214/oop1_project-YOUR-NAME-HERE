@@ -13,5 +13,4 @@ int main()
 	GameController game;
 	game.run();
 	return EXIT_SUCCESS;
-	return EXIT_SUCCESS;
 }

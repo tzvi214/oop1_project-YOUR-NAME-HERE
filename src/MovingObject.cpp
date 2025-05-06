@@ -8,7 +8,7 @@ MovingObject::MovingObject(sf::Vector2f location, SfmlManager& sfmlManager, ObjN
     m_image.setTexture(m_texture);
 
 }
-
+//-----------------------------------------------------------------
 void MovingObject::setDirection(sf::Vector2f newDirection)
 {
     if (m_direction.x == newDirection.x && m_direction.y == newDirection.y)
